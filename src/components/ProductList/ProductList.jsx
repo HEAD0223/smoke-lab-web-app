@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTelegram } from '../../hooks/useTelegram';
 import { ProductItem } from '../ProductItem/ProductItem';
 import './ProductList.css';
 
@@ -21,6 +22,7 @@ const getTotalPrice = (items = []) => {
 
 export const ProductList = () => {
 	const [addedItems, setAddedItems] = useState([]);
+	const { tg } = useTelegram();
 
 	const onAdd = (product) => {
 		const alreadyAdded = addedItems.find((item) => item.id === product.id);
