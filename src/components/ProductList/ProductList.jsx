@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useTelegram } from '../../hooks/useTelegram';
 import { ProductItem } from '../ProductItem/ProductItem';
 import './ProductList.css';
 
-const products = [
+const fake_products = [
 	{ id: '1', title: 'Product 1', price: 5000, description: 'Blue, Warm' },
 	{ id: '2', title: 'Product 2', price: 12000, description: 'Green, Cold' },
 	{ id: '3', title: 'Product 3', price: 5500, description: 'Red, Warm' },
@@ -24,19 +25,22 @@ export const ProductList = () => {
 	const [addedItems, setAddedItems] = useState([]);
 	const { tg } = useTelegram();
 
+	const { products } = useSelector((state) => state.products);
+	const isProductsLoading = products.status === 'loading';
+
 	const onSendData = useCallback(() => {
 		const data = {
 			products: addedItems,
 			totalPrice: getTotalPrice(addedItems),
 			queryId,
 		};
-		fetch('http://localhost:8000', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data),
-		});
+		// fetch('http://localhost:8000', {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 	},
+		// 	body: JSON.stringify(data),
+		// });
 	}, []);
 
 	useEffect(() => {
@@ -71,9 +75,13 @@ export const ProductList = () => {
 
 	return (
 		<div className={'list'}>
-			{products.map((item) => (
-				<ProductItem product={item} onAdd={onAdd} className={'item'} />
-			))}
+			{(isProductsLoading ? fake_products : products.items).map((obj, index) =>
+				isProductsLoading ? (
+					<ProductItem key={index} product={obj} onAdd={onAdd} className={'item'} />
+				) : (
+					<ProductItem product={obj} onAdd={onAdd} className={'item'} />
+				),
+			)}
 		</div>
 	);
 };

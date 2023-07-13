@@ -10,11 +10,11 @@ export const ProductItem = ({ product, className, onAdd }) => {
 	return (
 		<div className={'product ' + className}>
 			<div className={'img'}></div>
-			<div className={'title'}>{product.title}</div>
-			<div className={'description'}>{product.description}</div>
+			<div className={'title'}>{product.name}</div>
+			<div className={'description'}>{product.url}</div>
 			<div className={'price'}>
 				<span>
-					Cost: <b>{product.price}</b>
+					Cost: <b>{product.amount}</b>
 				</span>
 			</div>
 			<Button className={'add-btn'} onClick={onAddHandler}>
