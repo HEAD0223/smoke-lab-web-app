@@ -4,6 +4,7 @@ import './App.css';
 import { Form } from './components/Form/Form';
 import { Header } from './components/Header/Header';
 import { ProductList } from './components/ProductList/ProductList';
+import { getProducts } from './db/Stock';
 import { useTelegram } from './hooks/useTelegram';
 
 function App() {
