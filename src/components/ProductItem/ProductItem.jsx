@@ -1,8 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../Button/Button';
 import './ProductItem.css';
 
 export const ProductItem = ({ product, className, onAdd }) => {
+	// Translation
+	const { t } = useTranslation();
+
 	const onAddHandler = () => {
 		onAdd(product);
 	};
@@ -18,7 +22,7 @@ export const ProductItem = ({ product, className, onAdd }) => {
 				</span>
 			</div>
 			<Button className={'add-btn'} onClick={onAddHandler}>
-				Add to Cart
+				{t('add_to_cart')}
 			</Button>
 		</div>
 	);

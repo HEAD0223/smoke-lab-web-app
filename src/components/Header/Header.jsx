@@ -10,6 +10,8 @@ export const Header = () => {
 		<div className={'header'}>
 			<Button onClick={onClose}>Close</Button>
 			<span className={'username'}>{user?.username}</span>
+			<span className={'username'}>{user?.language_code}</span>
+			<span className={'username'}>{user?.photo_url}</span>
 		</div>
 	);
 };
