@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -9,11 +10,14 @@ import { useTelegram } from './hooks/useTelegram';
 import { fetchProducts } from './redux/slices/products';
 
 function App() {
-	const { tg } = useTelegram();
+	const { tg, user } = useTelegram();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		tg.ready();
+		const languageCode = user?.language_code;
+		// Set the language code as a cookie with an expiration date
+		Cookies.set('language_code', languageCode, { expires: 7 }); // Expires in 7 days
 		dispatch(fetchProducts());
 	}, []);
 
