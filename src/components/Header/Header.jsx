@@ -28,7 +28,7 @@ export const Header = () => {
 				</div>
 				<div className={classes.username}>
 					<Typography variant="h6" align="right">
-						user?.username
+						{user?.username}
 					</Typography>
 				</div>
 			</Toolbar>
