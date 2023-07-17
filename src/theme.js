@@ -28,22 +28,22 @@ const theme = createTheme({
 			main: themeParams?.bg_color + ' !important',
 		},
 		text_color: {
-			main: themeParams?.text_color,
+			main: themeParams?.text_color + ' !important',
 		},
 		hint_color: {
-			main: themeParams?.hint_color,
+			main: themeParams?.hint_color + ' !important',
 		},
 		link_color: {
-			main: themeParams?.link_color,
+			main: themeParams?.link_color + ' !important',
 		},
 		button_color: {
-			main: themeParams?.button_color,
+			main: themeParams?.button_color + ' !important',
 		},
 		button_text_color: {
-			main: themeParams?.button_text_color,
+			main: themeParams?.button_text_color + ' !important',
 		},
 		secondary_bg_color: {
-			main: themeParams?.secondary_bg_color,
+			main: themeParams?.secondary_bg_color + ' !important',
 		},
 	},
 });

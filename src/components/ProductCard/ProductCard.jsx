@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		height: '100%',
+		color: theme.palette.text_color,
 	},
 	productImageContainer: {
 		position: 'relative',
@@ -28,11 +29,20 @@ const useStyles = makeStyles((theme) => ({
 		right: 15,
 		bottom: -25,
 	},
+	badgeBody: {
+		backgroundColor: theme.palette.button_color,
+		color: theme.palette.button_text_color,
+	},
 	productName: {
 		marginBottom: theme.spacing(0.5), // Increase the spacing as needed
 	},
+	linkText: {
+		color: theme.palette.info,
+	},
 	addButton: {
 		alignSelf: 'flex-end',
+		backgroundColor: theme.palette.button_color,
+		color: theme.palette.button_text_color,
 	},
 	cardContent: {
 		display: 'flex',
@@ -47,8 +57,15 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'center',
 		marginTop: theme.spacing(2),
 	},
-	quantityButton: {
+	quantityButtonRemove: {
 		margin: `${theme.spacing(0)} ${theme.spacing(1)} !important`,
+		backgroundColor: theme.palette.error,
+		color: theme.palette.button_text_color,
+	},
+	quantityButtonAdd: {
+		margin: `${theme.spacing(0)} ${theme.spacing(1)} !important`,
+		backgroundColor: theme.palette.button_color,
+		color: theme.palette.button_text_color,
 	},
 }));
 
@@ -81,7 +98,7 @@ export const ProductCard = ({ name, price, description }) => {
 				/>
 				{quantity > 0 && (
 					<div className={classes.badgeContainer}>
-						<Badge badgeContent={quantity} color="primary" />
+						<Badge badgeContent={quantity} className={classes.badgeBody} />
 					</div>
 				)}
 			</div>
@@ -90,15 +107,12 @@ export const ProductCard = ({ name, price, description }) => {
 					<Typography variant="h6" className={classes.productName}>
 						{name}
 					</Typography>
-					<Typography variant="subtitle1" color="textSecondary">
-						Price: {price}
-					</Typography>
+					<Typography variant="subtitle1">Price: {price}</Typography>
 				</div>
 				<div>
 					<Link
 						component="button"
 						variant="body2"
-						color="primary"
 						className={classes.linkText}
 						onClick={handleModalOpen}>
 						See more
@@ -114,7 +128,6 @@ export const ProductCard = ({ name, price, description }) => {
 				{quantity === 0 ? (
 					<Button
 						variant="contained"
-						color="primary"
 						className={classes.addButton}
 						startIcon={<AddIcon />}
 						onClick={handleAdd}>
@@ -123,16 +136,14 @@ export const ProductCard = ({ name, price, description }) => {
 				) : (
 					<div className={classes.quantityButtons}>
 						<Button
-							variant="outlined"
-							color="primary"
-							className={classes.quantityButton}
+							variant="contained"
+							className={classes.quantityButtonRemove}
 							onClick={handleRemove}>
 							<RemoveIcon />
 						</Button>
 						<Button
-							variant="outlined"
-							color="primary"
-							className={classes.quantityButton}
+							variant="contained"
+							className={classes.quantityButtonAdd}
 							onClick={handleAdd}>
 							<AddIcon />
 						</Button>
