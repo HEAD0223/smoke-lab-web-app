@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		height: '100%',
-		backgroundColor: theme.palette.bg_color.main,
+		backgroundColor: theme.palette.hint_color.main,
 		color: theme.palette.text_color.main,
 	},
 	productImageContainer: {
