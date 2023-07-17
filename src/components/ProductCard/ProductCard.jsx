@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		height: '100%',
-		backgroundColor: theme.palette.text_color.main,
+		backgroundColor: theme.palette.hint_color.main,
 		color: theme.palette.text_color.main,
 		backdropFilter: 'blur(7px)',
 	},
