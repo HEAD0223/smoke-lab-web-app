@@ -11,5 +11,8 @@
 	border-color: var(--tg-theme-text-color, 87%) !important;
 }
 .MuiButtonBase-root {
+	color: var(--tg-theme-text-color, 84%) !important;
+}
+.MuiButtonBase-root.MuiIconButton-root {
 	color: var(--tg-theme-text-color, 54%) !important;
 }
