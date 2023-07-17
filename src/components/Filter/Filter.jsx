@@ -32,23 +32,10 @@ export const Filter = () => {
 						variant="outlined"
 						label="Filter Options"
 						placeholder="Select options"
-						InputProps={{
-							sx: {
-								color: 'white',
-								'&::before': {
-									borderBottomColor: 'white',
-								},
-							},
-						}}
 					/>
 				)}
 				renderOption={(props, option) => (
-					<li
-						{...props}
-						style={{
-							backgroundColor: 'blue',
-							color: 'white',
-						}}>
+					<li {...props}>
 						<Checkbox checked={selectedOptions.includes(option)} />
 						{option}
 					</li>
