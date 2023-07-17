@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		height: '100%',
-		color: theme.palette.text_color,
+		color: theme.palette.text_color.main,
 	},
 	productImageContainer: {
 		position: 'relative',
@@ -30,19 +30,19 @@ const useStyles = makeStyles((theme) => ({
 		bottom: -25,
 	},
 	badgeBody: {
-		backgroundColor: theme.palette.button_color,
-		color: theme.palette.button_text_color,
+		backgroundColor: theme.palette.button_color.main,
+		color: theme.palette.button_text_color.main,
 	},
 	productName: {
 		marginBottom: theme.spacing(0.5), // Increase the spacing as needed
 	},
 	linkText: {
-		color: theme.palette.info,
+		color: theme.palette.info.main,
 	},
 	addButton: {
 		alignSelf: 'flex-end',
-		backgroundColor: theme.palette.button_color,
-		color: theme.palette.button_text_color,
+		backgroundColor: theme.palette.button_color.main,
+		color: theme.palette.button_text_color.main,
 	},
 	cardContent: {
 		display: 'flex',
@@ -59,13 +59,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 	quantityButtonRemove: {
 		margin: `${theme.spacing(0)} ${theme.spacing(1)} !important`,
-		backgroundColor: theme.palette.error,
-		color: theme.palette.button_text_color,
+		backgroundColor: theme.palette.error.main,
+		color: theme.palette.button_text_color.main,
 	},
 	quantityButtonAdd: {
 		margin: `${theme.spacing(0)} ${theme.spacing(1)} !important`,
-		backgroundColor: theme.palette.button_color,
-		color: theme.palette.button_text_color,
+		backgroundColor: theme.palette.button_color.main,
+		color: theme.palette.button_text_color.main,
 	},
 }));
 

@@ -11,8 +11,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingLeft: theme.spacing(10),
 		paddingRight: theme.spacing(10),
 		marginBottom: theme.spacing(6),
-		backgroundColor: theme.palette.bg_color,
-		color: theme.palette.text_color,
+		color: theme.palette.text_color.main,
 	},
 	filterContainer: {
 		display: 'flex',
