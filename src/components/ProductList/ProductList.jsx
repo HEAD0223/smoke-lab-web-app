@@ -1,4 +1,4 @@
-import { Grid, LinearProgress } from '@mui/material';
+import { Grid, LinearProgress, Skeleton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -37,7 +37,7 @@ export const ProductList = () => {
 
 	// const { tg } = useTelegram();
 	const { products } = useSelector((state) => state.products);
-	const isProductsLoading = products.status === 'loading';
+	const isProductsLoading = products.status === 'loading' || !products.status;
 	// State to store the selected manufacturers as an array
 	const [selectedManufacturers, setSelectedManufacturers] = useState([]);
 
@@ -106,20 +106,7 @@ export const ProductList = () => {
 			</div>
 			{/* Products */}
 			<Grid container spacing={3} className={classes.productList}>
-				{filteredProducts.map((product) => (
-					<Grid item xs={12} sm={6} md={4} lg={4} key={product._id}>
-						<ProductCard
-							code={product.code}
-							name={product.name}
-							amount={product.amount}
-							price={product.price}
-							description={product.description}
-							manufacturer={product.manufacturer}
-							url={product.url}
-						/>
-					</Grid>
-				))}
-				{/* {isProductsLoading
+				{isProductsLoading
 					? // Render skeleton if products are loading
 					  Array.from({ length: 3 }).map((_, index) => (
 							<Grid item xs={12} sm={6} md={4} lg={4} key={index}>
@@ -139,7 +126,7 @@ export const ProductList = () => {
 									url={product.url}
 								/>
 							</Grid>
-					  ))} */}
+					  ))}
 			</Grid>
 		</>
 	);
