@@ -10,8 +10,9 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		height: '100%',
-		backgroundColor: theme.palette.bg_color.main,
+		backgroundColor: theme.palette.text_color.main,
 		color: theme.palette.text_color.main,
+		backdropFilter: 'blur(7px)',
 	},
 	productImageContainer: {
 		position: 'relative',
@@ -52,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'space-between',
 		textAlign: 'center',
 		minHeight: 200, // Adjust the height as needed
-		backgroundColor: theme.palette.hint_color.main,
 	},
 	quantityButtons: {
 		display: 'flex',
