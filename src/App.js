@@ -8,6 +8,7 @@ import { Form } from './components/Form/Form';
 import { Header } from './components/Header/Header';
 import { ProductList } from './components/ProductList/ProductList';
 import { useTelegram } from './hooks/useTelegram';
+import { fetchManufacturers } from './redux/slices/manufacturers';
 import { fetchProducts } from './redux/slices/products';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,7 @@ function App() {
 		const languageCode = user?.language_code;
 		// Set the language code as a cookie with an expiration date
 		Cookies.set('lng', languageCode, { expires: 7 }); // Expires in 7 days
+		dispatch(fetchManufacturers());
 		dispatch(fetchProducts());
 	}, []);
 

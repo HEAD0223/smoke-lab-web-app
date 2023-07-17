@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ProductCard = ({ name, price, description }) => {
+export const ProductCard = ({ code, name, amount, price, description, manufacturer, url }) => {
 	const classes = useStyles();
 	const [quantity, setQuantity] = useState(0);
 	const [openModal, setOpenModal] = useState(false);
@@ -121,9 +121,13 @@ export const ProductCard = ({ name, price, description }) => {
 					<ProductModal
 						open={openModal}
 						onClose={handleModalClose}
+						code={code}
 						name={name}
+						amount={amount}
 						price={price}
 						description={description}
+						manufacturer={manufacturer}
+						url={url}
 					/>
 				</div>
 				{quantity === 0 ? (

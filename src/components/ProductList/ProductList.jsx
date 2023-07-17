@@ -1,6 +1,6 @@
 import { Grid, LinearProgress, Skeleton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Filter } from '../Filter/Filter';
 import { ProductCard } from '../ProductCard/ProductCard';
@@ -38,6 +38,19 @@ export const ProductList = () => {
 	// const { tg } = useTelegram();
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading';
+	// State to store the selected manufacturers as an array
+	const [selectedManufacturers, setSelectedManufacturers] = useState([]);
+
+	// Function to filter products based on the selected manufacturers
+	const filteredProducts = products.items.filter((product) => {
+		if (selectedManufacturers.length === 0) return true; // Show all products if no manufacturer selected
+		return selectedManufacturers.includes(product.manufacturer);
+	});
+
+	// Function to handle selection change in Filter component
+	const handleManufacturerSelection = (selectedOptions) => {
+		setSelectedManufacturers(selectedOptions);
+	};
 
 	// const onSendData = useCallback(() => {
 	// 	const data = {
@@ -88,7 +101,8 @@ export const ProductList = () => {
 		<>
 			{isProductsLoading && <LinearProgress />}
 			<div className={classes.filterContainer}>
-				<Filter />
+				{/* Pass handleManufacturerSelection as a callback to Filter component */}
+				<Filter onSelectManufacturers={handleManufacturerSelection} />
 			</div>
 			{/* Products */}
 			<Grid container spacing={3} className={classes.productList}>
@@ -100,12 +114,16 @@ export const ProductList = () => {
 							</Grid>
 					  ))
 					: // Render products when they are loaded
-					  products.items.map((product) => (
+					  filteredProducts.map((product) => (
 							<Grid item xs={12} sm={6} md={4} lg={4} key={product._id}>
 								<ProductCard
+									code={product.code}
 									name={product.name}
-									price={product.amount}
-									description={product.url}
+									amount={product.amount}
+									price={product.price}
+									description={product.description}
+									manufacturer={product.manufacturer}
+									url={product.url}
 								/>
 							</Grid>
 					  ))}
