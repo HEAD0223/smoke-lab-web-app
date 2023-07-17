@@ -25,7 +25,7 @@ const theme = createTheme({
 			main: '#66bb6a',
 		},
 		bg_color: {
-			main: themeParams?.bg_color,
+			main: themeParams?.bg_color + ' !important',
 		},
 		text_color: {
 			main: themeParams?.text_color,
