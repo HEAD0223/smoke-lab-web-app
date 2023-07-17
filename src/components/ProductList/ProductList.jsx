@@ -1,9 +1,8 @@
-import { Grid, LinearProgress, Skeleton } from '@mui/material';
+import { Grid, LinearProgress } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Filter } from '../Filter/Filter';
-import { ProductCard } from '../ProductCard/ProductCard';
 
 const useStyles = makeStyles((theme) => ({
 	productList: {
@@ -106,8 +105,12 @@ export const ProductList = () => {
 			</div>
 			{/* Products */}
 			<Grid container spacing={3} className={classes.productList}>
-				hello
-				{isProductsLoading
+				{Array.from({ length: 3 }).map((_, index) => (
+					<Grid item xs={12} sm={6} md={4} lg={4} key={index}>
+						<Skeleton variant="rectangular" height={300} animation="wave" />
+					</Grid>
+				))}
+				{/* {isProductsLoading
 					? // Render skeleton if products are loading
 					  Array.from({ length: 3 }).map((_, index) => (
 							<Grid item xs={12} sm={6} md={4} lg={4} key={index}>
@@ -127,7 +130,7 @@ export const ProductList = () => {
 									url={product.url}
 								/>
 							</Grid>
-					  ))}
+					  ))} */}
 			</Grid>
 		</>
 	);
