@@ -6,13 +6,15 @@ import { Filter } from '../Filter/Filter';
 import { ProductCard } from '../ProductCard/ProductCard';
 
 const useStyles = makeStyles((theme) => ({
+	body: {
+		backgroundColor: theme.palette.bg_color.main,
+		color: theme.palette.text_color.main,
+	},
 	productList: {
 		marginTop: theme.spacing(3),
 		paddingLeft: theme.spacing(10),
 		paddingRight: theme.spacing(10),
 		marginBottom: theme.spacing(6),
-		backgroundColor: theme.palette.bg_color.main,
-		color: theme.palette.text_color.main,
 	},
 	filterContainer: {
 		display: 'flex',
@@ -83,7 +85,7 @@ export const ProductList = () => {
 	// };
 
 	return (
-		<>
+		<div className={classes.body}>
 			{isProductsLoading && <LinearProgress />}
 			<div className={classes.filterContainer}>
 				<Filter />
@@ -108,6 +110,6 @@ export const ProductList = () => {
 							</Grid>
 					  ))}
 			</Grid>
-		</>
+		</div>
 	);
 };
