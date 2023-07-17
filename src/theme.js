@@ -7,7 +7,7 @@ const { themeParams } = useTelegram();
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: themeParams?.bg_color,
+			main: '#90caf9',
 		},
 		secondary: {
 			main: '#ce93d8',

@@ -6,7 +6,7 @@ import { useTelegram } from '../../hooks/useTelegram';
 const useStyles = makeStyles((theme) => ({
 	appBar: {
 		backgroundColor: theme.palette.bg_color.main,
-		color: theme.palette.text_color,
+		color: theme.palette.text_color.main,
 	},
 	logo: {
 		marginRight: theme.spacing(2),
