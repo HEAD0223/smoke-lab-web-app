@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
-import './Form.css';
 
 export const Form = () => {
 	const [country, setCountry] = useState('');

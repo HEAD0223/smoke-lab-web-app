@@ -1,3 +1,4 @@
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpApi from 'i18next-http-backend';
@@ -8,6 +9,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import store from './redux/store';
+import theme from './theme';
 
 // Localisation
 i18n
@@ -28,11 +30,12 @@ i18n
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<>
+	<ThemeProvider theme={theme}>
 		<BrowserRouter>
 			<Provider store={store}>
+				<CssBaseline />
 				<App />
 			</Provider>
 		</BrowserRouter>
-	</>,
+	</ThemeProvider>,
 );

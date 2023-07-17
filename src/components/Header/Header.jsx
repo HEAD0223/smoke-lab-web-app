@@ -1,16 +1,37 @@
+import { AppBar, Toolbar, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
-import { Button } from '../Button/Button';
-import './Header.css';
+
+const useStyles = makeStyles((theme) => ({
+	appBar: {
+		backgroundColor: theme.palette.bg_color,
+		color: theme.palette.text_color,
+	},
+	logo: {
+		marginRight: theme.spacing(2),
+	},
+	username: {
+		flexGrow: 1,
+	},
+}));
 
 export const Header = () => {
-	const { user, onClose } = useTelegram();
+	const classes = useStyles();
+	const { user } = useTelegram();
 
 	return (
-		<div className={'header'}>
-			<Button onClick={onClose}>Close</Button>
-			<span className={'username'}>{user?.username}</span>
-			<span className={'username'}>{user?.language_code}</span>
-		</div>
+		<AppBar position="static" className={classes.appBar}>
+			<Toolbar>
+				<div className={classes.logo}>
+					<Typography variant="h6">Logo</Typography>
+				</div>
+				<div className={classes.username}>
+					<Typography variant="h6" align="right">
+						Username
+					</Typography>
+				</div>
+			</Toolbar>
+		</AppBar>
 	);
 };
