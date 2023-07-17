@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'center',
 		marginBottom: theme.spacing(2),
 		marginTop: theme.spacing(2),
+		color: theme.palette.text_color.main,
 	},
 }));
 
