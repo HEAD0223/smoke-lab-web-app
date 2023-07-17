@@ -1,3 +1,4 @@
+import { makeStyles } from '@mui/styles';
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -9,7 +10,15 @@ import { ProductList } from './components/ProductList/ProductList';
 import { useTelegram } from './hooks/useTelegram';
 import { fetchProducts } from './redux/slices/products';
 
+const useStyles = makeStyles((theme) => ({
+	body: {
+		backgroundColor: theme.palette.bg_color.main,
+		color: theme.palette.text_color.main,
+	},
+}));
+
 function App() {
+	const classes = useStyles();
 	const { tg, user } = useTelegram();
 	const dispatch = useDispatch();
 
@@ -22,7 +31,7 @@ function App() {
 	}, []);
 
 	return (
-		<div>
+		<div className={classes.body}>
 			<Header />
 			<Routes>
 				<Route index element={<ProductList />} />
