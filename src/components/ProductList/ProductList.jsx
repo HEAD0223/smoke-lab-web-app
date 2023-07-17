@@ -106,6 +106,7 @@ export const ProductList = () => {
 			</div>
 			{/* Products */}
 			<Grid container spacing={3} className={classes.productList}>
+				hello
 				{isProductsLoading
 					? // Render skeleton if products are loading
 					  Array.from({ length: 3 }).map((_, index) => (
