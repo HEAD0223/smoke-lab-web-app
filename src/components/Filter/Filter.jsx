@@ -8,10 +8,7 @@ const useStyles = makeStyles((theme) => ({
 	filterContainer: {
 		marginBottom: theme.spacing(2),
 		width: 300,
-		color: theme.palette.text_color.main,
 	},
-	filterTextField: { color: theme.palette.text_color.main },
-	filterList: { color: theme.palette.text_color.main },
 }));
 
 export const Filter = () => {
@@ -31,15 +28,27 @@ export const Filter = () => {
 				onChange={handleOptionChange}
 				renderInput={(params) => (
 					<TextField
-						className={classes.filterTextField}
 						{...params}
 						variant="outlined"
 						label="Filter Options"
 						placeholder="Select options"
+						InputProps={{
+							sx: {
+								color: 'white',
+								'&::before': {
+									borderBottomColor: 'white',
+								},
+							},
+						}}
 					/>
 				)}
 				renderOption={(props, option) => (
-					<li className={classes.filterList} {...props}>
+					<li
+						{...props}
+						style={{
+							backgroundColor: 'blue',
+							color: 'white',
+						}}>
 						<Checkbox checked={selectedOptions.includes(option)} />
 						{option}
 					</li>
