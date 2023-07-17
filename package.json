@@ -2,10 +2,6 @@
 	"name": "smoke-lab-web-app",
 	"version": "0.1.0",
 	"private": true,
-	"peerDependencies": {
-		"react": "^17.0.0 || ^18.0.0",
-		"react-dom": "^17.0.0 || ^18.0.0"
-	},
 	"dependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
 		"@emotion/react": "^11.11.1",
