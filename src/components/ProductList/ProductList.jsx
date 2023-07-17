@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Filter } from '../Filter/Filter';
+import { ProductCard } from '../ProductCard/ProductCard';
 
 const useStyles = makeStyles((theme) => ({
 	productList: {
