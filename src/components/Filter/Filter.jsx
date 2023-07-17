@@ -1,6 +1,7 @@
 import { Autocomplete, Checkbox, TextField } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
+import './Filter.css';
 
 const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'];
 
