@@ -16,3 +16,9 @@
 .MuiButtonBase-root.MuiIconButton-root {
 	color: var(--tg-theme-text-color, 54%) !important;
 }
+.MuiButtonBase-root.MuiChip-root {
+	background-color: var(--tg-theme-text-color, 8%) !important;
+}
+.MuiButtonBase-root.MuiChip-root .MuiSvgIcon-root {
+	background-color: var(--tg-theme-text-color, 26%) !important;
+}
