@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'space-between',
 		textAlign: 'center',
 		minHeight: 200, // Adjust the height as needed
+		backgroundColor: theme.palette.hint_color.main,
 	},
 	quantityButtons: {
 		display: 'flex',

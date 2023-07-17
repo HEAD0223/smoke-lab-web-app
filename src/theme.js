@@ -7,22 +7,22 @@ const { themeParams } = useTelegram();
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: '#90caf9',
+			main: '#90caf9 !important',
 		},
 		secondary: {
-			main: '#ce93d8',
+			main: '#ce93d8 !important',
 		},
 		error: {
-			main: '#f44336',
+			main: '#f44336 !important',
 		},
 		warning: {
-			main: '#ffa726',
+			main: '#ffa726 !important',
 		},
 		info: {
-			main: '#29b6f6',
+			main: '#29b6f6 !important',
 		},
 		success: {
-			main: '#66bb6a',
+			main: '#66bb6a !important',
 		},
 		bg_color: {
 			main: themeParams?.bg_color + ' !important',
