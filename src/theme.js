@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import { useTelegram } from './hooks/useTelegram';
 
-const { user } = useTelegram();
+const { themeParams } = useTelegram();
 
 // A custom theme for this app
 const theme = createTheme({
@@ -25,25 +25,25 @@ const theme = createTheme({
 			main: '#66bb6a',
 		},
 		bg_color: {
-			main: user?.bg_color,
+			main: themeParams?.bg_color,
 		},
 		text_color: {
-			main: user?.text_color,
+			main: themeParams?.text_color,
 		},
 		hint_color: {
-			main: user?.hint_color,
+			main: themeParams?.hint_color,
 		},
 		link_color: {
-			main: user?.link_color,
+			main: themeParams?.link_color,
 		},
 		button_color: {
-			main: user?.button_color,
+			main: themeParams?.button_color,
 		},
 		button_text_color: {
-			main: user?.button_text_color,
+			main: themeParams?.button_text_color,
 		},
 		secondary_bg_color: {
-			main: user?.secondary_bg_color,
+			main: themeParams?.secondary_bg_color,
 		},
 	},
 });
