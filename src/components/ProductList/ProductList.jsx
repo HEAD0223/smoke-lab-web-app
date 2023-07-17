@@ -39,7 +39,7 @@ export const ProductList = () => {
 	const { products } = useSelector((state) => state.products);
 	console.log(products);
 	console.log(products.status);
-	const isProductsLoading = products.status === 'loading' || !products.status;
+	const isProductsLoading = products.status === 'loading' || products.status === 'error';
 	// State to store the selected manufacturers as an array
 	const [selectedManufacturers, setSelectedManufacturers] = useState([]);
 

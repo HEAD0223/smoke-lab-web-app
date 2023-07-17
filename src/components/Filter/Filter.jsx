@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
 export const Filter = ({ onSelectManufacturers }) => {
 	const classes = useStyles();
 	const { manufacturers } = useSelector((state) => state.manufacturers);
-	const isManufacturersLoading = manufacturers.status === 'loading' || !manufacturers.status;
+	const isManufacturersLoading =
+		manufacturers.status === 'loading' || manufacturers.status === 'error';
 	const [selectedOptions, setSelectedOptions] = useState([]);
 
 	// Create the options array dynamically from the manufacturers in Redux state
