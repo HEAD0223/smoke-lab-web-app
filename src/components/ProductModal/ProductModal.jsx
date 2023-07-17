@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
 		top: '50%',
 		left: '50%',
 		transform: 'translate(-50%, -50%)',
-		backgroundColor: theme.palette.bg_color.main,
+		backgroundColor: theme.palette.hint_color.main,
 		color: theme.palette.text_color.main,
 		boxShadow: theme.shadows[20],
 		padding: theme.spacing(4),
@@ -23,9 +23,7 @@ export const ProductModal = ({ open, onClose, name, price, description }) => {
 		<Modal open={open} onClose={onClose}>
 			<div className={classes.modalContent}>
 				<Typography variant="h6">{name}</Typography>
-				<Typography variant="subtitle1" color="textSecondary">
-					Price: {price}
-				</Typography>
+				<Typography variant="subtitle1">Price: {price}</Typography>
 				<Typography variant="body1">{description}</Typography>
 			</div>
 		</Modal>
