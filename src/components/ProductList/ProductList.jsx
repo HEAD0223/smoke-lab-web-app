@@ -1,6 +1,6 @@
 import { Grid, LinearProgress, Skeleton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTelegram } from '../../hooks/useTelegram';
 import { Filter } from '../Filter/Filter';
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export const ProductList = () => {
 	const classes = useStyles();
 	const { tg } = useTelegram();
-	const [addedItems, setAddedItems] = useState([]);
+	const [cart, setCart] = useState([]);
 
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
@@ -45,88 +45,38 @@ export const ProductList = () => {
 		setSelectedManufacturers(selectedOptions);
 	};
 
-	const getTotalPrice = (items = []) => {
-		return items.reduce((acc, item) => {
-			const itemPrice = parseFloat(item.price);
-			return (acc += itemPrice);
-		}, 0);
+	const getTotalPrice = (items) => {
+		return items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
 	};
 
-	const [totalPrice, setTotalPrice] = useState(0);
-
-	useEffect(() => {
-		// Use useEffect to update the main button when addedItems change
-		if (addedItems.length === 0) {
-			tg.MainButton.hide();
-		} else {
-			tg.MainButton.show();
-			tg.MainButton.setParams({
-				text: `Buy ${totalPrice.toFixed(2)}`, // Use the totalPrice state here
-			});
-		}
-	}, [addedItems, totalPrice, tg.MainButton]);
-
 	const onAdd = (product) => {
-		const alreadyAdded = addedItems.find((item) => item.code === product.code);
-		let newItems = [];
+		const existingProduct = cart.find((item) => item.code === product.code);
 
-		if (alreadyAdded) {
-			newItems = addedItems.filter((item) => item.code !== product.code);
+		if (existingProduct) {
+			const updatedCart = cart.map((item) =>
+				item.code === product.code ? { ...item, quantity: item.quantity + 1 } : item,
+			);
+			setCart(updatedCart);
 		} else {
-			newItems = [...addedItems, product];
+			setCart([...cart, { ...product, quantity: 1 }]);
 		}
-
-		setAddedItems(newItems);
-
-		// Calculate the total price and update the state
-		const newTotalPrice = getTotalPrice(newItems);
-		setTotalPrice(newTotalPrice);
 	};
 
 	const onRemove = (product) => {
-		const updatedItems = addedItems.filter((item) => item.code !== product.code);
-		setAddedItems(updatedItems);
+		const existingProduct = cart.find((item) => item.code === product.code);
 
-		// Calculate the total price and update the state
-		const newTotalPrice = getTotalPrice(updatedItems);
-		setTotalPrice(newTotalPrice);
+		if (existingProduct) {
+			if (existingProduct.quantity === 1) {
+				const updatedCart = cart.filter((item) => item.code !== product.code);
+				setCart(updatedCart);
+			} else {
+				const updatedCart = cart.map((item) =>
+					item.code === product.code ? { ...item, quantity: item.quantity - 1 } : item,
+				);
+				setCart(updatedCart);
+			}
+		}
 	};
-
-	// const onAdd = (product) => {
-	// 	const alreadyAdded = addedItems.find((item) => item.code === product.code);
-	// 	let newItems = [];
-
-	// 	if (alreadyAdded) {
-	// 		newItems = addedItems.filter((item) => item.code !== product.code);
-	// 	} else {
-	// 		newItems = [...addedItems, product];
-	// 	}
-
-	// 	setAddedItems(newItems);
-
-	// 	if (newItems.length === 0) {
-	// 		tg.MainButton.hide();
-	// 	} else {
-	// 		tg.MainButton.show();
-	// 		tg.MainButton.setParams({
-	// 			text: `Buy ${getTotalPrice(newItems)}`,
-	// 		});
-	// 	}
-	// };
-
-	// const onRemove = (product) => {
-	// 	const updatedItems = addedItems.filter((item) => item.code !== product.code);
-	// 	setAddedItems(updatedItems);
-
-	// 	if (updatedItems.length === 0) {
-	// 		tg.MainButton.hide();
-	// 	} else {
-	// 		tg.MainButton.show();
-	// 		tg.MainButton.setParams({
-	// 			text: `Buy ${getTotalPrice(updatedItems)}`,
-	// 		});
-	// 	}
-	// };
 
 	return (
 		<>
@@ -151,6 +101,12 @@ export const ProductList = () => {
 							</Grid>
 					  ))}
 			</Grid>
+			{/* Show the main button in Telegram with the total price */}
+			{tg.MainButton && (
+				<tg.MainButton
+					text={`Buy ${getTotalPrice(cart).toFixed(2)}`} // Use toFixed(2) to format the price with 2 decimal places
+				/>
+			)}
 		</>
 	);
 };
