@@ -1,6 +1,6 @@
 import { Grid, LinearProgress, Skeleton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTelegram } from '../../hooks/useTelegram';
 import { Filter } from '../Filter/Filter';
@@ -68,13 +68,6 @@ export const ProductList = () => {
 	// 	};
 	// }, [onSendData]);
 
-	useEffect(() => {
-		const storedItems = localStorage.getItem('addedItems');
-		if (storedItems) {
-			setAddedItems(JSON.parse(storedItems));
-		}
-	}, []);
-
 	const onAdd = (product) => {
 		const alreadyAdded = addedItems.find((item) => item.code === product.code);
 		let newItems = [];
@@ -86,9 +79,6 @@ export const ProductList = () => {
 		}
 
 		setAddedItems(newItems);
-
-		// Save the addedItems array to localStorage
-		localStorage.setItem('addedItems', JSON.stringify(newItems));
 
 		if (newItems.length === 0) {
 			tg.MainButton.hide();
