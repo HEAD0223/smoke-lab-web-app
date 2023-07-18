@@ -72,13 +72,19 @@ export const ProductList = () => {
 		const alreadyAdded = addedItems.find((item) => item.code === product.code);
 		let newItems = [];
 
+		console.log(alreadyAdded);
+		console.log(newItems);
+
 		if (alreadyAdded) {
 			newItems = addedItems.filter((item) => item.code !== product.code);
+			console.log(newItems);
 		} else {
 			newItems = [...addedItems, product];
+			console.log(newItems);
 		}
 
 		setAddedItems(newItems);
+		console.log(newItems);
 
 		if (newItems.length === 0) {
 			tg.MainButton.hide();
@@ -90,7 +96,20 @@ export const ProductList = () => {
 		}
 	};
 
-	const onRemove = (product) => {};
+	const onRemove = (product) => {
+		const updatedItems = addedItems.filter((item) => item.code !== product.code);
+		setAddedItems(updatedItems);
+		console.log(updatedItems);
+
+		if (updatedItems.length === 0) {
+			tg.MainButton.hide();
+		} else {
+			tg.MainButton.show();
+			tg.MainButton.setParams({
+				text: `Buy ${getTotalPrice(updatedItems)}`,
+			});
+		}
+	};
 
 	return (
 		<>
