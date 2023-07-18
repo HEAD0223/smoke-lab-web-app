@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
 const getTotalPrice = (items = []) => {
 	return items.reduce((acc, item) => {
 		console.log(item.price);
+		if (typeof item.price === 'string' || item.price instanceof String) console.log('1');
+		else console.log('2');
 		return (acc += item.price);
 	}, 0);
 };
