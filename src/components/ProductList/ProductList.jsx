@@ -1,6 +1,6 @@
 import { Grid, LinearProgress, Skeleton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTelegram } from '../../hooks/useTelegram';
 import { Filter } from '../Filter/Filter';
@@ -52,6 +52,20 @@ export const ProductList = () => {
 		}, 0);
 	};
 
+	const [totalPrice, setTotalPrice] = useState(0);
+
+	useEffect(() => {
+		// Use useEffect to update the main button when addedItems change
+		if (addedItems.length === 0) {
+			tg.MainButton.hide();
+		} else {
+			tg.MainButton.show();
+			tg.MainButton.setParams({
+				text: `Buy ${totalPrice.toFixed(2)}`, // Use the totalPrice state here
+			});
+		}
+	}, [addedItems, totalPrice, tg.MainButton]);
+
 	const onAdd = (product) => {
 		const alreadyAdded = addedItems.find((item) => item.code === product.code);
 		let newItems = [];
@@ -64,29 +78,55 @@ export const ProductList = () => {
 
 		setAddedItems(newItems);
 
-		if (newItems.length === 0) {
-			tg.MainButton.hide();
-		} else {
-			tg.MainButton.show();
-			tg.MainButton.setParams({
-				text: `Buy ${getTotalPrice(newItems)}`,
-			});
-		}
+		// Calculate the total price and update the state
+		const newTotalPrice = getTotalPrice(newItems);
+		setTotalPrice(newTotalPrice);
 	};
 
 	const onRemove = (product) => {
 		const updatedItems = addedItems.filter((item) => item.code !== product.code);
 		setAddedItems(updatedItems);
 
-		if (updatedItems.length === 0) {
-			tg.MainButton.hide();
-		} else {
-			tg.MainButton.show();
-			tg.MainButton.setParams({
-				text: `Buy ${getTotalPrice(updatedItems)}`,
-			});
-		}
+		// Calculate the total price and update the state
+		const newTotalPrice = getTotalPrice(updatedItems);
+		setTotalPrice(newTotalPrice);
 	};
+
+	// const onAdd = (product) => {
+	// 	const alreadyAdded = addedItems.find((item) => item.code === product.code);
+	// 	let newItems = [];
+
+	// 	if (alreadyAdded) {
+	// 		newItems = addedItems.filter((item) => item.code !== product.code);
+	// 	} else {
+	// 		newItems = [...addedItems, product];
+	// 	}
+
+	// 	setAddedItems(newItems);
+
+	// 	if (newItems.length === 0) {
+	// 		tg.MainButton.hide();
+	// 	} else {
+	// 		tg.MainButton.show();
+	// 		tg.MainButton.setParams({
+	// 			text: `Buy ${getTotalPrice(newItems)}`,
+	// 		});
+	// 	}
+	// };
+
+	// const onRemove = (product) => {
+	// 	const updatedItems = addedItems.filter((item) => item.code !== product.code);
+	// 	setAddedItems(updatedItems);
+
+	// 	if (updatedItems.length === 0) {
+	// 		tg.MainButton.hide();
+	// 	} else {
+	// 		tg.MainButton.show();
+	// 		tg.MainButton.setParams({
+	// 			text: `Buy ${getTotalPrice(updatedItems)}`,
+	// 		});
+	// 	}
+	// };
 
 	return (
 		<>
