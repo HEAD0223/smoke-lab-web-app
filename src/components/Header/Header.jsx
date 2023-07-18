@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Header = () => {
 	const classes = useStyles();
-	const { user, themeParams } = useTelegram();
+	const { user } = useTelegram();
 
 	return (
 		<AppBar position="static" className={classes.appBar}>

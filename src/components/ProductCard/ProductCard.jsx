@@ -89,14 +89,13 @@ export const ProductCard = ({ code, name, amount, price, description, manufactur
 		setOpenModal(false);
 	};
 
+	// Decode the base64 image data and create a data URL
+	const imageSrc = url ? `data:image/png;base64,${url}` : 'https://source.unsplash.com/random';
+
 	return (
 		<Card className={classes.productCard}>
 			<div className={classes.productImageContainer}>
-				<CardMedia
-					className={classes.productImage}
-					image="https://source.unsplash.com/random"
-					title={name}
-				/>
+				<CardMedia className={classes.productImage} image={imageSrc} title={name} />
 				{quantity > 0 && (
 					<div className={classes.badgeContainer}>
 						<Badge badgeContent={quantity} className={classes.badgeBody} />
