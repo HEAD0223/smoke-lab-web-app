@@ -25,13 +25,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const getTotalPrice = (items = []) => {
-	return items.reduce((acc, item) => {
-		const itemPrice = parseFloat(item.price);
-		return (acc += itemPrice);
-	}, 0);
-};
-
 export const ProductList = () => {
 	const classes = useStyles();
 	const { tg } = useTelegram();
@@ -39,7 +32,6 @@ export const ProductList = () => {
 
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
-	// State to store the selected manufacturers as an array
 	const [selectedManufacturers, setSelectedManufacturers] = useState([]);
 
 	// Function to filter products based on the selected manufacturers
@@ -53,67 +45,47 @@ export const ProductList = () => {
 		setSelectedManufacturers(selectedOptions);
 	};
 
-	// const onSendData = useCallback(() => {
-	// 	const data = {
-	// 		products: addedItems,
-	// 		totalPrice: getTotalPrice(addedItems),
-	// 	};
-	// 	console.log('Data to be sent:', data);
-	// }, [addedItems]);
-
-	// useEffect(() => {
-	// 	tg.onEvent('mainButtonClicked', onSendData);
-	// 	return () => {
-	// 		tg.offEvent('mainButtonClicked', onSendData);
-	// 	};
-	// }, [onSendData]);
+	const getTotalPrice = (items = []) => {
+		return items.reduce((acc, item) => {
+			const itemPrice = parseFloat(item.price);
+			return (acc += itemPrice);
+		}, 0);
+	};
 
 	const onAdd = (product) => {
-		setAddedItems((prevAddedItems) => {
-			const alreadyAdded = prevAddedItems.find((item) => item.code === product.code);
-			let newItems = [];
+		const alreadyAdded = addedItems.find((item) => item.code === product.code);
+		let newItems = [];
 
-			console.log(alreadyAdded);
-			console.log(newItems);
+		if (alreadyAdded) {
+			newItems = addedItems.filter((item) => item.code !== product.code);
+		} else {
+			newItems = [...addedItems, product];
+		}
 
-			if (alreadyAdded) {
-				newItems = prevAddedItems.filter((item) => item.code !== product.code);
-				console.log(newItems);
-			} else {
-				newItems = [...prevAddedItems, product];
-				console.log(newItems);
-			}
+		setAddedItems(newItems);
 
-			if (newItems.length === 0) {
-				tg.MainButton.hide();
-			} else {
-				tg.MainButton.show();
-				tg.MainButton.setParams({
-					text: `Buy ${getTotalPrice(newItems)}`,
-				});
-			}
-
-			return newItems;
-		});
+		if (newItems.length === 0) {
+			tg.MainButton.hide();
+		} else {
+			tg.MainButton.show();
+			tg.MainButton.setParams({
+				text: `Buy ${getTotalPrice(newItems)}`,
+			});
+		}
 	};
 
 	const onRemove = (product) => {
-		setAddedItems((prevAddedItems) => {
-			const updatedItems = prevAddedItems.filter((item) => item.code !== product.code);
+		const updatedItems = addedItems.filter((item) => item.code !== product.code);
+		setAddedItems(updatedItems);
 
-			console.log(updatedItems);
-
-			if (updatedItems.length === 0) {
-				tg.MainButton.hide();
-			} else {
-				tg.MainButton.show();
-				tg.MainButton.setParams({
-					text: `Buy ${getTotalPrice(updatedItems)}`,
-				});
-			}
-
-			return updatedItems;
-		});
+		if (updatedItems.length === 0) {
+			tg.MainButton.hide();
+		} else {
+			tg.MainButton.show();
+			tg.MainButton.setParams({
+				text: `Buy ${getTotalPrice(updatedItems)}`,
+			});
+		}
 	};
 
 	return (
