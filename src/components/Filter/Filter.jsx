@@ -8,9 +8,11 @@ const useStyles = makeStyles((theme) => ({
 	filterContainer: {
 		marginBottom: theme.spacing(2),
 		width: 300,
-		// display: 'flex',
-		// justifyContent: 'center',
-		// alignItems: 'center',
+	},
+	circularProgressContainer: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	circularProgress: {
 		color: theme.palette.button_color.main,
@@ -37,7 +39,9 @@ export const Filter = ({ onSelectManufacturers }) => {
 		<div className={classes.filterContainer}>
 			{isManufacturersLoading ? (
 				// Display a CircularProgress while manufacturers are loading
-				<CircularProgress className={classes.circularProgress} />
+				<div className={classes.circularProgressContainer}>
+					<CircularProgress className={classes.circularProgress} />
+				</div>
 			) : (
 				// Render the Autocomplete component when manufacturers are loaded
 				<Autocomplete
