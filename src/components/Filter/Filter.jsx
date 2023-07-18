@@ -8,9 +8,9 @@ const useStyles = makeStyles((theme) => ({
 	filterContainer: {
 		marginBottom: theme.spacing(2),
 		width: 300,
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
+		// display: 'flex',
+		// justifyContent: 'center',
+		// alignItems: 'center',
 	},
 	circularProgress: {
 		color: theme.palette.button_color.main,
