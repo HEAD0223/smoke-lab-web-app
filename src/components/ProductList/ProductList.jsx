@@ -109,9 +109,9 @@ export const ProductList = () => {
 							</Grid>
 					  ))
 					: // Render products when they are loaded
-					  filteredProducts.map((product) => (
-							<Grid item xs={12} sm={6} md={4} lg={4} key={product._id}>
-								<ProductCard product={product} onAdd={onAdd} onRemove={onRemove} />
+					  filteredProducts.map((item) => (
+							<Grid item xs={12} sm={6} md={4} lg={4} key={item._id}>
+								<ProductCard product={item} onAdd={onAdd} onRemove={onRemove} />
 							</Grid>
 					  ))}
 			</Grid>
