@@ -52,14 +52,14 @@ export const ProductList = () => {
 	const onAdd = (product) => {
 		const existingProduct = cart.find((item) => item.code === product.code);
 
-		console.log(existingProduct);
+		console.log('existingProduct: ', existingProduct);
 
 		if (existingProduct) {
 			const updatedCart = cart.map((item) =>
 				item.code === product.code ? { ...item, quantity: item.quantity + 1 } : item,
 			);
 
-			console.log(updatedCart);
+			console.log('updatedCart: ', updatedCart);
 
 			setCart(updatedCart);
 		} else {
@@ -70,13 +70,13 @@ export const ProductList = () => {
 	const onRemove = (product) => {
 		const existingProduct = cart.find((item) => item.code === product.code);
 
-		console.log(existingProduct);
+		console.log('existingProduct: ', existingProduct);
 
 		if (existingProduct) {
 			if (existingProduct.quantity === 1) {
 				const updatedCart = cart.filter((item) => item.code !== product.code);
 
-				console.log(updatedCart);
+				console.log('updatedCart: ', updatedCart);
 
 				setCart(updatedCart);
 			} else {
