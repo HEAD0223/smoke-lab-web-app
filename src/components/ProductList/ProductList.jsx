@@ -52,10 +52,15 @@ export const ProductList = () => {
 	const onAdd = (product) => {
 		const existingProduct = cart.find((item) => item.code === product.code);
 
+		console.log(existingProduct);
+
 		if (existingProduct) {
 			const updatedCart = cart.map((item) =>
 				item.code === product.code ? { ...item, quantity: item.quantity + 1 } : item,
 			);
+
+			console.log(updatedCart);
+
 			setCart(updatedCart);
 		} else {
 			setCart([...cart, { ...product, quantity: 1 }]);
@@ -65,9 +70,14 @@ export const ProductList = () => {
 	const onRemove = (product) => {
 		const existingProduct = cart.find((item) => item.code === product.code);
 
+		console.log(existingProduct);
+
 		if (existingProduct) {
 			if (existingProduct.quantity === 1) {
 				const updatedCart = cart.filter((item) => item.code !== product.code);
+
+				console.log(updatedCart);
+
 				setCart(updatedCart);
 			} else {
 				const updatedCart = cart.map((item) =>
@@ -101,12 +111,6 @@ export const ProductList = () => {
 							</Grid>
 					  ))}
 			</Grid>
-			{/* Show the main button in Telegram with the total price */}
-			{tg.MainButton && (
-				<tg.MainButton
-					text={`Buy ${getTotalPrice(cart).toFixed(2)}`} // Use toFixed(2) to format the price with 2 decimal places
-				/>
-			)}
 		</>
 	);
 };
