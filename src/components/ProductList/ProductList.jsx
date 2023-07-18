@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const getTotalPrice = (items = []) => {
 	return items.reduce((acc, item) => {
+		print(item.price);
 		return (acc += item.price);
 	}, 0);
 };
@@ -34,8 +35,8 @@ const getTotalPrice = (items = []) => {
 export const ProductList = () => {
 	const classes = useStyles();
 	const { tg } = useTelegram();
-
 	const [addedItems, setAddedItems] = useState([]);
+
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
 	// State to store the selected manufacturers as an array
@@ -118,16 +119,7 @@ export const ProductList = () => {
 					: // Render products when they are loaded
 					  filteredProducts.map((product) => (
 							<Grid item xs={12} sm={6} md={4} lg={4} key={product._id}>
-								<ProductCard
-									code={product.code}
-									name={product.name}
-									amount={product.amount}
-									price={product.price}
-									description={product.description}
-									manufacturer={product.manufacturer}
-									url={product.url}
-									onAdd={() => onAdd(product)} // Pass onAdd function as a prop
-								/>
+								<ProductCard product={product} onAdd={onAdd} onRemove={onRemove} />
 							</Grid>
 					  ))}
 			</Grid>

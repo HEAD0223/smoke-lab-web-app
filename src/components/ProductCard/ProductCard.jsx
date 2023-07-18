@@ -70,16 +70,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ProductCard = ({
-	code,
-	name,
-	amount,
-	price,
-	description,
-	manufacturer,
-	url,
-	onAdd,
-}) => {
+export const ProductCard = ({ product, onAdd, onRemove }) => {
 	const classes = useStyles();
 	const [quantity, setQuantity] = useState(0);
 	const [openModal, setOpenModal] = useState(false);
@@ -92,21 +83,23 @@ export const ProductCard = ({
 	};
 
 	// Decode the base64 image data and create a data URL
-	const imageSrc = url ? `data:image/png;base64,${url}` : 'https://source.unsplash.com/random';
+	const imageSrc = product.url
+		? `data:image/png;base64,${product.url}`
+		: 'https://source.unsplash.com/random';
 
-	const handleQuantityChange = (newQuantity) => {
-		// Ensure the quantity does not go below 0
-		const validQuantity = Math.max(newQuantity, 0);
-		setQuantity(validQuantity);
-
-		// Call the onAdd prop to handle the addition/removal of the product
-		onAdd(validQuantity);
+	const onAddHandler = () => {
+		setQuantity((prevQuantity) => prevQuantity + 1);
+		onAdd(product);
+	};
+	const onRemoveHandler = () => {
+		setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
+		onRemove(product);
 	};
 
 	return (
 		<Card className={classes.productCard}>
 			<div className={classes.productImageContainer}>
-				<CardMedia className={classes.productImage} image={imageSrc} title={name} />
+				<CardMedia className={classes.productImage} image={imageSrc} title={product.name} />
 				{quantity > 0 && (
 					<div className={classes.badgeContainer}>
 						<Badge badgeContent={quantity} className={classes.badgeBody} />
@@ -116,9 +109,9 @@ export const ProductCard = ({
 			<CardContent className={classes.cardContent}>
 				<div>
 					<Typography variant="h6" className={classes.productName}>
-						{name}
+						{product.name}
 					</Typography>
-					<Typography variant="subtitle1">Price: {price}</Typography>
+					<Typography variant="subtitle1">Price: {product.price}</Typography>
 				</div>
 				<div>
 					<Link
@@ -131,13 +124,13 @@ export const ProductCard = ({
 					<ProductModal
 						open={openModal}
 						onClose={handleModalClose}
-						code={code}
-						name={name}
-						amount={amount}
-						price={price}
-						description={description}
-						manufacturer={manufacturer}
-						url={url}
+						code={product.code}
+						name={product.name}
+						amount={product.amount}
+						price={product.price}
+						description={product.description}
+						manufacturer={product.manufacturer}
+						url={product.url}
 					/>
 				</div>
 				{quantity === 0 ? (
@@ -145,7 +138,7 @@ export const ProductCard = ({
 						variant="contained"
 						className={classes.addButton}
 						startIcon={<AddIcon />}
-						onClick={() => handleQuantityChange(quantity + 1)}>
+						onClick={onAddHandler}>
 						Add
 					</Button>
 				) : (
@@ -153,13 +146,13 @@ export const ProductCard = ({
 						<Button
 							variant="contained"
 							className={classes.quantityButtonRemove}
-							onClick={() => handleQuantityChange(quantity - 1)}>
+							onClick={onRemoveHandler}>
 							<RemoveIcon />
 						</Button>
 						<Button
 							variant="contained"
 							className={classes.quantityButtonAdd}
-							onClick={() => handleQuantityChange(quantity + 1)}>
+							onClick={onAddHandler}>
 							<AddIcon />
 						</Button>
 					</div>
