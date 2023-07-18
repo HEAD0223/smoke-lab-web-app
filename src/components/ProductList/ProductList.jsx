@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 const getTotalPrice = (items = []) => {
 	return items.reduce((acc, item) => {
 		print(item.price);
-		if (typeof myVar === 'string' || myVar instanceof String) print(item.price);
+		if (typeof item.price === 'string' || item.price instanceof String) print(item.price);
 		else print(item.price);
 		return (acc += item.price);
 	}, 0);
