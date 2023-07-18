@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const getTotalPrice = (items = []) => {
 	return items.reduce((acc, item) => {
-		print(item.price);
+		console.log(item.price);
 		return (acc += item.price);
 	}, 0);
 };
