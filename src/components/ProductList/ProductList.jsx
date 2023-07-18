@@ -1,6 +1,6 @@
 import { Grid, LinearProgress, Skeleton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTelegram } from '../../hooks/useTelegram';
 import { Filter } from '../Filter/Filter';
@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
 const getTotalPrice = (items = []) => {
 	return items.reduce((acc, item) => {
 		print(item.price);
+		if (typeof myVar === 'string' || myVar instanceof String) print(item.price);
+		else print(item.price);
 		return (acc += item.price);
 	}, 0);
 };
@@ -53,20 +55,20 @@ export const ProductList = () => {
 		setSelectedManufacturers(selectedOptions);
 	};
 
-	const onSendData = useCallback(() => {
-		const data = {
-			products: addedItems,
-			totalPrice: getTotalPrice(addedItems),
-		};
-		console.log('Data to be sent:', data);
-	}, [addedItems]);
+	// const onSendData = useCallback(() => {
+	// 	const data = {
+	// 		products: addedItems,
+	// 		totalPrice: getTotalPrice(addedItems),
+	// 	};
+	// 	console.log('Data to be sent:', data);
+	// }, [addedItems]);
 
-	useEffect(() => {
-		tg.onEvent('mainButtonClicked', onSendData);
-		return () => {
-			tg.offEvent('mainButtonClicked', onSendData);
-		};
-	}, [onSendData]);
+	// useEffect(() => {
+	// 	tg.onEvent('mainButtonClicked', onSendData);
+	// 	return () => {
+	// 		tg.offEvent('mainButtonClicked', onSendData);
+	// 	};
+	// }, [onSendData]);
 
 	useEffect(() => {
 		const storedItems = localStorage.getItem('addedItems');
@@ -99,6 +101,8 @@ export const ProductList = () => {
 			});
 		}
 	};
+
+	const onRemove = (product) => {};
 
 	return (
 		<>
