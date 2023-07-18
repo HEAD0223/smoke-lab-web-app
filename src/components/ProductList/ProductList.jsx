@@ -24,18 +24,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-// const getTotalPrice = (items = []) => {
-// 	return items.reduce((acc, item) => {
-// 		return (acc += item.price);
-// 	}, 0);
-// };
+const getTotalPrice = (items = []) => {
+	return items.reduce((acc, item) => {
+		return (acc += item.price);
+	}, 0);
+};
 
 export const ProductList = () => {
 	const classes = useStyles();
+	const { tg } = useTelegram();
 
-	// const [addedItems, setAddedItems] = useState([]);
-
-	// const { tg } = useTelegram();
+	const [addedItems, setAddedItems] = useState([]);
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
 	// State to store the selected manufacturers as an array
@@ -52,50 +51,52 @@ export const ProductList = () => {
 		setSelectedManufacturers(selectedOptions);
 	};
 
-	// const onSendData = useCallback(() => {
-	// 	const data = {
-	// 		products: addedItems,
-	// 		totalPrice: getTotalPrice(addedItems),
-	// 		queryId,
-	// 	};
-	// 	// fetch('http://localhost:8000', {
-	// 	// 	method: 'POST',
-	// 	// 	headers: {
-	// 	// 		'Content-Type': 'application/json',
-	// 	// 	},
-	// 	// 	body: JSON.stringify(data),
-	// 	// });
-	// }, []);
+	const onSendData = useCallback(() => {
+		const data = {
+			products: addedItems,
+			totalPrice: getTotalPrice(addedItems),
+		};
+		console.log('Data to be sent:', data);
+	}, [addedItems]);
 
-	// useEffect(() => {
-	// 	tg.onEvent('mainButtonClicked', onSendData);
+	useEffect(() => {
+		tg.onEvent('mainButtonClicked', onSendData);
+		return () => {
+			tg.offEvent('mainButtonClicked', onSendData);
+		};
+	}, [onSendData]);
 
-	// 	return () => {
-	// 		tg.offEvent('mainButtonClicked', onSendData);
-	// 	};
-	// }, [onSendData]);
+	useEffect(() => {
+		const storedItems = localStorage.getItem('addedItems');
+		if (storedItems) {
+			setAddedItems(JSON.parse(storedItems));
+		}
+	}, []);
 
-	// const onAdd = (product) => {
-	// 	const alreadyAdded = addedItems.find((item) => item.id === product.id);
-	// 	let newItems = [];
+	const onAdd = (product) => {
+		const alreadyAdded = addedItems.find((item) => item.code === product.code);
+		let newItems = [];
 
-	// 	if (alreadyAdded) {
-	// 		newItems = addedItems.filter((item) => item.id !== product.id);
-	// 	} else {
-	// 		newItems = [...addedItems, product];
-	// 	}
+		if (alreadyAdded) {
+			newItems = addedItems.filter((item) => item.code !== product.code);
+		} else {
+			newItems = [...addedItems, product];
+		}
 
-	// 	setAddedItems(newItems);
+		setAddedItems(newItems);
 
-	// 	if (newItems.length === 0) {
-	// 		tg.MainButton.hide();
-	// 	} else {
-	// 		tg.MainButton.show();
-	// 		tg.MainButton.setParams({
-	// 			text: `Buy ${getTotalPrice(newItems)}`,
-	// 		});
-	// 	}
-	// };
+		// Save the addedItems array to localStorage
+		localStorage.setItem('addedItems', JSON.stringify(newItems));
+
+		if (newItems.length === 0) {
+			tg.MainButton.hide();
+		} else {
+			tg.MainButton.show();
+			tg.MainButton.setParams({
+				text: `Buy ${getTotalPrice(newItems)}`,
+			});
+		}
+	};
 
 	return (
 		<>
@@ -124,6 +125,7 @@ export const ProductList = () => {
 									description={product.description}
 									manufacturer={product.manufacturer}
 									url={product.url}
+									onAdd={() => onAdd(product)} // Pass onAdd function as a prop
 								/>
 							</Grid>
 					  ))}

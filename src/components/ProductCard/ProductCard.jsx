@@ -70,17 +70,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ProductCard = ({ code, name, amount, price, description, manufacturer, url }) => {
+export const ProductCard = ({
+	code,
+	name,
+	amount,
+	price,
+	description,
+	manufacturer,
+	url,
+	onAdd,
+}) => {
 	const classes = useStyles();
 	const [quantity, setQuantity] = useState(0);
 	const [openModal, setOpenModal] = useState(false);
-
-	const handleAdd = () => {
-		setQuantity((prevQuantity) => prevQuantity + 1);
-	};
-	const handleRemove = () => {
-		setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
-	};
 
 	const handleModalOpen = () => {
 		setOpenModal(true);
@@ -91,6 +93,15 @@ export const ProductCard = ({ code, name, amount, price, description, manufactur
 
 	// Decode the base64 image data and create a data URL
 	const imageSrc = url ? `data:image/png;base64,${url}` : 'https://source.unsplash.com/random';
+
+	const handleQuantityChange = (newQuantity) => {
+		// Ensure the quantity does not go below 0
+		const validQuantity = Math.max(newQuantity, 0);
+		setQuantity(validQuantity);
+
+		// Call the onAdd prop to handle the addition/removal of the product
+		onAdd(validQuantity);
+	};
 
 	return (
 		<Card className={classes.productCard}>
@@ -134,7 +145,7 @@ export const ProductCard = ({ code, name, amount, price, description, manufactur
 						variant="contained"
 						className={classes.addButton}
 						startIcon={<AddIcon />}
-						onClick={handleAdd}>
+						onClick={() => handleQuantityChange(quantity + 1)}>
 						Add
 					</Button>
 				) : (
@@ -142,13 +153,13 @@ export const ProductCard = ({ code, name, amount, price, description, manufactur
 						<Button
 							variant="contained"
 							className={classes.quantityButtonRemove}
-							onClick={handleRemove}>
+							onClick={() => handleQuantityChange(quantity - 1)}>
 							<RemoveIcon />
 						</Button>
 						<Button
 							variant="contained"
 							className={classes.quantityButtonAdd}
-							onClick={handleAdd}>
+							onClick={() => handleQuantityChange(quantity + 1)}>
 							<AddIcon />
 						</Button>
 					</div>
