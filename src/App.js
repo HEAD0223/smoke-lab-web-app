@@ -8,6 +8,7 @@ import { Cart } from './components/Cart/Cart';
 import { Form } from './components/Form/Form';
 import { Header } from './components/Header/Header';
 import { ProductList } from './components/ProductList/ProductList';
+import { CartProvider } from './hooks/useCart';
 import { useTelegram } from './hooks/useTelegram';
 import { fetchManufacturers } from './redux/slices/manufacturers';
 import { fetchProducts } from './redux/slices/products';
@@ -35,12 +36,14 @@ function App() {
 
 	return (
 		<div className={classes.body}>
-			<Header />
-			<Routes>
-				<Route index element={<ProductList />} />
-				<Route path="/cart" element={<Cart />} />
-				<Route path="/form" element={<Form />} />
-			</Routes>
+			<CartProvider>
+				<Header />
+				<Routes>
+					<Route index element={<ProductList />} />
+					<Route path="/cart" element={<Cart />} />
+					<Route path="/form" element={<Form />} />
+				</Routes>
+			</CartProvider>
 		</div>
 	);
 }

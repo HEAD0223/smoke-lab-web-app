@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
 import { Filter } from '../Filter/Filter';
 import { ProductCard } from '../ProductCard/ProductCard';
@@ -30,7 +31,7 @@ export const ProductList = () => {
 	const classes = useStyles();
 	const navigate = useNavigate();
 	const { tg } = useTelegram();
-	const [cart, setCart] = useState([]);
+	const { cart, setCart } = useCart();
 
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
