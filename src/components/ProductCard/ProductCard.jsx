@@ -89,11 +89,11 @@ export const ProductCard = ({ product, onAdd, onRemove }) => {
 
 	const onAddHandler = () => {
 		setQuantity((prevQuantity) => prevQuantity + 1);
-		onAdd(product);
+		onAdd(product, quantity);
 	};
 	const onRemoveHandler = () => {
 		setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
-		onRemove(product);
+		onRemove(product, quantity);
 	};
 
 	return (

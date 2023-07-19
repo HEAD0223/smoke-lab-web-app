@@ -49,42 +49,43 @@ export const ProductList = () => {
 		return items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
 	};
 
-	const onAdd = (product) => {
+	// Function to handle adding products to the cart
+	const onAdd = (product, quantity) => {
+		// Check if the product is already in the cart
 		const existingProduct = cart.find((item) => item.code === product.code);
-
 		console.log('existingProduct: ', existingProduct);
 
 		if (existingProduct) {
-			const updatedCart = cart.map((item) =>
-				item.code === product.code ? { ...item, quantity: item.quantity + 1 } : item,
+			// If the product is already in the cart, update its quantity
+			console.log('Yes');
+			setCart((prevCart) =>
+				prevCart.map((item) =>
+					item.code === product.code ? { ...item, quantity: item.quantity + quantity } : item,
+				),
 			);
-
-			console.log('updatedCart: ', updatedCart);
-
-			setCart(updatedCart);
 		} else {
-			setCart([...cart, { ...product, quantity: 1 }]);
+			// If the product is not in the cart, add it with the given quantity
+			console.log('No');
+			setCart((prevCart) => [...prevCart, { ...product, quantity }]);
 		}
 	};
 
-	const onRemove = (product) => {
+	// Function to handle removing products from the cart
+	const onRemove = (product, quantity) => {
+		// Check if the product is already in the cart
 		const existingProduct = cart.find((item) => item.code === product.code);
-
 		console.log('existingProduct: ', existingProduct);
 
 		if (existingProduct) {
-			if (existingProduct.quantity === 1) {
-				const updatedCart = cart.filter((item) => item.code !== product.code);
-
-				console.log('updatedCart: ', updatedCart);
-
-				setCart(updatedCart);
-			} else {
-				const updatedCart = cart.map((item) =>
-					item.code === product.code ? { ...item, quantity: item.quantity - 1 } : item,
-				);
-				setCart(updatedCart);
-			}
+			// If the product is in the cart, update its quantity
+			console.log('Yes');
+			setCart((prevCart) =>
+				prevCart.map((item) =>
+					item.code === product.code
+						? { ...item, quantity: Math.max(item.quantity - quantity, 0) }
+						: item,
+				),
+			);
 		}
 	};
 
