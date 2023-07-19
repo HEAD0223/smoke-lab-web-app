@@ -53,22 +53,17 @@ export const ProductList = () => {
 	const onAdd = (product, quantity) => {
 		// Check if the product is already in the cart
 		const existingProduct = cart.find((item) => item.code === product.code);
-		console.log('existingProduct: ', existingProduct);
 
 		if (existingProduct) {
 			// If the product is already in the cart, update its quantity
-			console.log('Yes');
 			setCart((prevCart) =>
 				prevCart.map((item) =>
 					item.code === product.code ? { ...item, quantity: item.quantity + quantity } : item,
 				),
 			);
-			console.log('Cart: ', cart);
 		} else {
 			// If the product is not in the cart, add it with the given quantity
-			console.log('No');
 			setCart((prevCart) => [...prevCart, { ...product, quantity }]);
-			console.log('Cart: ', cart);
 		}
 	};
 
@@ -76,11 +71,9 @@ export const ProductList = () => {
 	const onRemove = (product, quantity) => {
 		// Check if the product is already in the cart
 		const existingProduct = cart.find((item) => item.code === product.code);
-		console.log('existingProduct: ', existingProduct);
 
 		if (existingProduct) {
 			// If the product is in the cart, update its quantity
-			console.log('Yes');
 			setCart((prevCart) =>
 				prevCart.map((item) =>
 					item.code === product.code
@@ -88,9 +81,13 @@ export const ProductList = () => {
 						: item,
 				),
 			);
-			console.log('Cart: ', cart);
 		}
 	};
+
+	useEffect(() => {
+		// This will log the updated cart value whenever it changes
+		console.log('Updated Cart:', cart);
+	}, [cart]);
 
 	return (
 		<>
