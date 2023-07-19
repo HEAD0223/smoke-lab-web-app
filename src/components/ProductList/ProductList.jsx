@@ -88,6 +88,17 @@ export const ProductList = () => {
 	useEffect(() => {
 		// This will log the updated cart value whenever it changes
 		console.log('Updated Cart:', cart);
+
+		// Hide or show the MainButton based on the cart items
+		if (cart.length === 0) {
+			tg.MainButton.hide();
+		} else {
+			tg.MainButton.show();
+			const totalPrice = getTotalPrice(cart);
+			tg.MainButton.setParams({
+				text: `Buy ${totalPrice.toFixed(2)}`, // Use the totalPrice state here
+			});
+		}
 	}, [cart]);
 
 	return (
