@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ProductCard = ({ product, quantity = 0, onAdd, onRemove }) => {
+export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemove }) => {
 	const classes = useStyles();
 	const [openModal, setOpenModal] = useState(false);
 
@@ -87,9 +87,11 @@ export const ProductCard = ({ product, quantity = 0, onAdd, onRemove }) => {
 		: 'https://source.unsplash.com/random';
 
 	const onAddHandler = () => {
+		setQuantity((prevQuantity) => prevQuantity + 1);
 		onAdd(product, quantity + 1);
 	};
 	const onRemoveHandler = () => {
+		setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
 		onRemove(product, quantity - 1);
 	};
 

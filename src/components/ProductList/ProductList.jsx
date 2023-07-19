@@ -32,6 +32,7 @@ export const ProductList = () => {
 	const navigate = useNavigate();
 	const { tg } = useTelegram();
 	const { cart, dispatch } = useCart();
+	const [quantities, setQuantities] = useState({});
 
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
@@ -53,11 +54,32 @@ export const ProductList = () => {
 
 	// Function to handle adding products to the cart
 	const onAdd = (product, quantity) => {
+		// Update the quantity in the local state
+		setQuantities((prevQuantities) => ({
+			...prevQuantities,
+			[product.code]: quantity,
+		}));
+		// Update the quantity in the cart state using the dispatch function
 		dispatch({ type: 'ADD_TO_CART', payload: { product, quantity } });
 	};
 
 	// Function to handle removing products from the cart
 	const onRemove = (product, quantity) => {
+		// If the quantity is 0, remove the product from the local state
+		if (quantity === 0) {
+			setQuantities((prevQuantities) => ({
+				...prevQuantities,
+				[product.code]: undefined,
+			}));
+		} else {
+			// Otherwise, update the quantity in the local state
+			setQuantities((prevQuantities) => ({
+				...prevQuantities,
+				[product.code]: quantity,
+			}));
+		}
+
+		// Update the quantity in the cart state using the dispatch function
 		if (quantity === 0) {
 			dispatch({ type: 'REMOVE_PRODUCT_FROM_CART', payload: { product } });
 		} else {
@@ -115,7 +137,13 @@ export const ProductList = () => {
 							<Grid item xs={12} sm={6} md={4} lg={4} key={item._id}>
 								<ProductCard
 									product={item}
-									quantity={item.quantity}
+									quantity={quantities[item.code] || 0}
+									setQuantity={(value) =>
+										setQuantities((prevQuantities) => ({
+											...prevQuantities,
+											[item.code]: value,
+										}))
+									}
 									onAdd={onAdd}
 									onRemove={onRemove}
 								/>
