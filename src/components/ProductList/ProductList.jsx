@@ -104,12 +104,7 @@ export const ProductList = () => {
 
 	const onSendData = useCallback(() => {
 		console.log('Clicked');
-		const data = {
-			cart,
-			// Add other data you want to pass to the Cart component
-		};
-		// You can also pass data using state or query params if needed
-		navigate('/cart', { state: data });
+		navigate('/cart');
 	}, [cart, navigate]);
 
 	useEffect(() => {

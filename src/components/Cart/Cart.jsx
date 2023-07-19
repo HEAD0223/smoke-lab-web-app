@@ -1,12 +1,10 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 
 export const Cart = () => {
-	const location = useLocation();
-	const { cart } = location.state;
 	const navigate = useNavigate();
-	const { setCart } = useCart();
+	const { cart, setCart } = useCart();
 
 	const handleEditClick = () => {
 		navigate('/');
