@@ -73,14 +73,15 @@ export const ProductList = () => {
 		const existingProduct = cart.find((item) => item.code === product.code);
 
 		if (existingProduct) {
-			// If the product is in the cart, update its quantity
-			setCart((prevCart) =>
-				prevCart.map((item) =>
-					item.code === product.code
-						? { ...item, quantity: Math.max(item.quantity - quantity, 0) }
-						: item,
-				),
-			);
+			if (quantity === 0) {
+				// If the quantity is 0, remove the product from the cart
+				setCart((prevCart) => prevCart.filter((item) => item.code !== product.code));
+			} else {
+				// If the quantity is not 0, update the product's quantity in the cart
+				setCart((prevCart) =>
+					prevCart.map((item) => (item.code === product.code ? { ...item, quantity } : item)),
+				);
+			}
 		}
 	};
 
