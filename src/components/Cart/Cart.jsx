@@ -41,11 +41,6 @@ export const Cart = () => {
 		navigate('/');
 	};
 
-	// Decode the base64 image data and create a data URL
-	const imageSrc = cart.url
-		? `data:image/png;base64,${cart.url}`
-		: 'https://source.unsplash.com/random';
-
 	return (
 		<div className={classes.cartContainer}>
 			<div className={classes.headerContainer}>
@@ -56,7 +51,15 @@ export const Cart = () => {
 			</div>
 			{cart.map((item) => (
 				<div className={classes.cartItem} key={item.code}>
-					<img src={imageSrc} alt={item.name} className={classes.itemImage} />
+					<img
+						src={
+							item.url
+								? `data:image/png;base64,${item.url}`
+								: 'https://source.unsplash.com/random'
+						}
+						alt={item.name}
+						className={classes.itemImage}
+					/>
 					<div className={classes.itemName}>
 						<Typography variant="h6">{item.name}</Typography>
 						<Typography variant="body2">
