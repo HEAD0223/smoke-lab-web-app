@@ -51,15 +51,14 @@ export const ProductList = () => {
 
 	// Function to handle adding products to the cart
 	const onAdd = (product, quantity) => {
+		console.log('quantity: ', quantity);
 		// Check if the product is already in the cart
 		const existingProduct = cart.find((item) => item.code === product.code);
 
 		if (existingProduct) {
 			// If the product is already in the cart, update its quantity
 			setCart((prevCart) =>
-				prevCart.map((item) =>
-					item.code === product.code ? { ...item, quantity: item.quantity + quantity } : item,
-				),
+				prevCart.map((item) => (item.code === product.code ? { ...item, quantity } : item)),
 			);
 		} else {
 			// If the product is not in the cart, add it with the given quantity
@@ -69,6 +68,7 @@ export const ProductList = () => {
 
 	// Function to handle removing products from the cart
 	const onRemove = (product, quantity) => {
+		console.log('quantity: ', quantity);
 		// Check if the product is already in the cart
 		const existingProduct = cart.find((item) => item.code === product.code);
 
