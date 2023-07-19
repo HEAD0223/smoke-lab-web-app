@@ -63,10 +63,12 @@ export const ProductList = () => {
 					item.code === product.code ? { ...item, quantity: item.quantity + quantity } : item,
 				),
 			);
+			console.log('Cart: ', cart);
 		} else {
 			// If the product is not in the cart, add it with the given quantity
 			console.log('No');
 			setCart((prevCart) => [...prevCart, { ...product, quantity }]);
+			console.log('Cart: ', cart);
 		}
 	};
 
@@ -86,6 +88,7 @@ export const ProductList = () => {
 						: item,
 				),
 			);
+			console.log('Cart: ', cart);
 		}
 	};
 
