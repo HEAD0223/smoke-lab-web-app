@@ -110,7 +110,7 @@ export const ProductList = () => {
 	}, [cart, location]);
 
 	useEffect(() => {
-		tg.onEvent('mainButtonClicked', onSendData);
+		tg.onEvent('mainButtonClicked', console.log('Clicked'));
 
 		return () => {
 			tg.offEvent('mainButtonClicked', onSendData);
