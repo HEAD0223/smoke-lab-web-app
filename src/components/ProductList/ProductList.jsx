@@ -31,7 +31,7 @@ export const ProductList = () => {
 	const classes = useStyles();
 	const navigate = useNavigate();
 	const { tg } = useTelegram();
-	const { cart, setCart } = useCart();
+	const { cart, dispatch } = useCart();
 
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
@@ -53,36 +53,15 @@ export const ProductList = () => {
 
 	// Function to handle adding products to the cart
 	const onAdd = (product, quantity) => {
-		console.log('quantity: ', quantity);
-		// Check if the product is already in the cart
-		const existingProduct = cart.find((item) => item.code === product.code);
-
-		if (existingProduct) {
-			// If the product is already in the cart, update its quantity
-			setCart((prevCart) =>
-				prevCart.map((item) => (item.code === product.code ? { ...item, quantity } : item)),
-			);
-		} else {
-			// If the product is not in the cart, add it with the given quantity
-			setCart((prevCart) => [...prevCart, { ...product, quantity }]);
-		}
+		dispatch({ type: 'ADD_TO_CART', payload: { product, quantity } });
 	};
+
 	// Function to handle removing products from the cart
 	const onRemove = (product, quantity) => {
-		console.log('quantity: ', quantity);
-		// Check if the product is already in the cart
-		const existingProduct = cart.find((item) => item.code === product.code);
-
-		if (existingProduct) {
-			if (quantity === 0) {
-				// If the quantity is 0, remove the product from the cart
-				setCart((prevCart) => prevCart.filter((item) => item.code !== product.code));
-			} else {
-				// If the quantity is not 0, update the product's quantity in the cart
-				setCart((prevCart) =>
-					prevCart.map((item) => (item.code === product.code ? { ...item, quantity } : item)),
-				);
-			}
+		if (quantity === 0) {
+			dispatch({ type: 'REMOVE_PRODUCT_FROM_CART', payload: { product } });
+		} else {
+			dispatch({ type: 'REMOVE_FROM_CART', payload: { product, quantity } });
 		}
 	};
 
