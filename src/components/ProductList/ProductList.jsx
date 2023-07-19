@@ -88,6 +88,13 @@ export const ProductList = () => {
 	};
 
 	useEffect(() => {
+		// Update the quantities state based on the products in the cart
+		const newQuantities = {};
+		cart.forEach((item) => {
+			newQuantities[item.code] = item.quantity;
+		});
+		setQuantities(newQuantities);
+
 		// This will log the updated cart value whenever it changes
 		console.log('Updated Cart:', cart);
 
