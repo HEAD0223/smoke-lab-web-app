@@ -2,7 +2,7 @@ import { Grid, LinearProgress, Skeleton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTelegram } from '../../hooks/useTelegram';
 import { Filter } from '../Filter/Filter';
 import { ProductCard } from '../ProductCard/ProductCard';
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const ProductList = () => {
 	const classes = useStyles();
-	const location = useLocation();
+	const navigate = useNavigate();
 	const { tg } = useTelegram();
 	const [cart, setCart] = useState([]);
 
@@ -107,8 +107,9 @@ export const ProductList = () => {
 			cart,
 			// Add other data you want to pass to the Cart component
 		};
-		location.state = data; // Pass the data to the location state
-	}, [cart, location]);
+		// You can also pass data using state or query params if needed
+		navigate('/cart', { state: data });
+	}, [cart, navigate]);
 
 	useEffect(() => {
 		tg.onEvent('mainButtonClicked', onSendData);
