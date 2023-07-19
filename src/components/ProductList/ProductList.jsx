@@ -1,7 +1,8 @@
 import { Grid, LinearProgress, Skeleton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { useTelegram } from '../../hooks/useTelegram';
 import { Filter } from '../Filter/Filter';
 import { ProductCard } from '../ProductCard/ProductCard';
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const ProductList = () => {
 	const classes = useStyles();
+	const location = useLocation();
 	const { tg } = useTelegram();
 	const [cart, setCart] = useState([]);
 
@@ -39,7 +41,6 @@ export const ProductList = () => {
 		if (selectedManufacturers.length === 0) return true; // Show all products if no manufacturer selected
 		return selectedManufacturers.includes(product.manufacturer);
 	});
-
 	// Function to handle selection change in Filter component
 	const handleManufacturerSelection = (selectedOptions) => {
 		setSelectedManufacturers(selectedOptions);
@@ -65,7 +66,6 @@ export const ProductList = () => {
 			setCart((prevCart) => [...prevCart, { ...product, quantity }]);
 		}
 	};
-
 	// Function to handle removing products from the cart
 	const onRemove = (product, quantity) => {
 		console.log('quantity: ', quantity);
@@ -100,6 +100,22 @@ export const ProductList = () => {
 			});
 		}
 	}, [cart]);
+
+	const onSendData = useCallback(() => {
+		const data = {
+			cart,
+			// Add other data you want to pass to the Cart component
+		};
+		location.state = data; // Pass the data to the location state
+	}, [cart, location]);
+
+	useEffect(() => {
+		tg.onEvent('mainButtonClicked', onSendData);
+
+		return () => {
+			tg.offEvent('mainButtonClicked', onSendData);
+		};
+	}, [onSendData]);
 
 	return (
 		<>
