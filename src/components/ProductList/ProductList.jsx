@@ -102,6 +102,7 @@ export const ProductList = () => {
 	}, [cart]);
 
 	const onSendData = useCallback(() => {
+		console.log('Clicked');
 		const data = {
 			cart,
 			// Add other data you want to pass to the Cart component
@@ -110,7 +111,7 @@ export const ProductList = () => {
 	}, [cart, location]);
 
 	useEffect(() => {
-		tg.onEvent('mainButtonClicked', console.log('Clicked'));
+		tg.onEvent('mainButtonClicked', onSendData);
 
 		return () => {
 			tg.offEvent('mainButtonClicked', onSendData);
