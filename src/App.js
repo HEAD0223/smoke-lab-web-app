@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Cart } from './components/Cart/Cart';
-import { Form } from './components/Form/Form';
 import { Header } from './components/Header/Header';
 import { ProductList } from './components/ProductList/ProductList';
 import { CartProvider } from './hooks/useCart';
@@ -41,7 +40,6 @@ function App() {
 				<Routes>
 					<Route index element={<ProductList />} />
 					<Route path="/cart" element={<Cart />} />
-					<Route path="/form" element={<Form />} />
 				</Routes>
 			</CartProvider>
 		</div>

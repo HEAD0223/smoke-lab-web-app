@@ -12,9 +12,11 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
+import { sendDataToServer } from '../../redux/slices/cart';
 
 const useStyles = makeStyles((theme) => ({
 	cartContainer: {
@@ -67,7 +69,8 @@ export const Cart = () => {
 	const classes = useStyles();
 	const navigate = useNavigate();
 	const { cart } = useCart();
-	const { tg } = useTelegram();
+	const { tg, user } = useTelegram();
+	const dispatch = useDispatch();
 
 	// State to manage the modal open/close status and form fields data
 	const [modalOpen, setModalOpen] = useState(false);
@@ -104,8 +107,12 @@ export const Cart = () => {
 			setModalOpen(true);
 			// Combine cart and user information
 			const combinedData = {
-				cartItems: cart,
-				userInfo: {
+				id: user.user_id,
+				username: user.username,
+				created_at: Date.now(),
+				status: '⌛️',
+				items: cart,
+				info: {
 					name: userInfo.name,
 					phone: userInfo.phone,
 					address: userInfo.address,
@@ -113,6 +120,7 @@ export const Cart = () => {
 				},
 			};
 			console.log('Combine Cart and User:', combinedData);
+			dispatch(sendDataToServer(combinedData));
 		} else {
 			alert('Please fill out all the required fields.');
 		}
