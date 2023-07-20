@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, Skeleton, TextField, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -78,26 +78,32 @@ export const Cart = () => {
 					Edit
 				</Button>
 			</div>
-			{cart.map((item) => (
-				<div className={classes.cartItem} key={item.code}>
-					<img
-						src={
-							item.url
-								? `data:image/png;base64,${item.url}`
-								: 'https://source.unsplash.com/random'
-						}
-						alt={item.name}
-						className={classes.itemImage}
-					/>
-					<div className={classes.itemName}>
-						<Typography variant="h6">{item.name}</Typography>
-						<Typography variant="body2">
-							{item.quantity} x {item.manufacturer}
-						</Typography>
+			{cart.length === 0 ? (
+				// If the cart is empty and still loading, show the Skeleton
+				<Skeleton variant="rectangular" height={300} animation="wave" />
+			) : (
+				// Otherwise, show the cart content
+				cart.map((item) => (
+					<div className={classes.cartItem} key={item.code}>
+						<img
+							src={
+								item.url
+									? `data:image/png;base64,${item.url}`
+									: 'https://source.unsplash.com/random'
+							}
+							alt={item.name}
+							className={classes.itemImage}
+						/>
+						<div className={classes.itemName}>
+							<Typography variant="h6">{item.name}</Typography>
+							<Typography variant="body2">
+								{item.quantity} x {item.manufacturer}
+							</Typography>
+						</div>
+						<Typography variant="body1">${parseFloat(item.price) * item.quantity}</Typography>
 					</div>
-					<Typography variant="body1">${parseFloat(item.price) * item.quantity}</Typography>
-				</div>
-			))}
+				))
+			)}
 			<div className={classes.commentContainer}>
 				<TextField
 					multiline
