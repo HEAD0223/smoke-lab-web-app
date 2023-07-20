@@ -110,7 +110,7 @@ export const Cart = () => {
 			const combinedData = {
 				user_id: user.id,
 				username: user.username,
-				created_at: now.toISOString().split('T')[0],
+				created_at: Date.now(),
 				status: '⌛️',
 				items: cart,
 				info: {
@@ -120,7 +120,6 @@ export const Cart = () => {
 					comment: userInfo.comment,
 				},
 			};
-			console.log(combinedData);
 			dispatch(sendDataToServer(combinedData));
 		} else {
 			alert('Please fill out all the required fields.');
