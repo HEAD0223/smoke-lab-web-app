@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	commentContainer: {
 		marginTop: theme.spacing(4),
+		color: theme.palette.text_color.main,
 	},
 }));
 
