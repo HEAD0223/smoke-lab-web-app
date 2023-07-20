@@ -102,7 +102,17 @@ export const Cart = () => {
 		// Check if all user information fields are filled
 		if (userInfo.name && userInfo.phone && userInfo.address && userInfo.comment) {
 			setModalOpen(true);
-			console.log('User Info:', userInfo);
+			// Combine cart and user information
+			const combinedData = {
+				cartItems: cart,
+				userInfo: {
+					name: userInfo.name,
+					phone: userInfo.phone,
+					address: userInfo.address,
+					comment: userInfo.comment,
+				},
+			};
+			console.log('Combine Cart and User:', combinedData);
 		} else {
 			alert('Please fill out all the required fields.');
 		}
