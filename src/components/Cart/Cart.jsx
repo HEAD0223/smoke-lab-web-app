@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
+import { sendDataToServer } from '../../redux/slices/cart';
 
 const useStyles = makeStyles((theme) => ({
 	cartContainer: {
@@ -119,7 +120,7 @@ export const Cart = () => {
 				},
 			};
 			console.log('Combine Cart and User:', combinedData);
-			// dispatch(sendDataToServer(combinedData));
+			dispatch(sendDataToServer(combinedData));
 		} else {
 			alert('Please fill out all the required fields.');
 		}
