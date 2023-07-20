@@ -82,9 +82,12 @@ export const Cart = () => {
 
 	const onSendData = useCallback(() => {
 		console.log('Clicked');
+		console.log('User Name:', userInfo.name);
+		console.log('User Phone:', userInfo.phone);
+		console.log('User Address:', userInfo.address);
+		console.log('User Comment:', userInfo.comment);
 		data = [];
 		data.push(userInfo);
-		console.log('User Info:', data);
 
 		// Check if all user information fields are filled
 		if (userInfo.name && userInfo.phone && userInfo.address && userInfo.comment) {
