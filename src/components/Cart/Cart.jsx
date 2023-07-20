@@ -86,12 +86,11 @@ export const Cart = () => {
 		console.log('User Phone:', userInfo.phone);
 		console.log('User Address:', userInfo.address);
 		console.log('User Comment:', userInfo.comment);
-		data = [userInfo];
-		console.log('User Info:', data);
 
 		// Check if all user information fields are filled
 		if (userInfo.name && userInfo.phone && userInfo.address && userInfo.comment) {
 			setModalOpen(true);
+			console.log('User Info:', userInfo);
 		} else {
 			alert('Please fill out all the required fields.');
 		}
