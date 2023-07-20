@@ -200,7 +200,9 @@ export const Cart = () => {
 				<DialogContent>
 					<DialogContentText>
 						<div className={classes.circularProgressContainer}>
-							<CircularProgress className={classes.circularProgress} />
+							{isDataSending === 'sending' && (
+								<CircularProgress className={classes.circularProgress} />
+							)}
 						</div>
 						{isDataSending === 'sent' && (
 							<>
