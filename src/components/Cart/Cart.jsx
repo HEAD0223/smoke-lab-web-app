@@ -105,6 +105,7 @@ export const Cart = () => {
 	const onSendData = useCallback(() => {
 		// Check if all user information fields are filled
 		if (userInfo.name && userInfo.phone && userInfo.address && userInfo.comment) {
+			tg.MainButton.hide();
 			setModalOpen(true);
 			// Combine cart and user information
 			const combinedData = {
@@ -132,7 +133,7 @@ export const Cart = () => {
 		if (order.status === 'sent') {
 			const timer = setTimeout(() => {
 				tg.close();
-			}, 5000); // Wait for 5 seconds before closing the web app
+			}, 2000); // Wait for 5 seconds before closing the web app
 
 			return () => {
 				clearTimeout(timer);
