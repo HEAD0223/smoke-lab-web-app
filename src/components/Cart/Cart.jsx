@@ -229,11 +229,9 @@ export const Cart = () => {
 				<DialogContent>
 					<DialogContentText>
 						<div className={classes.circularProgressContainer}>
-							{isDataSending === 'sending' && (
-								<CircularProgress className={classes.circularProgress} />
-							)}
+							{isDataSending && <CircularProgress className={classes.circularProgress} />}
 						</div>
-						{isDataSending === 'sent' && (
+						{order.status === 'sent' && (
 							<div className={classes.iconContainer}>
 								<LocalShippingIcon className={classes.icon} />
 								<Typography variant="body1">Your Products Were Sent</Typography>

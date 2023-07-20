@@ -20,16 +20,17 @@ const orderSlice = createSlice({
 	name: 'order',
 	initialState,
 	reducers: {},
-	extraReducers: {
-		[sendDataToServer.pending]: (state) => {
-			state.order.status = 'sending';
-		},
-		[sendDataToServer.fulfilled]: (state) => {
-			state.order.status = 'sent';
-		},
-		[sendDataToServer.rejected]: (state) => {
-			state.order.status = 'error';
-		},
+	extraReducers: (builder) => {
+		builder
+			.addCase(sendDataToServer.pending, (state) => {
+				state.order.status = 'sending';
+			})
+			.addCase(sendDataToServer.fulfilled, (state) => {
+				state.order.status = 'sent';
+			})
+			.addCase(sendDataToServer.rejected, (state) => {
+				state.order.status = 'error';
+			});
 	},
 });
 
