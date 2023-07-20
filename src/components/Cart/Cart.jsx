@@ -51,6 +51,16 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(4),
 		color: theme.palette.hint_color.main,
 	},
+	iconContainer: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		flexDirection: 'column',
+	},
+	icon: {
+		fontSize: 48,
+		marginBottom: theme.spacing(1),
+	},
 }));
 
 export const Cart = () => {
@@ -205,10 +215,10 @@ export const Cart = () => {
 							)}
 						</div>
 						{isDataSending === 'sent' && (
-							<>
-								<LocalShippingIcon />
-								Your Products Were Sent
-							</>
+							<div className={classes.iconContainer}>
+								<LocalShippingIcon className={classes.icon} />
+								<Typography variant="body1">Your Products Were Sent</Typography>
+							</div>
 						)}
 					</DialogContentText>
 				</DialogContent>
