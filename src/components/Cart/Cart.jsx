@@ -1,6 +1,17 @@
-import { Button, Skeleton, TextField, Typography } from '@mui/material';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import {
+	Button,
+	CircularProgress,
+	Dialog,
+	DialogContent,
+	DialogContentText,
+	DialogTitle,
+	Skeleton,
+	TextField,
+	Typography,
+} from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
@@ -30,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	commentContainer: {
 		marginTop: theme.spacing(4),
-		color: theme.palette.text_color.main,
+		color: theme.palette.hint_color.main,
 	},
 }));
 
@@ -39,6 +50,16 @@ export const Cart = () => {
 	const navigate = useNavigate();
 	const { cart } = useCart();
 	const { tg } = useTelegram();
+
+	// State to manage the modal open/close status and form fields data
+	const [modalOpen, setModalOpen] = useState(false);
+	const isDataSending = 'sent';
+	const [userInfo, setUserInfo] = useState({
+		name: '',
+		phone: '',
+		address: '',
+		comment: '',
+	});
 
 	const getTotalPrice = (items) => {
 		return items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
@@ -61,7 +82,17 @@ export const Cart = () => {
 
 	const onSendData = useCallback(() => {
 		console.log('Clicked');
-	}, []);
+		data = [];
+		data.push(userInfo);
+		console.log('User Info:', data);
+
+		// Check if all user information fields are filled
+		if (userInfo.name && userInfo.phone && userInfo.address && userInfo.comment) {
+			setModalOpen(true);
+		} else {
+			alert('Please fill out all the required fields.');
+		}
+	}, [userInfo]);
 
 	useEffect(() => {
 		tg.onEvent('mainButtonClicked', onSendData);
@@ -71,11 +102,24 @@ export const Cart = () => {
 		};
 	}, [onSendData]);
 
+	// Function to handle input changes for user information
+	const handleInputChange = (event) => {
+		const { name, value } = event.target;
+		setUserInfo((prevUserInfo) => ({
+			...prevUserInfo,
+			[name]: value,
+		}));
+	};
+
+	const handleModalClose = () => {
+		setModalOpen(false);
+	};
+
 	return (
 		<div className={classes.cartContainer}>
 			<div className={classes.headerContainer}>
 				<Typography variant="h4">Your Order</Typography>
-				<Button variant="outlined" color="primary" onClick={handleEditClick}>
+				<Button variant="outlined" onClick={handleEditClick}>
 					Edit
 				</Button>
 			</div>
@@ -106,17 +150,61 @@ export const Cart = () => {
 				))
 			)}
 			<div className={classes.commentContainer}>
+				{/* Form fields to collect user information */}
 				<TextField
+					name="name"
+					label="Name"
+					value={userInfo.name}
+					onChange={handleInputChange}
+					variant="outlined"
+					fullWidth
+					margin="normal"
+				/>
+				<TextField
+					name="phone"
+					label="Phone"
+					value={userInfo.phone}
+					onChange={handleInputChange}
+					variant="outlined"
+					fullWidth
+					margin="normal"
+				/>
+				<TextField
+					name="address"
+					label="Address"
+					value={userInfo.address}
+					onChange={handleInputChange}
+					variant="outlined"
+					fullWidth
+					margin="normal"
+				/>
+				<TextField
+					name="comment"
+					label="Comment"
+					value={userInfo.comment}
+					onChange={handleInputChange}
 					multiline
 					rows={4}
 					variant="outlined"
 					fullWidth
-					placeholder="Add comment..."
+					margin="normal"
 				/>
-				<Typography variant="body2" color="textSecondary">
-					Any special requests, details, final wishes etc.
-				</Typography>
 			</div>
+			{/* Modal */}
+			<Dialog open={modalOpen} onClose={handleModalClose}>
+				<DialogTitle>Order Confirmation</DialogTitle>
+				<DialogContent>
+					<DialogContentText>
+						{isDataSending && <CircularProgress />}
+						{isDataSending === 'sent' && (
+							<>
+								<LocalShippingIcon />
+								Your Products Were Sent
+							</>
+						)}
+					</DialogContentText>
+				</DialogContent>
+			</Dialog>
 		</div>
 	);
 };
