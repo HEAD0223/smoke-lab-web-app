@@ -39,6 +39,14 @@ const useStyles = makeStyles((theme) => ({
 	itemName: {
 		flexGrow: 1,
 	},
+	circularProgressContainer: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	circularProgress: {
+		color: theme.palette.button_color.main,
+	},
 	commentContainer: {
 		marginTop: theme.spacing(4),
 		color: theme.palette.hint_color.main,
@@ -191,7 +199,9 @@ export const Cart = () => {
 				<DialogTitle>Order Confirmation</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
-						{isDataSending === 'sending' && <CircularProgress />}
+						<div className={classes.circularProgressContainer}>
+							<CircularProgress className={classes.circularProgress} />
+						</div>
 						{isDataSending === 'sent' && (
 							<>
 								<LocalShippingIcon />
