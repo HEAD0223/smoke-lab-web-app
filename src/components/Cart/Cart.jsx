@@ -108,7 +108,7 @@ export const Cart = () => {
 			setModalOpen(true);
 			// Combine cart and user information
 			const combinedData = {
-				id: user.user_id,
+				user_id: user.user_id,
 				username: user.username,
 				created_at: Date.now(),
 				status: '⌛️',
