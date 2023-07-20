@@ -129,10 +129,20 @@ export const Cart = () => {
 	useEffect(() => {
 		tg.onEvent('mainButtonClicked', onSendData);
 
+		if (order.status === 'sent') {
+			const timer = setTimeout(() => {
+				tg.close();
+			}, 5000); // Wait for 5 seconds before closing the web app
+
+			return () => {
+				clearTimeout(timer);
+			};
+		}
+
 		return () => {
 			tg.offEvent('mainButtonClicked', onSendData);
 		};
-	}, [onSendData]);
+	}, [onSendData, order.status]);
 
 	// Function to handle input changes for user information
 	const handleInputChange = (event) => {
