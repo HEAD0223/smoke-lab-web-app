@@ -44,7 +44,6 @@ export const Cart = () => {
 	};
 
 	const handleEditClick = () => {
-		console.log('Back');
 		navigate('/');
 		const totalPrice = getTotalPrice(cart);
 		tg.MainButton.setParams({

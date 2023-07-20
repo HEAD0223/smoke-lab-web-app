@@ -95,9 +95,6 @@ export const ProductList = () => {
 		});
 		setQuantities(newQuantities);
 
-		// This will log the updated cart value whenever it changes
-		console.log('Updated Cart:', cart);
-
 		// Hide or show the MainButton based on the cart items
 		if (cart.length === 0) {
 			tg.MainButton.hide();
@@ -111,7 +108,6 @@ export const ProductList = () => {
 	}, [cart, tg]);
 
 	const onSendData = useCallback(() => {
-		console.log('Clicked');
 		navigate('/cart');
 		tg.MainButton.setParams({
 			text: `Order`,
