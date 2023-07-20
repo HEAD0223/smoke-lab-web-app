@@ -74,7 +74,8 @@ export const Cart = () => {
 
 	// State to manage the modal open/close status and form fields data
 	const [modalOpen, setModalOpen] = useState(false);
-	const isDataSending = 'sent';
+	const { order } = useSelector((state) => state.order);
+	const isDataSending = order.status === 'sending' || order.status === 'error';
 	const [userInfo, setUserInfo] = useState({
 		name: '',
 		phone: '',
