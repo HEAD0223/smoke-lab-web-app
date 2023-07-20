@@ -133,7 +133,7 @@ export const Cart = () => {
 		if (order.status === 'sent') {
 			const timer = setTimeout(() => {
 				tg.close();
-			}, 2000); // Wait for 5 seconds before closing the web app
+			}, 3000); // Wait for 5 seconds before closing the web app
 
 			return () => {
 				clearTimeout(timer);
