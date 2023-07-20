@@ -120,6 +120,7 @@ export const Cart = () => {
 					comment: userInfo.comment,
 				},
 			};
+			console.log(combinedData);
 			dispatch(sendDataToServer(combinedData));
 		} else {
 			alert('Please fill out all the required fields.');
