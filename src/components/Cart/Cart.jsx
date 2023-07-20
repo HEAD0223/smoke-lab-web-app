@@ -110,7 +110,7 @@ export const Cart = () => {
 			const combinedData = {
 				user_id: user.id,
 				username: user.username,
-				created_at: Date.now(),
+				created_at: now.toISOString().split('T')[0],
 				status: '⌛️',
 				items: cart,
 				info: {
