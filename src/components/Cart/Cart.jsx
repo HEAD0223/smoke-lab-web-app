@@ -1,8 +1,9 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
+import { useTelegram } from '../../hooks/useTelegram';
 
 const useStyles = makeStyles((theme) => ({
 	cartContainer: {
@@ -36,10 +37,39 @@ export const Cart = () => {
 	const classes = useStyles();
 	const navigate = useNavigate();
 	const { cart } = useCart();
+	const { tg } = useTelegram();
+
+	const getTotalPrice = (items) => {
+		return items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
+	};
 
 	const handleEditClick = () => {
+		console.log('Back');
 		navigate('/');
+		const totalPrice = getTotalPrice(cart);
+		tg.MainButton.setParams({
+			text: `Buy ${totalPrice.toFixed(2)}`,
+		});
 	};
+
+	useEffect(() => {
+		tg.MainButton.show();
+		tg.MainButton.setParams({
+			text: `Order`,
+		});
+	}, []);
+
+	const onSendData = useCallback(() => {
+		console.log('Clicked');
+	}, []);
+
+	useEffect(() => {
+		tg.onEvent('mainButtonClicked', onSendData);
+
+		return () => {
+			tg.offEvent('mainButtonClicked', onSendData);
+		};
+	}, [onSendData]);
 
 	return (
 		<div className={classes.cartContainer}>

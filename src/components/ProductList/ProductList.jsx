@@ -105,14 +105,17 @@ export const ProductList = () => {
 			tg.MainButton.show();
 			const totalPrice = getTotalPrice(cart);
 			tg.MainButton.setParams({
-				text: `Buy ${totalPrice.toFixed(2)}`, // Use the totalPrice state here
+				text: `Buy ${totalPrice.toFixed(2)}`,
 			});
 		}
-	}, [cart]);
+	}, [cart, tg]);
 
 	const onSendData = useCallback(() => {
 		console.log('Clicked');
 		navigate('/cart');
+		tg.MainButton.setParams({
+			text: `Order`,
+		});
 	}, [cart, navigate]);
 
 	useEffect(() => {
