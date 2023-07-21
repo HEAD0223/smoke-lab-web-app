@@ -35,7 +35,7 @@ export const Filter = ({ onSelectManufacturers }) => {
 	const options = manufacturers.items.map((manufacturer) => manufacturer.name);
 
 	const handleOptionChange = (event, value) => {
-		tg.impactOccurred(medium);
+		tg.HapticFeedback.impactOccurred(medium);
 		setSelectedOptions(value);
 		// Pass the selected manufacturers back to the parent component
 		onSelectManufacturers(value);

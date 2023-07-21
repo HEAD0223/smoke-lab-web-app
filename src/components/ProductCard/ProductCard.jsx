@@ -95,12 +95,12 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 	const [openModal, setOpenModal] = useState(false);
 
 	const handleModalOpen = () => {
-		tg.impactOccurred(soft);
+		tg.HapticFeedback.impactOccurred(soft);
 		tg.MainButton.hide();
 		setOpenModal(true);
 	};
 	const handleModalClose = () => {
-		tg.impactOccurred(soft);
+		tg.HapticFeedback.impactOccurred(soft);
 		tg.MainButton.show();
 		setOpenModal(false);
 	};
@@ -111,12 +111,12 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 		: 'https://source.unsplash.com/random';
 
 	const onAddHandler = () => {
-		tg.selectionChanged();
+		tg.HapticFeedback.selectionChanged();
 		setQuantity((prevQuantity) => prevQuantity + 1);
 		onAdd(product, quantity + 1);
 	};
 	const onRemoveHandler = () => {
-		tg.selectionChanged();
+		tg.HapticFeedback.selectionChanged();
 		setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
 		onRemove(product, quantity - 1);
 	};
