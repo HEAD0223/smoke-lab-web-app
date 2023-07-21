@@ -205,6 +205,7 @@ export const Cart = () => {
 								<Typography variant="h6">{item.name}</Typography>
 								<Typography variant="body2">
 									{item.quantity} x {item.price}
+									{t('currency')}
 								</Typography>
 							</div>
 							<Typography variant="body1">
