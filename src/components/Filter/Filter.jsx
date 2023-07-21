@@ -3,7 +3,6 @@ import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useTelegram } from '../../hooks/useTelegram';
 import './Filter.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const Filter = ({ onSelectManufacturers }) => {
 	const classes = useStyles();
-	const { tg } = useTelegram();
 	const { t } = useTranslation();
 
 	const { manufacturers } = useSelector((state) => state.manufacturers);
@@ -35,7 +33,6 @@ export const Filter = ({ onSelectManufacturers }) => {
 	const options = manufacturers.items.map((manufacturer) => manufacturer.name);
 
 	const handleOptionChange = (event, value) => {
-		tg.HapticFeedback.impactOccurred(medium);
 		setSelectedOptions(value);
 		// Pass the selected manufacturers back to the parent component
 		onSelectManufacturers(value);

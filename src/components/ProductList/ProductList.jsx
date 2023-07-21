@@ -109,7 +109,6 @@ export const ProductList = () => {
 	}, [cart, tg]);
 
 	const onSendData = useCallback(() => {
-		tg.HapticFeedback.impactOccurred(heavy);
 		navigate('/cart');
 		tg.MainButton.setParams({
 			text: `${t('tg_order')}`,
