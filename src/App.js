@@ -1,5 +1,4 @@
 import { makeStyles } from '@mui/styles';
-import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -21,26 +20,14 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
 	const classes = useStyles();
-	const { tg, user } = useTelegram();
+	const { tg } = useTelegram();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const setLanguageCookie = (languageCode) => {
-			Cookies.set('lng', languageCode, { expires: 1 }); // Expires in 1 day
-		};
-
 		tg.ready();
-
-		const userLanguageCode = user?.language_code;
-		console.log('User language code:', userLanguageCode);
-		if (userLanguageCode) {
-			setLanguageCookie(userLanguageCode);
-			console.log('Language cookie set to:', userLanguageCode);
-		}
-
 		dispatch(fetchManufacturers());
 		dispatch(fetchProducts());
-	}, [dispatch, tg, user?.language_code]);
+	}, [dispatch, tg]);
 
 	return (
 		<div className={classes.body}>
