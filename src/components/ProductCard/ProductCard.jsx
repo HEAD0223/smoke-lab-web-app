@@ -46,10 +46,6 @@ const useStyles = makeStyles((theme) => ({
 		alignSelf: 'flex-end',
 		backgroundColor: theme.palette.button_color.main,
 		color: theme.palette.button_text_color.main,
-		transition: 'transform 0.2s',
-	},
-	addButtonActive: {
-		transform: 'scale(0.8)',
 	},
 	cardContent: {
 		display: 'flex',
@@ -83,7 +79,6 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(false);
-	const [adding, setAdding] = useState(false);
 
 	const handleModalOpen = () => {
 		tg.MainButton.hide();
@@ -100,12 +95,8 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 		: 'https://source.unsplash.com/random';
 
 	const onAddHandler = () => {
-		setAdding(true);
-		setTimeout(() => {
-			setQuantity((prevQuantity) => prevQuantity + 1);
-			onAdd(product, quantity + 1);
-			setAdding(false);
-		}, 200);
+		setQuantity((prevQuantity) => prevQuantity + 1);
+		onAdd(product, quantity + 1);
 	};
 	const onRemoveHandler = () => {
 		setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
@@ -157,7 +148,7 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 				{quantity === 0 ? (
 					<Button
 						variant="contained"
-						className={`${classes.addButton} ${adding ? classes.addButtonActive : ''}`}
+						className={classes.addButton}
 						startIcon={<AddIcon />}
 						onClick={onAddHandler}>
 						{t('card_add')}
