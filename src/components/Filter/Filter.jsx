@@ -1,6 +1,7 @@
 import { Autocomplete, Checkbox, CircularProgress, TextField } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import './Filter.css';
 
@@ -21,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 export const Filter = ({ onSelectManufacturers }) => {
 	const classes = useStyles();
+	const { t } = useTranslation();
+
 	const { manufacturers } = useSelector((state) => state.manufacturers);
 	const isManufacturersLoading =
 		manufacturers.status === 'loading' || manufacturers.status === 'error';
@@ -53,7 +56,7 @@ export const Filter = ({ onSelectManufacturers }) => {
 						<TextField
 							{...params}
 							variant="outlined"
-							label="Filter Options"
+							label={t('filter_label')}
 							placeholder="Select options"
 						/>
 					)}
