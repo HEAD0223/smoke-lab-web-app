@@ -3,6 +3,7 @@ import { Badge, Button, Card, CardContent, CardMedia, Link, Typography } from '@
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTelegram } from '../../hooks/useTelegram';
 import { ProductModal } from '../ProductModal/ProductModal';
 
 const useStyles = makeStyles((theme) => ({
@@ -73,13 +74,16 @@ const useStyles = makeStyles((theme) => ({
 
 export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemove }) => {
 	const classes = useStyles();
+	const { tg } = useTelegram();
 	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(false);
 
 	const handleModalOpen = () => {
+		tg.MainButton.hide();
 		setOpenModal(true);
 	};
 	const handleModalClose = () => {
+		tg.MainButton.show();
 		setOpenModal(false);
 	};
 
