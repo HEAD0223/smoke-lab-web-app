@@ -28,7 +28,7 @@ function App() {
 		tg.ready();
 		const languageCode = user?.language_code;
 		// Set the language code as a cookie with an expiration date
-		Cookies.set('i18next', languageCode, { expires: 1 }); // Expires in 1 day
+		Cookies.set('lng', languageCode, { expires: 1 }); // Expires in 1 day
 		dispatch(fetchManufacturers());
 		dispatch(fetchProducts());
 	}, []);
