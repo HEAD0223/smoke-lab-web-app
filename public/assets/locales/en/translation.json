@@ -1,3 +1,25 @@
 {
-	"filter_label": "Filter Options"
+	"currency": " MDL",
+
+	"tg_buy": "Buy ",
+	"tg_order": "Order",
+
+	"filter_label": "Filter Options",
+	"filter_placeholder": "Select options",
+
+	"card_modal": "See more",
+	"card_add": "Add",
+
+	"modal_price": "Price: ",
+	"modal_sku": "SKU: ",
+	"modal_amount": "Amount: ",
+	"modal_manufacturer": "Manufacturer: ",
+
+	"form_name": "Name",
+	"form_phone": "Phone",
+	"form_address": "Address",
+	"form_comment": "Comment",
+
+	"cart_decline": "Please fill out all the required fields.",
+	"cart_success": "Your Products Were Sent"
 }

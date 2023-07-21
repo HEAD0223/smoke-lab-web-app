@@ -1,3 +1,25 @@
 {
-	"filter_label": "Параметры фильтра"
+	"currency": " MDL",
+
+	"tg_buy": "Купить ",
+	"tg_order": "Заказать",
+
+	"filter_label": "Параметры фильтра",
+	"filter_placeholder": "Выберите параметры",
+
+	"card_modal": "Узнать больше",
+	"card_add": "Добавить",
+
+	"modal_price": "Цена: ",
+	"modal_sku": "Артикул: ",
+	"modal_amount": "Количество: ",
+	"modal_manufacturer": "Производитель: ",
+
+	"form_name": "Имя",
+	"form_phone": "Телефон",
+	"form_address": "Адрес",
+	"form_comment": "Комментарий",
+
+	"cart_decline": "Пожалуйста, заполните все необходимые поля.",
+	"cart_success": "Ваши товары отправлены"
 }

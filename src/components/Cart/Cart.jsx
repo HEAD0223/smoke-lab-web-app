@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
@@ -70,6 +71,7 @@ export const Cart = () => {
 	const navigate = useNavigate();
 	const { cart } = useCart();
 	const { tg, user } = useTelegram();
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
 	// State to manage the modal open/close status and form fields data
@@ -91,14 +93,14 @@ export const Cart = () => {
 		navigate('/');
 		const totalPrice = getTotalPrice(cart);
 		tg.MainButton.setParams({
-			text: `Buy ${totalPrice.toFixed(2)}`,
+			text: `${t('tg_buy')}${totalPrice}`,
 		});
 	};
 
 	useEffect(() => {
 		tg.MainButton.show();
 		tg.MainButton.setParams({
-			text: `Order`,
+			text: `${t('tg_order')}`,
 		});
 	}, []);
 
@@ -123,7 +125,7 @@ export const Cart = () => {
 			};
 			dispatch(sendDataToServer(combinedData));
 		} else {
-			alert('Please fill out all the required fields.');
+			alert(`${t('cart_decline')}`);
 		}
 	}, [userInfo]);
 
@@ -196,7 +198,7 @@ export const Cart = () => {
 				{/* Form fields to collect user information */}
 				<TextField
 					name="name"
-					label="Name"
+					label={t('form_name')}
 					value={userInfo.name}
 					onChange={handleInputChange}
 					variant="outlined"
@@ -205,7 +207,7 @@ export const Cart = () => {
 				/>
 				<TextField
 					name="phone"
-					label="Phone"
+					label={t('form_phone')}
 					value={userInfo.phone}
 					onChange={handleInputChange}
 					variant="outlined"
@@ -214,7 +216,7 @@ export const Cart = () => {
 				/>
 				<TextField
 					name="address"
-					label="Address"
+					label={t('form_address')}
 					value={userInfo.address}
 					onChange={handleInputChange}
 					variant="outlined"
@@ -223,7 +225,7 @@ export const Cart = () => {
 				/>
 				<TextField
 					name="comment"
-					label="Comment"
+					label={t('form_comment')}
 					value={userInfo.comment}
 					onChange={handleInputChange}
 					multiline
@@ -244,7 +246,7 @@ export const Cart = () => {
 						{order.status === 'sent' && (
 							<div className={classes.iconContainer}>
 								<LocalShippingIcon className={classes.icon} />
-								<Typography variant="body1">Your Products Were Sent</Typography>
+								<Typography variant="body1">{t('cart_success')}</Typography>
 							</div>
 						)}
 					</DialogContentText>

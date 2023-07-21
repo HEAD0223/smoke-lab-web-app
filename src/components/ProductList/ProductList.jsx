@@ -1,6 +1,7 @@
 import { Grid, LinearProgress, Skeleton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
@@ -31,6 +32,7 @@ export const ProductList = () => {
 	const classes = useStyles();
 	const navigate = useNavigate();
 	const { tg } = useTelegram();
+	const { t } = useTranslation();
 	const { cart, dispatch } = useCart();
 	const [quantities, setQuantities] = useState({});
 
@@ -102,7 +104,7 @@ export const ProductList = () => {
 			tg.MainButton.show();
 			const totalPrice = getTotalPrice(cart);
 			tg.MainButton.setParams({
-				text: `Buy ${totalPrice.toFixed(2)}`,
+				text: `${t('tg_buy')}${totalPrice}`,
 			});
 		}
 	}, [cart, tg]);
@@ -110,7 +112,7 @@ export const ProductList = () => {
 	const onSendData = useCallback(() => {
 		navigate('/cart');
 		tg.MainButton.setParams({
-			text: `Order`,
+			text: `${t('tg_order')}`,
 		});
 	}, [cart, navigate]);
 

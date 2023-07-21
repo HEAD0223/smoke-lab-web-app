@@ -1,3 +1,25 @@
 {
-	"filter_label": "Opțiuni de filtrare"
+	"currency": " MDL",
+
+	"tg_buy": "Cumpără ",
+	"tg_order": "Ordin",
+
+	"filter_label": "Opțiuni de filtrare",
+	"filter_placeholder": "Selectați opțiuni",
+
+	"card_modal": "Vezi mai mult",
+	"card_add": "Adăuga",
+
+	"modal_price": "Preț: ",
+	"modal_sku": "SKU: ",
+	"modal_amount": "Cantitate: ",
+	"modal_manufacturer": "Producător: ",
+
+	"form_name": "Nume",
+	"form_phone": "Telefon",
+	"form_address": "Adresă",
+	"form_comment": "Comentariu",
+
+	"cart_decline": "Vă rugăm să completați toate câmpurile necesare.",
+	"cart_success": "Produsele dvs. au fost trimise"
 }

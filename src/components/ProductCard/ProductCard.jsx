@@ -2,6 +2,7 @@ import { Add as AddIcon, Remove as RemoveIcon } from '@mui/icons-material';
 import { Badge, Button, Card, CardContent, CardMedia, Link, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ProductModal } from '../ProductModal/ProductModal';
 
 const useStyles = makeStyles((theme) => ({
@@ -72,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemove }) => {
 	const classes = useStyles();
+	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(false);
 
 	const handleModalOpen = () => {
@@ -110,7 +112,10 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 					<Typography variant="h6" className={classes.productName}>
 						{product.name}
 					</Typography>
-					<Typography variant="subtitle1">Price: {product.price}</Typography>
+					<Typography variant="subtitle1">
+						{product.price}
+						{t('currency')}
+					</Typography>
 				</div>
 				<div>
 					<Link
@@ -118,7 +123,7 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 						variant="body2"
 						className={classes.linkText}
 						onClick={handleModalOpen}>
-						See more
+						{t('card_modal')}
 					</Link>
 					<ProductModal
 						open={openModal}
@@ -138,7 +143,7 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 						className={classes.addButton}
 						startIcon={<AddIcon />}
 						onClick={onAddHandler}>
-						Add
+						{t('card_add')}
 					</Button>
 				) : (
 					<div className={classes.quantityButtons}>

@@ -57,7 +57,7 @@ export const Filter = ({ onSelectManufacturers }) => {
 							{...params}
 							variant="outlined"
 							label={t('filter_label')}
-							placeholder="Select options"
+							placeholder={t('filter_placeholder')}
 						/>
 					)}
 					renderOption={(props, option) => (

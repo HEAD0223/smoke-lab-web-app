@@ -1,6 +1,7 @@
 import { Box, Modal, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
 	modalContainer: {
@@ -38,6 +39,7 @@ export const ProductModal = ({
 	url,
 }) => {
 	const classes = useStyles();
+	const { t } = useTranslation();
 
 	// Decode the base64 image data and create a data URL
 	const imageSrc = url ? `data:image/png;base64,${url}` : 'https://source.unsplash.com/random';
@@ -48,11 +50,24 @@ export const ProductModal = ({
 				<Box display="flex" flexDirection="column" alignItems="center">
 					<img src={imageSrc} alt={name} className={classes.productImage} />
 					<Typography variant="h6">{name}</Typography>
-					<Typography variant="subtitle1">Price: {price}</Typography>
-					<Typography variant="subtitle1">SKU: {code}</Typography>
-					<Typography variant="subtitle1">Amount: {amount}</Typography>
+					<Typography variant="subtitle1">
+						{t('modal_price')}
+						{price}
+						{t('currency')}
+					</Typography>
+					<Typography variant="subtitle1">
+						{t('modal_sku')}
+						{code}
+					</Typography>
+					<Typography variant="subtitle1">
+						{t('modal_amount')}
+						{amount}
+					</Typography>
 					<Typography variant="body1">{description}</Typography>
-					<Typography variant="subtitle1">Manufacturer: {manufacturer}</Typography>
+					<Typography variant="subtitle1">
+						{t('modal_manufacturer')}
+						{manufacturer}
+					</Typography>
 				</Box>
 			</Paper>
 		</Modal>
