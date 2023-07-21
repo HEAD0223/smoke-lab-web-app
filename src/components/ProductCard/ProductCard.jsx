@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme) => ({
 		alignSelf: 'flex-end',
 		backgroundColor: theme.palette.button_color.main,
 		color: theme.palette.button_text_color.main,
+		borderRadius: `${theme.spacing(1)} !important`,
+		padding: `${theme.spacing(0.5)} ${theme.spacing(1)} !important`,
 	},
 	cardContent: {
 		display: 'flex',
@@ -66,11 +68,15 @@ const useStyles = makeStyles((theme) => ({
 		margin: `${theme.spacing(0)} ${theme.spacing(1)} !important`,
 		backgroundColor: theme.palette.error.main,
 		color: theme.palette.button_text_color.main,
+		padding: `${theme.spacing(0.5)} ${theme.spacing(1)} !important`,
+		minWidth: `${theme.spacing(5)} !important`,
 	},
 	quantityButtonAdd: {
 		margin: `${theme.spacing(0)} ${theme.spacing(1)} !important`,
 		backgroundColor: theme.palette.button_color.main,
 		color: theme.palette.button_text_color.main,
+		padding: `${theme.spacing(0.5)} ${theme.spacing(1)} !important`,
+		minWidth: `${theme.spacing(5)} !important`,
 	},
 }));
 
@@ -146,11 +152,7 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 					</div>
 				</div>
 				{quantity === 0 ? (
-					<Button
-						variant="contained"
-						className={classes.addButton}
-						startIcon={<AddIcon />}
-						onClick={onAddHandler}>
+					<Button variant="contained" className={classes.addButton} onClick={onAddHandler}>
 						{t('card_add')}
 					</Button>
 				) : (
