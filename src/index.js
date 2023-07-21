@@ -19,7 +19,6 @@ i18n
 	.use(initReactI18next) // passes i18n down to react-i18next
 	.use(HttpApi)
 	.init({
-		debug: true,
 		supportedLngs: ['en', 'ru', 'ro'],
 		fallbackLng: 'en',
 		lng: userLanguageCode,
