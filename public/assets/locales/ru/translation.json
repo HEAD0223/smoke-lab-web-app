@@ -4,8 +4,8 @@
 	"tg_buy": "Купить ",
 	"tg_order": "Заказать",
 
-	"filter_label": "Параметры фильтра",
-	"filter_placeholder": "Выберите параметры",
+	"filter_label": "Производители",
+	"filter_placeholder": "Выберите",
 
 	"card_modal": "Узнать больше",
 	"card_add": "Добавить",
@@ -20,6 +20,8 @@
 	"form_address": "Адрес",
 	"form_comment": "Комментарий",
 
+	"cart_title": "Ваш заказ",
+	"cart_btn": "Редактировать",
 	"cart_decline": "Пожалуйста, заполните все необходимые поля.",
 	"cart_success": "Ваши товары отправлены"
 }

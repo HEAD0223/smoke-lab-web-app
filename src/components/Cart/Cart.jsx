@@ -163,9 +163,9 @@ export const Cart = () => {
 	return (
 		<div className={classes.cartContainer}>
 			<div className={classes.headerContainer}>
-				<Typography variant="h4">Your Order</Typography>
+				<Typography variant="h4">{t('cart_title')}</Typography>
 				<Button variant="outlined" onClick={handleEditClick}>
-					Edit
+					{t('cart_btn')}
 				</Button>
 			</div>
 			{cart.length === 0 ? (
@@ -190,7 +190,10 @@ export const Cart = () => {
 								{item.quantity} x {item.manufacturer}
 							</Typography>
 						</div>
-						<Typography variant="body1">${parseFloat(item.price) * item.quantity}</Typography>
+						<Typography variant="body1">
+							{parseFloat(item.price) * item.quantity}
+							{t('currency')}
+						</Typography>
 					</div>
 				))
 			)}

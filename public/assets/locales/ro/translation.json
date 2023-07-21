@@ -4,8 +4,8 @@
 	"tg_buy": "Cumpără ",
 	"tg_order": "Ordin",
 
-	"filter_label": "Opțiuni de filtrare",
-	"filter_placeholder": "Selectați opțiuni",
+	"filter_label": "Producătorii",
+	"filter_placeholder": "Selectați",
 
 	"card_modal": "Vezi mai mult",
 	"card_add": "Adăuga",
@@ -20,6 +20,8 @@
 	"form_address": "Adresă",
 	"form_comment": "Comentariu",
 
+	"cart_title": "Comanda dumneavoastră",
+	"cart_btn": "Editați",
 	"cart_decline": "Vă rugăm să completați toate câmpurile necesare.",
 	"cart_success": "Produsele dvs. au fost trimise"
 }

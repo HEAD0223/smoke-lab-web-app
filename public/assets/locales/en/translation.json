@@ -4,8 +4,8 @@
 	"tg_buy": "Buy ",
 	"tg_order": "Order",
 
-	"filter_label": "Filter Options",
-	"filter_placeholder": "Select options",
+	"filter_label": "Manufacturers",
+	"filter_placeholder": "Select",
 
 	"card_modal": "See more",
 	"card_add": "Add",
@@ -20,6 +20,8 @@
 	"form_address": "Address",
 	"form_comment": "Comment",
 
+	"cart_title": "Your Order",
+	"cart_btn": "Edit",
 	"cart_decline": "Please fill out all the required fields.",
 	"cart_success": "Your Products Were Sent"
 }
