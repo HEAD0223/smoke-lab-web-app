@@ -201,14 +201,12 @@ export const Cart = () => {
 								alt={item.name}
 								className={classes.itemImage}
 							/>
-							<Divider orientation="vertical" variant="middle" flexItem />
 							<div className={classes.itemName}>
 								<Typography variant="h6">{item.name}</Typography>
 								<Typography variant="body2">
-									{item.quantity} x {item.manufacturer}
+									{item.quantity} x {item.price}
 								</Typography>
 							</div>
-							<Divider orientation="vertical" variant="middle" flexItem />
 							<Typography variant="body1">
 								{parseFloat(item.price) * item.quantity}
 								{t('currency')}
