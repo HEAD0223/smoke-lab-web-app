@@ -38,11 +38,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 	productName: {
 		marginBottom: theme.spacing(0.5),
+		fontSize: `1rem !important`,
+	},
+	productPrice: {
+		fontSize: `0.75rem !important`,
 	},
 	linkText: {
 		color: theme.palette.info.main,
+		fontSize: `0.675rem !important`,
 	},
 	addButton: {
+		fontSize: `0.675rem !important`,
 		alignSelf: 'flex-end',
 		backgroundColor: theme.palette.button_color.main,
 		color: theme.palette.button_text_color.main,
@@ -55,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		textAlign: 'center',
-		minHeight: 150,
+		minHeight: 135,
 		padding: `${theme.spacing(1.5)} !important`,
 		paddingTop: `0px !important`,
 	},
@@ -125,7 +131,7 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 						<Typography variant="h6" className={classes.productName}>
 							{product.name}
 						</Typography>
-						<Typography variant="subtitle1">
+						<Typography variant="subtitle1" className={classes.productPrice}>
 							{product.price}
 							{t('currency')}
 						</Typography>
