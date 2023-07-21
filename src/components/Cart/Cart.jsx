@@ -52,6 +52,9 @@ const useStyles = makeStyles((theme) => ({
 	itemName: {
 		flexGrow: 1,
 	},
+	modalTitle: {
+		textAlign: 'center',
+	},
 	circularProgressContainer: {
 		display: 'flex',
 		justifyContent: 'center',
@@ -72,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: 'center',
 	},
 	icon: {
-		fontSize: 48,
+		fontSize: `3.5rem !important`,
 		marginBottom: theme.spacing(1),
 	},
 }));
@@ -257,7 +260,7 @@ export const Cart = () => {
 			</div>
 			{/* Modal */}
 			<Dialog open={modalOpen} onClose={handleModalClose}>
-				<DialogTitle>Order Confirmation</DialogTitle>
+				<DialogTitle className={classes.modalTitle}>{t('cart_order')}</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
 						<div className={classes.circularProgressContainer}>
