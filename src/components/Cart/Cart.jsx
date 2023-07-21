@@ -7,6 +7,8 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
+	Divider,
+	Grid,
 	Skeleton,
 	TextField,
 	Typography,
@@ -170,35 +172,38 @@ export const Cart = () => {
 					{t('cart_btn')}
 				</Button>
 			</div>
-			{cart.length === 0 ? (
-				// If the cart is empty and still loading, show the Skeleton
-				<Skeleton variant="rectangular" height={300} animation="wave" />
-			) : (
-				// Otherwise, show the cart content
-				cart.map((item) => (
-					<div className={classes.cartItem} key={item.code}>
-						<img
-							src={
-								item.url
-									? `data:image/png;base64,${item.url}`
-									: 'https://source.unsplash.com/random'
-							}
-							alt={item.name}
-							className={classes.itemImage}
-						/>
-						<div className={classes.itemName}>
-							<Typography variant="h6">{item.name}</Typography>
-							<Typography variant="body2">
-								{item.quantity} x {item.manufacturer}
+			{cart.length === 0
+				? // If the cart is empty and still loading, show the Skeleton
+				  Array.from({ length: 3 }).map((_, index) => (
+						<Grid item xs={6} sm={6} md={4} lg={4} key={index}>
+							<Skeleton variant="rectangular" height={100} animation="wave" />
+							<Divider />
+						</Grid>
+				  ))
+				: // Otherwise, show the cart content
+				  cart.map((item) => (
+						<div className={classes.cartItem} key={item.code}>
+							<img
+								src={
+									item.url
+										? `data:image/png;base64,${item.url}`
+										: 'https://source.unsplash.com/random'
+								}
+								alt={item.name}
+								className={classes.itemImage}
+							/>
+							<div className={classes.itemName}>
+								<Typography variant="h6">{item.name}</Typography>
+								<Typography variant="body2">
+									{item.quantity} x {item.manufacturer}
+								</Typography>
+							</div>
+							<Typography variant="body1">
+								{parseFloat(item.price) * item.quantity}
+								{t('currency')}
 							</Typography>
 						</div>
-						<Typography variant="body1">
-							{parseFloat(item.price) * item.quantity}
-							{t('currency')}
-						</Typography>
-					</div>
-				))
-			)}
+				  ))}
 			<div className={classes.commentContainer}>
 				{/* Form fields to collect user information */}
 				<TextField

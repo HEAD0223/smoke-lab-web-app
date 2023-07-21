@@ -11,9 +11,8 @@ import { ProductCard } from '../ProductCard/ProductCard';
 
 const useStyles = makeStyles((theme) => ({
 	productList: {
-		marginTop: theme.spacing(3),
-		paddingLeft: theme.spacing(10),
-		paddingRight: theme.spacing(10),
+		paddingLeft: theme.spacing(4),
+		paddingRight: theme.spacing(4),
 		marginBottom: theme.spacing(6),
 		backgroundColor: theme.palette.bg_color.main,
 		color: theme.palette.text_color.main,
@@ -135,14 +134,14 @@ export const ProductList = () => {
 			<Grid container spacing={3} className={classes.productList}>
 				{isProductsLoading
 					? // Render skeleton if products are loading
-					  Array.from({ length: 3 }).map((_, index) => (
-							<Grid item xs={12} sm={6} md={4} lg={4} key={index}>
+					  Array.from({ length: 4 }).map((_, index) => (
+							<Grid item xs={6} sm={6} md={4} lg={4} key={index}>
 								<Skeleton variant="rectangular" height={300} animation="wave" />
 							</Grid>
 					  ))
 					: // Render products when they are loaded
 					  filteredProducts.map((item) => (
-							<Grid item xs={12} sm={6} md={4} lg={4} key={item._id}>
+							<Grid item xs={6} sm={6} md={4} lg={4} key={item._id}>
 								<ProductCard
 									product={item}
 									quantity={quantities[item.code] || 0}

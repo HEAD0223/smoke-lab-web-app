@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	productImageContainer: {
 		position: 'relative',
-		height: 200,
+		height: 150,
 		width: '100%',
 		marginBottom: theme.spacing(2),
 	},
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.button_text_color.main,
 	},
 	productName: {
-		marginBottom: theme.spacing(0.5), // Increase the spacing as needed
+		marginBottom: theme.spacing(0.5),
 	},
 	linkText: {
 		color: theme.palette.info.main,
@@ -46,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
 		alignSelf: 'flex-end',
 		backgroundColor: theme.palette.button_color.main,
 		color: theme.palette.button_text_color.main,
+		transition: 'transform 0.2s',
+	},
+	addButtonActive: {
+		transform: 'scale(0.8)',
 	},
 	cardContent: {
 		display: 'flex',
@@ -53,7 +57,9 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		textAlign: 'center',
-		minHeight: 200, // Adjust the height as needed
+		minHeight: 150,
+		padding: `${theme.spacing(1.5)} !important`,
+		paddingTop: `0px !important`,
 	},
 	quantityButtons: {
 		display: 'flex',
@@ -77,6 +83,7 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(false);
+	const [adding, setAdding] = useState(false);
 
 	const handleModalOpen = () => {
 		tg.MainButton.hide();
@@ -93,8 +100,12 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 		: 'https://source.unsplash.com/random';
 
 	const onAddHandler = () => {
-		setQuantity((prevQuantity) => prevQuantity + 1);
-		onAdd(product, quantity + 1);
+		setAdding(true);
+		setTimeout(() => {
+			setQuantity((prevQuantity) => prevQuantity + 1);
+			onAdd(product, quantity + 1);
+			setAdding(false);
+		}, 200);
 	};
 	const onRemoveHandler = () => {
 		setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
@@ -113,38 +124,40 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 			</div>
 			<CardContent className={classes.cardContent}>
 				<div>
-					<Typography variant="h6" className={classes.productName}>
-						{product.name}
-					</Typography>
-					<Typography variant="subtitle1">
-						{product.price}
-						{t('currency')}
-					</Typography>
-				</div>
-				<div>
-					<Link
-						component="button"
-						variant="body2"
-						className={classes.linkText}
-						onClick={handleModalOpen}>
-						{t('card_modal')}
-					</Link>
-					<ProductModal
-						open={openModal}
-						onClose={handleModalClose}
-						code={product.code}
-						name={product.name}
-						amount={product.amount}
-						price={product.price}
-						description={product.description}
-						manufacturer={product.manufacturer}
-						url={product.url}
-					/>
+					<div>
+						<Typography variant="h6" className={classes.productName}>
+							{product.name}
+						</Typography>
+						<Typography variant="subtitle1">
+							{product.price}
+							{t('currency')}
+						</Typography>
+					</div>
+					<div>
+						<Link
+							component="button"
+							variant="body2"
+							className={classes.linkText}
+							onClick={handleModalOpen}>
+							{t('card_modal')}
+						</Link>
+						<ProductModal
+							open={openModal}
+							onClose={handleModalClose}
+							code={product.code}
+							name={product.name}
+							amount={product.amount}
+							price={product.price}
+							description={product.description}
+							manufacturer={product.manufacturer}
+							url={product.url}
+						/>
+					</div>
 				</div>
 				{quantity === 0 ? (
 					<Button
 						variant="contained"
-						className={classes.addButton}
+						className={`${classes.addButton} ${adding ? classes.addButtonActive : ''}`}
 						startIcon={<AddIcon />}
 						onClick={onAddHandler}>
 						{t('card_add')}
