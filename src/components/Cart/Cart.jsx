@@ -252,6 +252,12 @@ export const Cart = () => {
 								<Typography variant="body1">{t('cart_success')}</Typography>
 							</div>
 						)}
+						{order.status === 'error' && (
+							<div className={classes.iconContainer}>
+								<LocalShippingIcon className={classes.icon} />
+								<Typography variant="body1">{t('cart_success')}</Typography>
+							</div>
+						)}
 					</DialogContentText>
 				</DialogContent>
 			</Dialog>
