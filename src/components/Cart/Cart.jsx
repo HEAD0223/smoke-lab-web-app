@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		justifyContent: 'center',
 		flexDirection: 'column',
+		textAlign: 'center',
 	},
 	icon: {
 		fontSize: 48,
