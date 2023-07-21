@@ -23,5 +23,6 @@
 	"cart_title": "Your Order",
 	"cart_btn": "Edit",
 	"cart_decline": "Please fill out all the required fields.",
-	"cart_success": "Your Products Were Sent"
+	"cart_success": "Your Products Were Sent",
+	"cart_error": "An order already exists for your account"
 }

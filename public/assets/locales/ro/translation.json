@@ -23,5 +23,6 @@
 	"cart_title": "Comanda dumneavoastră",
 	"cart_btn": "Editați",
 	"cart_decline": "Vă rugăm să completați toate câmpurile necesare.",
-	"cart_success": "Produsele dvs. au fost trimise"
+	"cart_success": "Produsele dvs. au fost trimise",
+	"cart_error": "Există deja o comandă pentru contul dvs"
 }

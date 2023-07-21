@@ -1,3 +1,4 @@
+import ErrorIcon from '@mui/icons-material/Error';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import {
 	Button,
@@ -77,7 +78,7 @@ export const Cart = () => {
 	// State to manage the modal open/close status and form fields data
 	const [modalOpen, setModalOpen] = useState(false);
 	const { order } = useSelector((state) => state.order);
-	const isDataSending = order.status === 'sending' || order.status === 'error';
+	const isDataSending = order.status === 'sending';
 	const [userInfo, setUserInfo] = useState({
 		name: '',
 		phone: '',
@@ -254,8 +255,8 @@ export const Cart = () => {
 						)}
 						{order.status === 'error' && (
 							<div className={classes.iconContainer}>
-								<LocalShippingIcon className={classes.icon} />
-								<Typography variant="body1">{t('cart_success')}</Typography>
+								<ErrorIcon className={classes.icon} />
+								<Typography variant="body1">{t('cart_error')}</Typography>
 							</div>
 						)}
 					</DialogContentText>
