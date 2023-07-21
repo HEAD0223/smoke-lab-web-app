@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 		bottom: -25,
 	},
 	badgeBody: {
-		backgroundColor: theme.palette.button_color.main,
 		color: theme.palette.button_text_color.main,
 		'& span': {
 			backgroundColor: theme.palette.button_color.main,

@@ -32,6 +32,13 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		marginBottom: theme.spacing(2),
 	},
+	headerTitle: {
+		fontSize: `1.125rem !important`,
+		margin: `6px !important`,
+	},
+	headerButton: {
+		fontSize: `0.675rem !important`,
+	},
 	cartItem: {
 		display: 'flex',
 		alignItems: 'center',
@@ -167,8 +174,10 @@ export const Cart = () => {
 	return (
 		<div className={classes.cartContainer}>
 			<div className={classes.headerContainer}>
-				<Typography variant="h4">{t('cart_title')}</Typography>
-				<Button variant="outlined" onClick={handleEditClick}>
+				<Typography variant="h4" className={classes.headerTitle}>
+					{t('cart_title')}
+				</Typography>
+				<Button variant="outlined" className={classes.headerButton} onClick={handleEditClick}>
 					{t('cart_btn')}
 				</Button>
 			</div>
@@ -192,12 +201,14 @@ export const Cart = () => {
 								alt={item.name}
 								className={classes.itemImage}
 							/>
+							<Divider orientation="vertical" variant="middle" flexItem />
 							<div className={classes.itemName}>
 								<Typography variant="h6">{item.name}</Typography>
 								<Typography variant="body2">
 									{item.quantity} x {item.manufacturer}
 								</Typography>
 							</div>
+							<Divider orientation="vertical" variant="middle" flexItem />
 							<Typography variant="body1">
 								{parseFloat(item.price) * item.quantity}
 								{t('currency')}
