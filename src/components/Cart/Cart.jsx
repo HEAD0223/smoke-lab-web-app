@@ -104,6 +104,7 @@ export const Cart = () => {
 	};
 
 	const handleEditClick = () => {
+		tg.impactOccurred(light);
 		navigate('/');
 		const totalPrice = getTotalPrice(cart);
 		tg.MainButton.setParams({
@@ -122,6 +123,7 @@ export const Cart = () => {
 		// Check if all user information fields are filled
 		if (userInfo.name && userInfo.phone && userInfo.address && userInfo.comment) {
 			tg.MainButton.hide();
+			tg.impactOccurred(soft);
 			setModalOpen(true);
 			// Combine cart and user information
 			const combinedData = {
@@ -137,6 +139,7 @@ export const Cart = () => {
 					comment: userInfo.comment,
 				},
 			};
+			tg.impactOccurred(heavy);
 			dispatch(sendDataToServer(combinedData));
 		} else {
 			alert(`${t('cart_decline')}`);
@@ -163,6 +166,7 @@ export const Cart = () => {
 
 	// Function to handle input changes for user information
 	const handleInputChange = (event) => {
+		tg.impactOccurred(soft);
 		const { name, value } = event.target;
 		setUserInfo((prevUserInfo) => ({
 			...prevUserInfo,
@@ -171,6 +175,7 @@ export const Cart = () => {
 	};
 
 	const handleModalClose = () => {
+		tg.impactOccurred(soft);
 		setModalOpen(false);
 	};
 

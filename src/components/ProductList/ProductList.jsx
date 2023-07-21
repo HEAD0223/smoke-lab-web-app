@@ -109,6 +109,7 @@ export const ProductList = () => {
 	}, [cart, tg]);
 
 	const onSendData = useCallback(() => {
+		tg.impactOccurred(heavy);
 		navigate('/cart');
 		tg.MainButton.setParams({
 			text: `${t('tg_order')}`,
