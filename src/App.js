@@ -32,6 +32,7 @@ function App() {
 		tg.ready();
 
 		const userLanguageCode = user?.language_code;
+		console.log('User language code:', userLanguageCode);
 		if (userLanguageCode) {
 			setLanguageCookie(userLanguageCode);
 		}
