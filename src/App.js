@@ -35,6 +35,7 @@ function App() {
 		console.log('User language code:', userLanguageCode);
 		if (userLanguageCode) {
 			setLanguageCookie(userLanguageCode);
+			console.log('Language cookie set to:', userLanguageCode);
 		}
 
 		dispatch(fetchManufacturers());
