@@ -31,11 +31,13 @@ const useStyles = makeStyles((theme) => ({
 		top: 'auto',
 		right: 15,
 		bottom: -25,
-		backgroundColor: theme.palette.button_color.main,
 	},
 	badgeBody: {
 		backgroundColor: theme.palette.button_color.main,
 		color: theme.palette.button_text_color.main,
+		'& span': {
+			backgroundColor: theme.palette.button_color.main,
+		},
 	},
 	productName: {
 		marginBottom: theme.spacing(0.5),
