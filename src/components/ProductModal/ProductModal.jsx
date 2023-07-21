@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 	},
 	productImage: {
-		width: '250px',
-		height: '250px',
+		width: 'auto',
+		height: '200px',
 		borderRadius: theme.spacing(1),
 		marginBottom: theme.spacing(2),
 	},
