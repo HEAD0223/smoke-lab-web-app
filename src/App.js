@@ -25,15 +25,16 @@ function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		const setLanguageCookie = (languageCode) => {
+			Cookies.set('lng', languageCode, { expires: 1 }); // Expires in 1 day
+		};
+
 		tg.ready();
 
 		const userLanguageCode = user?.language_code;
 		if (userLanguageCode) {
 			setLanguageCookie(userLanguageCode);
 		}
-		const setLanguageCookie = (languageCode) => {
-			Cookies.set('lng', languageCode, { expires: 1 }); // Expires in 1 day
-		};
 
 		dispatch(fetchManufacturers());
 		dispatch(fetchProducts());
