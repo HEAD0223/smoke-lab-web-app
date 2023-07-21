@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 		top: 'auto',
 		right: 15,
 		bottom: -25,
+		backgroundColor: theme.palette.button_color.main,
 	},
 	badgeBody: {
 		backgroundColor: theme.palette.button_color.main,
