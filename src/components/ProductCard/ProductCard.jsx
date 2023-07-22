@@ -108,9 +108,13 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 		? `data:image/png;base64,${product.url}`
 		: 'https://source.unsplash.com/random';
 
+	const amountInStock = parseInt(product.amount, 10);
+
 	const onAddHandler = () => {
-		setQuantity((prevQuantity) => prevQuantity + 1);
-		onAdd(product, quantity + 1);
+		if (quantity < amountInStock) {
+			setQuantity((prevQuantity) => prevQuantity + 1);
+			onAdd(product, quantity + 1);
+		}
 	};
 	const onRemoveHandler = () => {
 		setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
