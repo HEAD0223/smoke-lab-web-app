@@ -38,6 +38,20 @@ const useStyles = makeStyles((theme) => ({
 			backgroundColor: theme.palette.button_color.main,
 		},
 	},
+	chipContainer: {
+		position: 'absolute',
+		top: theme.spacing(0.5),
+		left: theme.spacing(0.5),
+	},
+	chipBody: {
+		fontSize: `0.6125rem !important`,
+		height: `${theme.spacing(2)} !important`,
+		borderRadius: `${theme.spacing(1)} !important`,
+		'& span': {
+			paddingLeft: `${theme.spacing(0.5)} !important`,
+			paddingRight: `${theme.spacing(0.5)} !important`,
+		},
+	},
 	productName: {
 		marginBottom: theme.spacing(0.5),
 		fontSize: `1rem !important`,
@@ -131,8 +145,13 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 					</div>
 				)}
 				{amountInStock === 0 && (
-					<div className={classes.badgeContainer}>
-						<Chip label={t('card_chip')} color="secondary" />
+					<div className={classes.chipContainer}>
+						<Chip
+							label={t('card_chip')}
+							color="secondary"
+							size="small"
+							className={classes.chipBody}
+						/>
 					</div>
 				)}
 			</div>
