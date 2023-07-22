@@ -83,21 +83,13 @@ const useStyles = makeStyles((theme) => ({
 export const Cart = () => {
 	const classes = useStyles();
 	const navigate = useNavigate();
-	const { cart } = useCart();
+	const { cart, userInfo, dispatchState } = useCart();
 	const { tg, user } = useTelegram();
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
-
-	// State to manage the modal open/close status and form fields data
 	const [modalOpen, setModalOpen] = useState(false);
 	const { order } = useSelector((state) => state.order);
 	const isDataSending = order.status === 'sending';
-	const [userInfo, setUserInfo] = useState({
-		name: '',
-		phone: '',
-		address: '',
-		comment: '',
-	});
 
 	const getTotalPrice = (items) => {
 		return items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
@@ -149,7 +141,7 @@ export const Cart = () => {
 		if (order.status === 'sent') {
 			const timer = setTimeout(() => {
 				tg.close();
-			}, 3000); // Wait for 5 seconds before closing the web app
+			}, 3000); // Wait for X seconds before closing the web app
 
 			return () => {
 				clearTimeout(timer);
@@ -164,13 +156,14 @@ export const Cart = () => {
 	// Function to handle input changes for user information
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
-		setUserInfo((prevUserInfo) => ({
-			...prevUserInfo,
-			[name]: value,
-		}));
+		dispatchState({
+			type: 'SET_USER_INFO',
+			payload: { userInfo: { ...userInfo, [name]: value } },
+		}); // Dispatch the updated userInfo
 	};
 
 	const handleModalClose = () => {
+		tg.MainButton.show();
 		setModalOpen(false);
 	};
 

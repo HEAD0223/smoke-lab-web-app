@@ -41,17 +41,24 @@ const cartReducer = (state, action) => {
 				...state,
 				cart: state.cart.filter((item) => item.code !== action.payload.product.code),
 			};
+		case 'SET_USER_INFO':
+			return {
+				...state,
+				userInfo: action.payload.userInfo,
+			};
 		default:
 			return state;
 	}
 };
 
 export const CartProvider = ({ children }) => {
-	const initialState = { cart: [] };
-	const [state, dispatch] = useReducer(cartReducer, initialState);
+	const initialState = { cart: [], userInfo: {} };
+	const [state, dispatchState] = useReducer(cartReducer, initialState);
 
 	return (
-		<CartContext.Provider value={{ cart: state.cart, dispatch }}>{children}</CartContext.Provider>
+		<CartContext.Provider value={{ cart: state.cart, userInfo: state.userInfo, dispatchState }}>
+			{children}
+		</CartContext.Provider>
 	);
 };
 

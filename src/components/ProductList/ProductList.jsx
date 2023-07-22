@@ -32,7 +32,7 @@ export const ProductList = () => {
 	const navigate = useNavigate();
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
-	const { cart, dispatch } = useCart();
+	const { cart, dispatchState } = useCart();
 	const [quantities, setQuantities] = useState({});
 
 	const { products } = useSelector((state) => state.products);
@@ -61,7 +61,7 @@ export const ProductList = () => {
 			[product.code]: quantity,
 		}));
 		// Update the quantity in the cart state using the dispatch function
-		dispatch({ type: 'ADD_TO_CART', payload: { product, quantity } });
+		dispatchState({ type: 'ADD_TO_CART', payload: { product, quantity } });
 	};
 
 	// Function to handle removing products from the cart
@@ -82,9 +82,9 @@ export const ProductList = () => {
 
 		// Update the quantity in the cart state using the dispatch function
 		if (quantity === 0) {
-			dispatch({ type: 'REMOVE_PRODUCT_FROM_CART', payload: { product } });
+			dispatchState({ type: 'REMOVE_PRODUCT_FROM_CART', payload: { product } });
 		} else {
-			dispatch({ type: 'REMOVE_FROM_CART', payload: { product, quantity } });
+			dispatchState({ type: 'REMOVE_FROM_CART', payload: { product, quantity } });
 		}
 	};
 
