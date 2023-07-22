@@ -1,5 +1,5 @@
 import { Add as AddIcon, Remove as RemoveIcon } from '@mui/icons-material';
-import { Badge, Button, Card, CardContent, CardMedia, Link, Typography } from '@mui/material';
+import { Badge, Button, Card, CardContent, CardMedia, Chip, Link, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
