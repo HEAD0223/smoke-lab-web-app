@@ -130,6 +130,11 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 						<Badge badgeContent={quantity} className={classes.badgeBody} />
 					</div>
 				)}
+				{amountInStock === 0 && (
+					<div className={classes.badgeContainer}>
+						<Chip label={t('card_chip')} color="secondary" />
+					</div>
+				)}
 			</div>
 			<CardContent className={classes.cardContent}>
 				<div>

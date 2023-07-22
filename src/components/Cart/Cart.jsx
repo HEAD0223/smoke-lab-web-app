@@ -112,7 +112,7 @@ export const Cart = () => {
 
 	const onSendData = useCallback(() => {
 		// Check if all user information fields are filled
-		if (userInfo.name && userInfo.phone && userInfo.address && userInfo.comment) {
+		if (userInfo.name && userInfo.phone && userInfo.address) {
 			tg.MainButton.hide();
 			setModalOpen(true);
 			// Combine cart and user information
