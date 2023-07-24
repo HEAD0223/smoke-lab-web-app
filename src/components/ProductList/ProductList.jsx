@@ -39,11 +39,16 @@ export const ProductList = () => {
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
 	const [selectedManufacturers, setSelectedManufacturers] = useState([]);
 
-	// Function to filter products based on the selected manufacturers
-	const filteredProducts = products.items.filter((product) => {
-		if (selectedManufacturers.length === 0) return true; // Show all products if no manufacturer selected
-		return selectedManufacturers.includes(product.manufacturer);
-	});
+	const filteredProducts = [...products.items]; // Make a copy of the original array
+
+	// Filter products based on selected manufacturers
+	const filteredAndSortedProducts = filteredProducts
+		.filter((product) => {
+			if (selectedManufacturers.length === 0) return true; // Show all products if no manufacturer selected
+			return selectedManufacturers.includes(product.manufacturer);
+		})
+		.sort((a, b) => b.amount - a.amount); // Sort the products in descending order based on the amount
+
 	// Function to handle selection change in Filter component
 	const handleManufacturerSelection = (selectedOptions) => {
 		setSelectedManufacturers(selectedOptions);
@@ -140,7 +145,7 @@ export const ProductList = () => {
 							</Grid>
 					  ))
 					: // Render products when they are loaded
-					  filteredProducts.map((item) => (
+					  filteredAndSortedProducts.map((item) => (
 							<Grid item xs={6} sm={6} md={4} lg={4} key={item._id}>
 								<ProductCard
 									product={item}
