@@ -35,8 +35,15 @@ export const ProductItem = () => {
 	const allImages = [product.image, ...product.flavours.map((flavour) => flavour.image)];
 
 	return (
-		<div>
-			<Button variant="outlined" color="primary">
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				justifyContent: 'center',
+				minHeight: '100vh',
+			}}>
+			<Button variant="outlined" color="primary" style={{ marginBottom: '20px' }}>
 				{t('back_button')}
 			</Button>
 			<Carousel
