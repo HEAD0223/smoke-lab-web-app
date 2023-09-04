@@ -43,7 +43,7 @@ export const ProductItem = () => {
 				justifyContent: 'center',
 				minHeight: '100vh',
 			}}>
-			<Button variant="outlined" color="primary" style={{ marginBottom: '20px' }}>
+			<Button variant="text" color="primary" style={{ margin: '20px' }}>
 				{t('back_button')}
 			</Button>
 			<Carousel
