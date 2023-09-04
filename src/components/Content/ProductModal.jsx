@@ -36,13 +36,13 @@ export const ProductModal = ({
 	price,
 	description,
 	manufacturer,
-	url,
+	image,
 }) => {
 	const classes = useStyles();
 	const { t } = useTranslation();
 
-	// Decode the base64 image data and create a data URL
-	const imageSrc = url ? `data:image/png;base64,${url}` : 'https://source.unsplash.com/random';
+	// Decode the base64 image data and create a data Image
+	const imageSrc = image ? `data:image/png;base64,${image}` : 'https://source.unsplash.com/random';
 
 	return (
 		<Modal open={open} onClose={onClose} className={classes.modalContainer}>

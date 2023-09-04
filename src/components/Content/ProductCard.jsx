@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	productImageContainer: {
 		position: 'relative',
-		height: 110,
+		height: 120,
 		width: '100%',
 		marginBottom: theme.spacing(2),
 	},
@@ -117,9 +117,9 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 		setOpenModal(false);
 	};
 
-	// Decode the base64 image data and create a data URL
-	const imageSrc = product.url
-		? `data:image/png;base64,${product.url}`
+	// Decode the base64 image data and create a data Image
+	const imageSrc = product.image
+		? `data:image/png;base64,${product.image}`
 		: 'https://source.unsplash.com/random';
 
 	const amountInStock = parseInt(product.amount, 10);
@@ -183,7 +183,7 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 							price={product.price}
 							description={product.description}
 							manufacturer={product.manufacturer}
-							url={product.url}
+							image={product.image}
 						/>
 					</div>
 				</div>

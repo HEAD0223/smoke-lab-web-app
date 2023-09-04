@@ -1,4 +1,4 @@
-import { Grid, LinearProgress, Skeleton, Tab, Tabs } from '@mui/material';
+import { LinearProgress, Tab, Tabs } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,24 +6,15 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
-import { Filter } from '../Utils/Filter';
-import { ProductCard } from './ProductCard';
+import { Filters } from '../Utils/Filters';
+import { Chasers } from './Chasers';
+import { ESigs } from './ESigs';
 
 const useStyles = makeStyles((theme) => ({
-	productList: {
-		paddingLeft: theme.spacing(4),
-		paddingRight: theme.spacing(4),
-		marginTop: theme.spacing(2),
-		marginBottom: theme.spacing(6),
-		backgroundColor: theme.palette.bg_color.main,
-		color: theme.palette.text_color.main,
-	},
 	filterContainer: {
 		display: 'flex',
 		justifyContent: 'center',
-		marginBottom: theme.spacing(2),
-		marginTop: theme.spacing(2),
-		padding: theme.spacing(2),
+		marginTop: theme.spacing(4),
 		backgroundColor: theme.palette.bg_color.main,
 	},
 }));
@@ -38,25 +29,49 @@ export const ProductList = () => {
 
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
+	const { manufacturers } = useSelector((state) => state.manufacturers);
+	const isManufacturersLoading =
+		manufacturers.status === 'loading' || manufacturers.status === 'error';
 	const [selectedManufacturers, setSelectedManufacturers] = useState([]);
+	const [searchText, setSearchText] = useState('');
+
+	const [selectedTab, setSelectedTab] = useState(0);
+	const handleTabChange = (event, newValue) => {
+		setSelectedTab(newValue);
+	};
+
+	const getTotalPrice = (items) => {
+		return items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
+	};
 
 	const filteredProducts = [...products.items]; // Make a copy of the original array
-
-	// Filter products based on selected manufacturers
+	// Filter products based on selected manufacturers and search text
 	const filteredAndSortedProducts = filteredProducts
 		.filter((product) => {
-			if (selectedManufacturers.length === 0) return true; // Show all products if no manufacturer selected
-			return selectedManufacturers.includes(product.manufacturer);
+			if (
+				selectedManufacturers.length === 0 ||
+				selectedManufacturers.includes(product.manufacturer)
+			) {
+				// Check if the manufacturer is selected or no manufacturers are selected
+				if (searchText === '') {
+					return true; // Show all products if no search text
+				}
+				return product.name.toLowerCase().includes(searchText.toLowerCase()); // Filter by product name
+			}
+			return false;
 		})
 		.sort((a, b) => b.amount - a.amount); // Sort the products in descending order based on the amount
 
+	const esigsProducts = filteredAndSortedProducts.filter((product) => product.volume === 'None');
+	const chasersProducts = filteredAndSortedProducts.filter((product) => product.volume !== 'None');
 	// Function to handle selection change in Filter component
 	const handleManufacturerSelection = (selectedOptions) => {
 		setSelectedManufacturers(selectedOptions);
 	};
 
-	const getTotalPrice = (items) => {
-		return items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
+	// Function to filter products by name
+	const onSearchByName = (text) => {
+		setSearchText(text);
 	};
 
 	// Function to handle adding products to the cart
@@ -69,7 +84,6 @@ export const ProductList = () => {
 		// Update the quantity in the cart state using the dispatch function
 		dispatchState({ type: 'ADD_TO_CART', payload: { product, quantity } });
 	};
-
 	// Function to handle removing products from the cart
 	const onRemove = (product, quantity) => {
 		// If the quantity is 0, remove the product from the local state
@@ -134,10 +148,18 @@ export const ProductList = () => {
 			{isProductsLoading && <LinearProgress />}
 			<div className={classes.filterContainer}>
 				{/* Pass handleManufacturerSelection as a callback to Filter component */}
-				<Filter onSelectManufacturers={handleManufacturerSelection} />
+				<Filters
+					manufacturers={manufacturers.items}
+					isManufacturersLoading={isManufacturersLoading}
+					onSelectManufacturers={handleManufacturerSelection}
+					onSearchByName={onSearchByName}
+					searchText={searchText}
+					setSearchText={setSearchText}
+				/>
 			</div>
 			{/* Tabs */}
 			<Tabs
+				style={{ marginBottom: 16 }}
 				value={selectedTab}
 				onChange={handleTabChange}
 				indicatorColor="primary"
@@ -147,30 +169,26 @@ export const ProductList = () => {
 				<Tab label="Chasers" />
 			</Tabs>
 			{/* Products */}
-			<Grid container spacing={3} className={classes.productList}>
-				{isProductsLoading
-					? Array.from({ length: 4 }).map((_, index) => (
-							<Grid item xs={6} sm={6} md={4} lg={4} key={index}>
-								<Skeleton variant="rectangular" height={300} animation="wave" />
-							</Grid>
-					  ))
-					: filteredAndSortedProducts.map((item) => (
-							<Grid item xs={6} sm={6} md={4} lg={4} key={item._id}>
-								<ProductCard
-									product={item}
-									quantity={quantities[item.code] || 0}
-									setQuantity={(value) =>
-										setQuantities((prevQuantities) => ({
-											...prevQuantities,
-											[item.code]: value,
-										}))
-									}
-									onAdd={onAdd}
-									onRemove={onRemove}
-								/>
-							</Grid>
-					  ))}
-			</Grid>
+			{selectedTab === 0 && (
+				<ESigs
+					isProductsLoading={isProductsLoading}
+					filteredAndSortedProducts={esigsProducts}
+					quantities={quantities}
+					setQuantities={setQuantities}
+					onAdd={onAdd}
+					onRemove={onRemove}
+				/>
+			)}
+			{selectedTab === 1 && (
+				<Chasers
+					isProductsLoading={isProductsLoading}
+					filteredAndSortedProducts={chasersProducts}
+					quantities={quantities}
+					setQuantities={setQuantities}
+					onAdd={onAdd}
+					onRemove={onRemove}
+				/>
+			)}
 		</>
 	);
 };
