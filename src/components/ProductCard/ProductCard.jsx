@@ -80,6 +80,7 @@ const useStyles = makeStyles((theme) => ({
 		minHeight: 135,
 		padding: `${theme.spacing(1.5)} !important`,
 		paddingTop: `0px !important`,
+		width: `${theme.spacing(5)}`,
 	},
 	quantityButtons: {
 		display: 'flex',
