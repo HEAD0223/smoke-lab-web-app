@@ -1,4 +1,4 @@
-import { Grid, LinearProgress, Skeleton } from '@mui/material';
+import { Grid, LinearProgress, Skeleton, Tab, Tabs } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,13 +6,14 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
-import { Filter } from '../Filter/Filter';
-import { ProductCard } from '../ProductCard/ProductCard';
+import { Filter } from '../Utils/Filter';
+import { ProductCard } from './ProductCard';
 
 const useStyles = makeStyles((theme) => ({
 	productList: {
 		paddingLeft: theme.spacing(4),
 		paddingRight: theme.spacing(4),
+		marginTop: theme.spacing(2),
 		marginBottom: theme.spacing(6),
 		backgroundColor: theme.palette.bg_color.main,
 		color: theme.palette.text_color.main,
@@ -135,6 +136,16 @@ export const ProductList = () => {
 				{/* Pass handleManufacturerSelection as a callback to Filter component */}
 				<Filter onSelectManufacturers={handleManufacturerSelection} />
 			</div>
+			{/* Tabs */}
+			<Tabs
+				value={selectedTab}
+				onChange={handleTabChange}
+				indicatorColor="primary"
+				textColor="primary"
+				centered>
+				<Tab label="e-Sigs" />
+				<Tab label="Chasers" />
+			</Tabs>
 			{/* Products */}
 			<Grid container spacing={3} className={classes.productList}>
 				{isProductsLoading

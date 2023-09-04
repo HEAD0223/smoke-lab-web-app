@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTelegram } from '../../hooks/useTelegram';
-import { ProductModal } from '../ProductModal/ProductModal';
+import { ProductModal } from './ProductModal';
 
 const useStyles = makeStyles((theme) => ({
 	productCard: {
