@@ -1,6 +1,6 @@
 import { Badge, Card, CardContent, CardMedia, Chip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useTelegram } from '../../hooks/useTelegram';
@@ -106,23 +106,13 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 	const navigate = useNavigate();
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
-	const [openModal, setOpenModal] = useState(false);
-
-	const handleModalOpen = () => {
-		tg.MainButton.hide();
-		setOpenModal(true);
-	};
-	const handleModalClose = () => {
-		tg.MainButton.show();
-		setOpenModal(false);
-	};
 
 	// Decode the base64 image data and create a data Image
 	const imageSrc = product.image
 		? `data:image/png;base64,${product.image}`
 		: 'https://source.unsplash.com/random';
 
-	const amountInStock = parseInt(product.amount, 10);
+	const amountInStock = parseInt(product.amount, 10); // ????
 
 	const onAddHandler = () => {
 		if (quantity < amountInStock) {
