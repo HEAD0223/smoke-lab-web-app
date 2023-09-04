@@ -75,11 +75,10 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		justifyContent: 'space-between',
+		justifyContent: 'space-around',
 		textAlign: 'center',
 		minHeight: 135,
-		padding: `${theme.spacing(1.5)} !important`,
-		paddingTop: `0px !important`,
+		padding: `10px !important`,
 		width: `${theme.spacing(17)}`,
 	},
 	quantityButtons: {
