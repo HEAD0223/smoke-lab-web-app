@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	productImageContainer: {
 		position: 'relative',
-		height: 150,
+		height: 110,
 		width: '100%',
 		marginBottom: theme.spacing(2),
 	},
@@ -187,26 +187,28 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 						/>
 					</div>
 				</div>
-				{quantity === 0 ? (
-					<Button variant="contained" className={classes.addButton} onClick={onAddHandler}>
-						{t('card_add')}
-					</Button>
-				) : (
-					<div className={classes.quantityButtons}>
-						<Button
-							variant="contained"
-							className={classes.quantityButtonRemove}
-							onClick={onRemoveHandler}>
-							<RemoveIcon />
+				<div>
+					{quantity === 0 ? (
+						<Button variant="contained" className={classes.addButton} onClick={onAddHandler}>
+							{t('card_add')}
 						</Button>
-						<Button
-							variant="contained"
-							className={classes.quantityButtonAdd}
-							onClick={onAddHandler}>
-							<AddIcon />
-						</Button>
-					</div>
-				)}
+					) : (
+						<div className={classes.quantityButtons}>
+							<Button
+								variant="contained"
+								className={classes.quantityButtonRemove}
+								onClick={onRemoveHandler}>
+								<RemoveIcon />
+							</Button>
+							<Button
+								variant="contained"
+								className={classes.quantityButtonAdd}
+								onClick={onAddHandler}>
+								<AddIcon />
+							</Button>
+						</div>
+					)}
+				</div>
 			</CardContent>
 		</Card>
 	);

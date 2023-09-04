@@ -138,14 +138,12 @@ export const ProductList = () => {
 			{/* Products */}
 			<Grid container spacing={3} className={classes.productList}>
 				{isProductsLoading
-					? // Render skeleton if products are loading
-					  Array.from({ length: 4 }).map((_, index) => (
+					? Array.from({ length: 4 }).map((_, index) => (
 							<Grid item xs={6} sm={6} md={4} lg={4} key={index}>
 								<Skeleton variant="rectangular" height={300} animation="wave" />
 							</Grid>
 					  ))
-					: // Render products when they are loaded
-					  filteredAndSortedProducts.map((item) => (
+					: filteredAndSortedProducts.map((item) => (
 							<Grid item xs={6} sm={6} md={4} lg={4} key={item._id}>
 								<ProductCard
 									product={item}
