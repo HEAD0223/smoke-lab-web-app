@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Cart } from './components/Cart/Cart';
+import { ProductItem } from './components/Content/ProductItem';
 import { ProductList } from './components/Content/ProductList';
 import { Header } from './components/Utils/Header';
 import { CartProvider } from './hooks/useCart';
@@ -36,6 +37,7 @@ function App() {
 				<Routes>
 					<Route index element={<ProductList />} />
 					<Route path="/cart" element={<Cart />} />
+					<Route path="/item/:code" element={<ProductItem />} />
 				</Routes>
 			</CartProvider>
 		</div>

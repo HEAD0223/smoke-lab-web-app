@@ -1,10 +1,9 @@
-import { Add as AddIcon, Remove as RemoveIcon } from '@mui/icons-material';
-import { Badge, Button, Card, CardContent, CardMedia, Chip, Link, Typography } from '@mui/material';
+import { Badge, Card, CardContent, CardMedia, Chip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { useTelegram } from '../../hooks/useTelegram';
-import { ProductModal } from './ProductModal';
 
 const useStyles = makeStyles((theme) => ({
 	productCard: {
@@ -79,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: 'center',
 		minHeight: 135,
 		padding: `10px !important`,
-		width: `${theme.spacing(17)}`,
+		width: `100%`,
 	},
 	quantityButtons: {
 		display: 'flex',
@@ -104,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemove }) => {
 	const classes = useStyles();
+	const navigate = useNavigate();
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(false);
@@ -135,6 +135,10 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 		onRemove(product, quantity - 1);
 	};
 
+	const handleProductClick = () => {
+		navigate(`/item/${product.code}`, { state: { productData: product } });
+	};
+
 	return (
 		<Card className={classes.productCard}>
 			<div className={classes.productImageContainer}>
@@ -155,39 +159,17 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 					</div>
 				)}
 			</div>
-			<CardContent className={classes.cardContent}>
+			<CardContent className={classes.cardContent} onClick={handleProductClick}>
 				<div>
-					<div>
-						<Typography variant="h6" className={classes.productName}>
-							{product.name}
-						</Typography>
-						<Typography variant="subtitle1" className={classes.productPrice}>
-							{product.price}
-							{t('currency')}
-						</Typography>
-					</div>
-					<div>
-						<Link
-							component="button"
-							variant="body2"
-							className={classes.linkText}
-							onClick={handleModalOpen}>
-							{t('card_modal')}
-						</Link>
-						<ProductModal
-							open={openModal}
-							onClose={handleModalClose}
-							code={product.code}
-							name={product.name}
-							amount={product.amount}
-							price={product.price}
-							description={product.description}
-							manufacturer={product.manufacturer}
-							image={product.image}
-						/>
-					</div>
+					<Typography variant="h6" className={classes.productName}>
+						{product.name}
+					</Typography>
+					<Typography variant="subtitle1" className={classes.productPrice}>
+						{product.price}
+						{t('currency')}
+					</Typography>
 				</div>
-				<div>
+				{/* <div>
 					{quantity === 0 ? (
 						<Button variant="contained" className={classes.addButton} onClick={onAddHandler}>
 							{t('card_add')}
@@ -208,7 +190,7 @@ export const ProductCard = ({ product, quantity = 0, setQuantity, onAdd, onRemov
 							</Button>
 						</div>
 					)}
-				</div>
+				</div> */}
 			</CardContent>
 		</Card>
 	);
