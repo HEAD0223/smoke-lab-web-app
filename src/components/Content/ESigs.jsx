@@ -14,14 +14,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ESigs = ({
-	isProductsLoading,
-	filteredAndSortedProducts,
-	quantities,
-	setQuantities,
-	onAdd,
-	onRemove,
-}) => {
+export const ESigs = ({ isProductsLoading, filteredAndSortedProducts }) => {
 	const classes = useStyles();
 
 	return (
@@ -34,18 +27,7 @@ export const ESigs = ({
 				  ))
 				: filteredAndSortedProducts.map((item) => (
 						<Grid item xs={6} sm={6} md={4} lg={4} key={item._id}>
-							<ProductCard
-								product={item}
-								quantity={quantities[item.code] || 0}
-								setQuantity={(value) =>
-									setQuantities((prevQuantities) => ({
-										...prevQuantities,
-										[item.code]: value,
-									}))
-								}
-								onAdd={onAdd}
-								onRemove={onRemove}
-							/>
+							<ProductCard product={item} />
 						</Grid>
 				  ))}
 		</Grid>

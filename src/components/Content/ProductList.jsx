@@ -25,7 +25,6 @@ export const ProductList = () => {
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
 	const { cart, dispatchState } = useCart();
-	const [quantities, setQuantities] = useState({});
 
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
@@ -44,7 +43,12 @@ export const ProductList = () => {
 		return items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
 	};
 
-	const filteredProducts = [...products.items]; // Make a copy of the original array
+	const filteredProducts = [...products.items];
+	const calculateTotalAmount = (product) => {
+		return product.flavours.reduce((total, flavour) => {
+			return total + parseInt(flavour.amount, 10);
+		}, 0);
+	};
 	// Filter products based on selected manufacturers and search text
 	const filteredAndSortedProducts = filteredProducts
 		.filter((product) => {
@@ -52,15 +56,25 @@ export const ProductList = () => {
 				selectedManufacturers.length === 0 ||
 				selectedManufacturers.includes(product.manufacturer)
 			) {
-				// Check if the manufacturer is selected or no manufacturers are selected
 				if (searchText === '') {
-					return true; // Show all products if no search text
+					return true;
 				}
-				return product.name.toLowerCase().includes(searchText.toLowerCase()); // Filter by product name
+				return product.name.toLowerCase().includes(searchText.toLowerCase());
 			}
 			return false;
 		})
-		.sort((a, b) => b.amount - a.amount); // Sort the products in descending order based on the amount
+		.sort((a, b) => {
+			const totalAmountA = calculateTotalAmount(a);
+			const totalAmountB = calculateTotalAmount(b);
+
+			if (totalAmountA === 0 && totalAmountB !== 0) {
+				return 1;
+			} else if (totalAmountA !== 0 && totalAmountB === 0) {
+				return -1;
+			} else {
+				return totalAmountA - totalAmountB;
+			}
+		});
 
 	const esigsProducts = filteredAndSortedProducts.filter((product) => product.volume === 'None');
 	const chasersProducts = filteredAndSortedProducts.filter((product) => product.volume !== 'None');
@@ -74,47 +88,13 @@ export const ProductList = () => {
 		setSearchText(text);
 	};
 
-	// Function to handle adding products to the cart
-	const onAdd = (product, quantity) => {
-		// Update the quantity in the local state
-		setQuantities((prevQuantities) => ({
-			...prevQuantities,
-			[product.code]: quantity,
-		}));
-		// Update the quantity in the cart state using the dispatch function
-		dispatchState({ type: 'ADD_TO_CART', payload: { product, quantity } });
-	};
-	// Function to handle removing products from the cart
-	const onRemove = (product, quantity) => {
-		// If the quantity is 0, remove the product from the local state
-		if (quantity === 0) {
-			setQuantities((prevQuantities) => ({
-				...prevQuantities,
-				[product.code]: undefined,
-			}));
-		} else {
-			// Otherwise, update the quantity in the local state
-			setQuantities((prevQuantities) => ({
-				...prevQuantities,
-				[product.code]: quantity,
-			}));
-		}
-
-		// Update the quantity in the cart state using the dispatch function
-		if (quantity === 0) {
-			dispatchState({ type: 'REMOVE_PRODUCT_FROM_CART', payload: { product } });
-		} else {
-			dispatchState({ type: 'REMOVE_FROM_CART', payload: { product, quantity } });
-		}
-	};
-
 	useEffect(() => {
-		// Update the quantities state based on the products in the cart
-		const newQuantities = {};
-		cart.forEach((item) => {
-			newQuantities[item.code] = item.quantity;
-		});
-		setQuantities(newQuantities);
+		// // Update the quantities state based on the products in the cart
+		// const newQuantities = {};
+		// cart.forEach((item) => {
+		// 	newQuantities[item.code] = item.quantity;
+		// });
+		// setQuantities(newQuantities);
 
 		// Hide or show the MainButton based on the cart items
 		if (cart.length === 0) {
@@ -173,20 +153,12 @@ export const ProductList = () => {
 				<ESigs
 					isProductsLoading={isProductsLoading}
 					filteredAndSortedProducts={esigsProducts}
-					quantities={quantities}
-					setQuantities={setQuantities}
-					onAdd={onAdd}
-					onRemove={onRemove}
 				/>
 			)}
 			{selectedTab === 1 && (
 				<Chasers
 					isProductsLoading={isProductsLoading}
 					filteredAndSortedProducts={chasersProducts}
-					quantities={quantities}
-					setQuantities={setQuantities}
-					onAdd={onAdd}
-					onRemove={onRemove}
 				/>
 			)}
 		</>

@@ -14,7 +14,11 @@ const cartReducer = (state, action) => {
 					...state,
 					cart: state.cart.map((item) =>
 						item.code === action.payload.product.code
-							? { ...item, quantity: action.payload.quantity }
+							? {
+									...item,
+									quantity: action.payload.quantity,
+									flavorName: action.payload.flavorName,
+							  }
 							: item,
 					),
 				};
@@ -23,7 +27,11 @@ const cartReducer = (state, action) => {
 					...state,
 					cart: [
 						...state.cart,
-						{ ...action.payload.product, quantity: action.payload.quantity },
+						{
+							...action.payload.product,
+							quantity: action.payload.quantity,
+							flavorName: action.payload.flavorName,
+						},
 					],
 				};
 			}
@@ -32,7 +40,11 @@ const cartReducer = (state, action) => {
 				...state,
 				cart: state.cart.map((item) =>
 					item.code === action.payload.product.code
-						? { ...item, quantity: action.payload.quantity }
+						? {
+								...item,
+								quantity: action.payload.quantity,
+								flavorName: action.payload.flavorName,
+						  }
 						: item,
 				),
 			};
