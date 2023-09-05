@@ -121,7 +121,7 @@ export const ProductItem = () => {
 							<IconButton
 								className={classes.flavorCircle}
 								style={{
-									background: `radial-gradient(${flavour.gradient1}, ${flavour.gradient2})`,
+									background: `linear-gradient(to bottom, ${flavour.gradient1}, ${flavour.gradient2})`,
 									border: selectedFlavor === index ? '2px solid #333' : 'none',
 								}}
 								onClick={() => handleFlavorClick(index)}
