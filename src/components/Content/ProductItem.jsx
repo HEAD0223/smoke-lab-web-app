@@ -183,8 +183,8 @@ export const ProductItem = () => {
 			<List>
 				<Divider />
 				{product.flavours.map((flavour, index) => (
-					<>
-						<ListItem key={index}>
+					<div key={index}>
+						<ListItem>
 							<ListItemText>
 								<div
 									style={{
@@ -201,7 +201,7 @@ export const ProductItem = () => {
 							</ListItemText>
 						</ListItem>
 						<Divider />
-					</>
+					</div>
 				))}
 			</List>
 		);
@@ -323,7 +323,9 @@ export const ProductItem = () => {
 				</Typography>
 				{product.volume !== 'None' ? (
 					<Typography variant="subtitle2" align="center">
-						{t('volume')}: {product.volume}
+						{t('volume')}
+						{product.volume}
+						{t('volume_unit')}
 					</Typography>
 				) : null}
 				<div style={{ marginTop: 12 }}>{renderFlavors()}</div>

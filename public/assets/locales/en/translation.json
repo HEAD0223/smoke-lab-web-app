@@ -1,5 +1,6 @@
 {
 	"currency": " MDL",
+	"volume_unit": " ml",
 
 	"tg_buy": "Buy ",
 	"tg_order": "Order",
