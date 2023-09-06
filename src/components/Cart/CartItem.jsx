@@ -1,3 +1,4 @@
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import React from 'react';
 
@@ -16,24 +17,27 @@ export const CartItem = ({ item }) => {
 					<Grid container spacing={2} justifyContent={'space-between'}>
 						<Grid item xs={6} minWidth={'60%'}>
 							<Typography variant="body1">{item.product.name}</Typography>
-							<Typography variant="body2">
+							<Typography variant="caption">
 								{totalQuantity} x {item.product.price} MDL
 							</Typography>
 						</Grid>
 						<Grid item xs={3}>
-							<Typography variant="caption">{totalPrice} MDL</Typography>
+							<Typography variant="body2">{totalPrice} MDL</Typography>
 						</Grid>
 					</Grid>
 					{item.flavorsInCart.map((flavor, index) => (
 						<div key={index}>
 							<Divider />
 							<Grid container spacing={2} justifyContent={'space-between'}>
-								<Grid item xs={6} minWidth={'60%'}>
+								<Grid item xs={3}>
+									<DoneAllIcon />
+								</Grid>
+								<Grid item xs={6} minWidth={'60%'} display={'flex'} alignItems={'center'}>
 									<Typography variant="body1">{flavor.flavour}</Typography>
 									<Typography variant="caption">x{flavor.quantity}</Typography>
 								</Grid>
 								<Grid item xs={3}>
-									<Typography variant="body1">
+									<Typography variant="body2">
 										{parseFloat(item.product.price) * flavor.quantity} MDL
 									</Typography>
 								</Grid>
