@@ -111,6 +111,8 @@ export const ProductList = () => {
 		} else {
 			tg.MainButton.show();
 			const totalPrice = getTotalPrice(cart);
+			console.log(cart);
+			console.log(totalPrice);
 			tg.MainButton.setParams({
 				text: `${t('tg_buy')}${totalPrice}`,
 			});
