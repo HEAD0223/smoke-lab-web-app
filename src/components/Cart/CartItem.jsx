@@ -27,10 +27,13 @@ export const CartItem = ({ item }) => {
 					{item.flavorsInCart.map((flavor, index) => (
 						<div key={index}>
 							<Divider />
-							<Grid container spacing={2}>
-								<Grid item xs={6}>
-									<Typography variant="h6">{flavor.flavour}</Typography>
-									<Typography variant="body2">Quantity: {flavor.quantity}</Typography>
+							<Grid container spacing={2} justifyContent={'space-between'}>
+								<Grid item xs={6} minWidth={'60%'}>
+									<Typography variant="h7">{flavor.flavour}</Typography>
+									<Typography variant="body1">{flavor.flavour}</Typography>
+									<Typography variant="subtitle1">{flavor.quantity}</Typography>
+									<Typography variant="caption">{flavor.quantity}</Typography>
+									<Typography variant="body2">x{flavor.quantity}</Typography>
 								</Grid>
 								<Grid item xs={3}>
 									<Typography variant="body1">
