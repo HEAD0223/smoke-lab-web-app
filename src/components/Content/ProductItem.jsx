@@ -2,6 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {
 	Button,
+	Divider,
 	IconButton,
 	List,
 	ListItem,
@@ -180,23 +181,27 @@ export const ProductItem = () => {
 	const renderFlavors = () => {
 		return (
 			<List>
+				<Divider />
 				{product.flavours.map((flavour, index) => (
-					<ListItem key={index}>
-						<ListItemText>
-							<div
-								style={{
-									display: 'flex',
-									alignItems: 'center',
-									justifyContent: 'space-between',
-									flexWrap: 'wrap',
-								}}>
-								<Typography variant="h6" maxWidth={'80%'}>
-									{flavour.flavour}
-								</Typography>
-								<Typography variant="h6">x{flavour.amount}</Typography>
-							</div>
-						</ListItemText>
-					</ListItem>
+					<>
+						<ListItem key={index}>
+							<ListItemText>
+								<div
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										justifyContent: 'space-between',
+										flexWrap: 'wrap',
+									}}>
+									<Typography variant="h6" maxWidth={'80%'}>
+										{flavour.flavour}
+									</Typography>
+									<Typography variant="h6">x{flavour.amount}</Typography>
+								</div>
+							</ListItemText>
+						</ListItem>
+						<Divider />
+					</>
 				))}
 			</List>
 		);
