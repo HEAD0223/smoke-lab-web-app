@@ -15,13 +15,13 @@ export const CartItem = ({ item }) => {
 				<CardContent>
 					<Grid container spacing={2} justifyContent={'space-between'}>
 						<Grid item xs={6} minWidth={'60%'}>
-							<Typography variant="h6">{item.product.name}</Typography>
+							<Typography variant="body1">{item.product.name}</Typography>
 							<Typography variant="body2">
 								{totalQuantity} x {item.product.price} MDL
 							</Typography>
 						</Grid>
 						<Grid item xs={3}>
-							<Typography variant="body1">{totalPrice} MDL</Typography>
+							<Typography variant="caption">{totalPrice} MDL</Typography>
 						</Grid>
 					</Grid>
 					{item.flavorsInCart.map((flavor, index) => (
@@ -30,10 +30,7 @@ export const CartItem = ({ item }) => {
 							<Grid container spacing={2} justifyContent={'space-between'}>
 								<Grid item xs={6} minWidth={'60%'}>
 									<Typography variant="body1">{flavor.flavour}</Typography>
-									<Typography variant="subtitle1">{flavor.quantity}</Typography>
-									<Typography variant="subtitle2">{flavor.quantity}</Typography>
-									<Typography variant="caption">{flavor.quantity}</Typography>
-									<Typography variant="body2">x{flavor.quantity}</Typography>
+									<Typography variant="caption">x{flavor.quantity}</Typography>
 								</Grid>
 								<Grid item xs={3}>
 									<Typography variant="body1">
