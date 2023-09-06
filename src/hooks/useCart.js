@@ -20,7 +20,7 @@ const cartReducer = (state, action) => {
 					);
 					if (existingFlavorIndex !== -1) {
 						// Flavor already exists, update its quantity
-						existingProduct.inCart[existingFlavorIndex].quantity = flavorInfo.quantity;
+						existingProduct.inCart[existingFlavorIndex].quantity += 1; // Increase quantity by 1
 					} else {
 						// Flavor does not exist, add it
 						existingProduct.inCart.push({ ...flavorInfo });
@@ -82,7 +82,6 @@ const cartReducer = (state, action) => {
 			const filteredCart = state.cart.filter((item) => {
 				return item.product.code !== action.payload.product.code;
 			});
-
 			return {
 				...state,
 				cart: filteredCart,

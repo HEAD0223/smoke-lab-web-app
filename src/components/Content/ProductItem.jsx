@@ -104,7 +104,7 @@ export const ProductItem = () => {
 	};
 
 	const onAddHandler = () => {
-		if (quantity < totalAmount && selectedFlavor !== null) {
+		if (selectedFlavor !== null) {
 			const flavor = product.flavours[selectedFlavor];
 			const updatedSelectedFlavors = [...selectedFlavors];
 			const existingFlavorIndex = updatedSelectedFlavors.findIndex(
@@ -121,32 +121,31 @@ export const ProductItem = () => {
 			setQuantity(newQuantity);
 			setSelectedFlavors(updatedSelectedFlavors);
 
-			onAdd(product, [{ flavorName: flavor.flavour, quantity: newQuantity }]);
-			console.log('inCart', [{ flavorName: flavor.flavour, quantity: newQuantity }]);
+			onAdd(product, [{ flavorName: flavor.flavour, quantity: 1 }]);
+			console.log('inCart', [{ flavorName: flavor.flavour, quantity: 1 }]);
 		}
 	};
 	const onRemoveHandler = () => {
-		if (quantity > 0 && selectedFlavor !== null) {
+		if (selectedFlavor !== null) {
 			const flavor = product.flavours[selectedFlavor];
 			const updatedSelectedFlavors = [...selectedFlavors];
 			const existingFlavorIndex = updatedSelectedFlavors.findIndex(
 				(f) => f.flavour === flavor.flavour,
 			);
 
-			if (existingFlavorIndex !== -1) {
-				if (updatedSelectedFlavors[existingFlavorIndex].quantity === 1) {
-					updatedSelectedFlavors.splice(existingFlavorIndex, 1);
-				} else {
-					updatedSelectedFlavors[existingFlavorIndex].quantity -= 1;
-				}
-
-				const newQuantity = updatedSelectedFlavors.reduce((total, f) => total + f.quantity, 0);
-				setQuantity(newQuantity);
-				setSelectedFlavors(updatedSelectedFlavors);
-
-				onRemove(product, [{ flavorName: flavor.flavour, quantity: newQuantity }]);
-				console.log('inCart', [{ flavorName: flavor.flavour, quantity: newQuantity }]);
+			if (
+				existingFlavorIndex !== -1 &&
+				updatedSelectedFlavors[existingFlavorIndex].quantity > 0
+			) {
+				updatedSelectedFlavors[existingFlavorIndex].quantity -= 1;
 			}
+
+			const newQuantity = updatedSelectedFlavors.reduce((total, f) => total + f.quantity, 0);
+			setQuantity(newQuantity);
+			setSelectedFlavors(updatedSelectedFlavors);
+
+			onRemove(product, [{ flavorName: flavor.flavour, quantity: 1 }]);
+			console.log('inCart', [{ flavorName: flavor.flavour, quantity: 1 }]);
 		}
 	};
 
