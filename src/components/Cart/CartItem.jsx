@@ -17,8 +17,6 @@ export const CartItem = ({ item }) => {
 		return foundFlavour !== undefined;
 	});
 
-	console.log(filteredFlavours);
-
 	return (
 		<div>
 			<Card>
@@ -38,6 +36,7 @@ export const CartItem = ({ item }) => {
 						<Grid item xs={3}>
 							{filteredFlavours.map((flavor, index) => (
 								<div key={index}>
+									{console.log(flavor)}
 									<Grid container spacing={2}>
 										<Grid item xs={2}>
 											<img

@@ -22,7 +22,7 @@ export const Chasers = ({ isProductsLoading, filteredAndSortedProducts, cart }) 
 			{isProductsLoading
 				? Array.from({ length: 4 }).map((_, index) => (
 						<Grid item xs={6} sm={6} md={4} lg={4} key={index}>
-							<Skeleton variant="rectangular" height={300} animation="wave" />
+							<Skeleton variant="rectangular" height={200} animation="wave" />
 						</Grid>
 				  ))
 				: filteredAndSortedProducts.map((item) => (
