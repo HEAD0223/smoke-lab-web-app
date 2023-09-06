@@ -29,7 +29,7 @@ export const CartItem = ({ item }) => {
 						<div key={index}>
 							<Divider />
 							<Grid container spacing={2} justifyContent={'space-between'}>
-								<Grid item xs={3} display={'flex'} alignItems={'center'}>
+								<Grid item xs={2} display={'flex'} alignItems={'center'}>
 									<DoneAllIcon />
 								</Grid>
 								<Grid item xs={6} display={'flex'} alignItems={'center'}>
