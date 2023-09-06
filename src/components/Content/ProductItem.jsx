@@ -11,7 +11,7 @@ import {
 	Typography,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Carousel } from 'react-responsive-carousel';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -87,6 +87,14 @@ export const ProductItem = () => {
 	const [selectedFlavorName, setSelectedFlavorName] = useState(null);
 	const [selectedFlavors, setSelectedFlavors] = useState([]);
 	const [quantity, setQuantity] = useState(0);
+
+	useEffect(() => {
+		const productInCart = cart.find((item) => item.product === product);
+
+		if (productInCart) {
+			setSelectedFlavors(productInCart.inCart);
+		}
+	}, [cart, product]);
 
 	const goBackToList = () => {
 		navigate('/');
