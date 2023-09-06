@@ -25,7 +25,8 @@ export const CartItem = ({ item }) => {
 						spacing={2}
 						justifyContent={'center'}
 						alignItems={'center'}
-						alignContent={'center'}>
+						alignContent={'center'}
+						marginBottom={10}>
 						<Grid item xs={6}>
 							<img
 								src={
@@ -70,7 +71,11 @@ export const CartItem = ({ item }) => {
 					{item.flavorsInCart.map((flavor, index) => (
 						<div key={index}>
 							<Divider />
-							<Grid container spacing={2} justifyContent={'space-between'}>
+							<Grid
+								container
+								spacing={2}
+								justifyContent={'space-between'}
+								padding={'10px 0'}>
 								<Grid item xs={2} display={'flex'} alignItems={'center'}>
 									<DoneAllIcon />
 								</Grid>
