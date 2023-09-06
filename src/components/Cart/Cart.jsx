@@ -45,14 +45,6 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		marginBottom: theme.spacing(2),
 	},
-	itemImage: {
-		width: 80,
-		height: 80,
-		marginRight: theme.spacing(2),
-	},
-	itemName: {
-		flexGrow: 1,
-	},
 	modalTitle: {
 		textAlign: 'center',
 	},
