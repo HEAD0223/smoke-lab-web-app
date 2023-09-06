@@ -99,7 +99,6 @@ export const ProductItem = () => {
 			payload: { product, flavorsInCart },
 		});
 	};
-
 	const onRemove = (product, flavorsInCart) => {
 		const newQuantity = flavorsInCart.reduce((total, flavor) => total + flavor.quantity, 0);
 
@@ -266,7 +265,7 @@ export const ProductItem = () => {
 							size="small"
 							variant="contained"
 							onClick={onAddHandler}
-							disabled={!selectedFlavor}>
+							disabled={selectedFlavor === null}>
 							{t('card_add')}
 						</Button>
 					)}
