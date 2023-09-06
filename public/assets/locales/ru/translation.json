@@ -4,17 +4,20 @@
 	"tg_buy": "Купить ",
 	"tg_order": "Заказать",
 
-	"filter_label": "Производители",
-	"filter_placeholder": "Выберите",
-
-	"card_modal": "Подробнее",
 	"card_add": "Добавить",
 	"card_chip": "Распродано",
 
-	"modal_price": "Цена: ",
-	"modal_sku": "Артикул: ",
-	"modal_amount": "Количество: ",
-	"modal_manufacturer": "Производитель: ",
+	"tabECigs": "e-Сигареты",
+	"tabLiquid": "Жидкость",
+
+	"search": "Поиск",
+	"back_button": "Назад",
+
+	"description": "Описание: ",
+	"sku": "Артикул: ",
+	"quantity": "Количество: ",
+	"manufacturer": "Производитель: ",
+	"volume": "Объем: ",
 
 	"form_name": "Имя",
 	"form_phone": "Телефон",
@@ -23,6 +26,8 @@
 
 	"cart_title": "Ваш заказ",
 	"cart_btn": "Редактировать",
+	"cart_total": "Итоговая цена: ",
+
 	"cart_order": "Подтверждение Заказа",
 	"cart_decline": "Пожалуйста, заполните все необходимые поля.",
 	"cart_success": "Ваши товары отправлены",

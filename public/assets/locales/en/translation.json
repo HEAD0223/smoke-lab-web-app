@@ -4,17 +4,20 @@
 	"tg_buy": "Buy ",
 	"tg_order": "Order",
 
-	"filter_label": "Manufacturers",
-	"filter_placeholder": "Select",
-
-	"card_modal": "More",
 	"card_add": "Add",
 	"card_chip": "Out Of Stock",
 
-	"modal_price": "Price: ",
-	"modal_sku": "SKU: ",
-	"modal_amount": "Amount: ",
-	"modal_manufacturer": "Manufacturer: ",
+	"tabECigs": "e-Cigs",
+	"tabLiquid": "Liquid",
+
+	"search": "Search",
+	"back_button": "Back",
+
+	"description": "Description",
+	"sku": "SKU: ",
+	"quantity": "Quantity: ",
+	"manufacturer": "Manufacturer: ",
+	"volume": "Volume: ",
 
 	"form_name": "Name",
 	"form_phone": "Phone",
@@ -23,6 +26,8 @@
 
 	"cart_title": "Your Order",
 	"cart_btn": "Edit",
+	"cart_total": "Total price: ",
+
 	"cart_order": "Order Confirmation",
 	"cart_decline": "Please fill out all the required fields.",
 	"cart_success": "Your Products Were Sent",

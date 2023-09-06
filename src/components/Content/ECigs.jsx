@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const Chasers = ({ isProductsLoading, filteredAndSortedProducts, cart }) => {
+export const ECigs = ({ isProductsLoading, filteredAndSortedProducts, cart }) => {
 	const classes = useStyles();
 
 	return (

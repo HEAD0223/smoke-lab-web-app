@@ -166,7 +166,8 @@ export const ProductItem = () => {
 									{sf.flavour}
 								</Typography>
 								<Typography variant="subtitle1" align="center">
-									{t('Quantity')}: {sf.quantity}
+									{t('quantity')}
+									{sf.quantity}
 								</Typography>
 							</ListItemText>
 						</ListItem>
@@ -192,7 +193,7 @@ export const ProductItem = () => {
 								<Typography variant="h6" maxWidth={'80%'}>
 									{flavour.flavour}
 								</Typography>
-								<Typography variant="h6">{flavour.amount}</Typography>
+								<Typography variant="h6">x{flavour.amount}</Typography>
 							</div>
 						</ListItemText>
 					</ListItem>
@@ -236,11 +237,11 @@ export const ProductItem = () => {
 					{product.name}
 				</Typography>
 				<Typography variant="h5" align="center" marginBottom={2}>
-					{product.price} MDL
+					{product.price}
+					{t('currency')}
 				</Typography>
 				<Typography variant="h6" align="center" marginBottom={2}>
-					{t('modal_amount')}
-					{totalAmount}
+					x{totalAmount}
 				</Typography>
 				<div
 					style={{
@@ -308,16 +309,16 @@ export const ProductItem = () => {
 					{product.description}
 				</Typography>
 				<Typography variant="subtitle2" align="center" marginTop={2}>
-					{t('modal_sku')}
+					{t('sku')}
 					{code}
 				</Typography>
 				<Typography variant="subtitle2" align="center">
-					{t('modal_manufacturer')}
+					{t('manufacturer')}
 					{product.manufacturer}
 				</Typography>
 				{product.volume !== 'None' ? (
 					<Typography variant="subtitle2" align="center">
-						{t('modal_volume')}: {product.volume}
+						{t('volume')}: {product.volume}
 					</Typography>
 				) : null}
 				<div style={{ marginTop: 12 }}>{renderFlavors()}</div>

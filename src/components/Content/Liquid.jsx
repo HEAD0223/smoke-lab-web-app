@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ESigs = ({ isProductsLoading, filteredAndSortedProducts, cart }) => {
+export const Liquid = ({ isProductsLoading, filteredAndSortedProducts, cart }) => {
 	const classes = useStyles();
 
 	return (

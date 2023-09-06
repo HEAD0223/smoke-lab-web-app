@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
 import { Filters } from '../Utils/Filters';
-import { Chasers } from './Chasers';
-import { ESigs } from './ESigs';
+import { ECigs } from './ECigs';
+import { Liquid } from './Liquid';
 
 const useStyles = makeStyles((theme) => ({
 	filterContainer: {
@@ -147,19 +147,19 @@ export const ProductList = () => {
 				indicatorColor="primary"
 				textColor="primary"
 				centered>
-				<Tab label="e-Sigs" />
-				<Tab label="Chasers" />
+				<Tab label={t('tabECigs')} />
+				<Tab label={t('tabLiquid')} />
 			</Tabs>
 			{/* Products */}
 			{selectedTab === 0 && (
-				<ESigs
+				<ECigs
 					isProductsLoading={isProductsLoading}
 					filteredAndSortedProducts={esigsProducts}
 					cart={cart}
 				/>
 			)}
 			{selectedTab === 1 && (
-				<Chasers
+				<Liquid
 					isProductsLoading={isProductsLoading}
 					filteredAndSortedProducts={chasersProducts}
 					cart={cart}

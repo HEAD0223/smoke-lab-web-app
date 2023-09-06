@@ -1,8 +1,10 @@
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const CartItem = ({ item }) => {
+	const { t } = useTranslation();
 	const totalQuantity = item.flavorsInCart.reduce((total, flavor) => total + flavor.quantity, 0);
 	const totalPrice = item.flavorsInCart.reduce(
 		(total, flavor) => total + parseFloat(item.product.price) * flavor.quantity,
@@ -61,12 +63,14 @@ export const CartItem = ({ item }) => {
 						<Grid item xs={6} minWidth={'60%'}>
 							<Typography variant="h6">{item.product.name}</Typography>
 							<Typography variant="caption">
-								{totalQuantity} x {item.product.price} MDL
+								{totalQuantity} x {item.product.price}
+								{t('currency')}
 							</Typography>
 						</Grid>
 						<Grid item xs={3}>
 							<Typography variant="body2" textAlign={'center'}>
-								{totalPrice} MDL
+								{totalPrice}
+								{t('currency')}
 							</Typography>
 						</Grid>
 					</Grid>
@@ -90,7 +94,8 @@ export const CartItem = ({ item }) => {
 								</Grid>
 								<Grid item xs={3}>
 									<Typography variant="body2" textAlign={'center'}>
-										{parseFloat(item.product.price) * flavor.quantity} MDL
+										{parseFloat(item.product.price) * flavor.quantity}
+										{t('currency')}
 									</Typography>
 								</Grid>
 							</Grid>

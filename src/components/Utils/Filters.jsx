@@ -1,6 +1,7 @@
 import { CircularProgress, TextField } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Filters.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +40,7 @@ export const Filters = ({
 	setSearchText,
 }) => {
 	const classes = useStyles();
+	const { t } = useTranslation();
 	const [selectedOptions, setSelectedOptions] = useState([]);
 
 	useEffect(() => {
@@ -67,7 +69,7 @@ export const Filters = ({
 			) : (
 				<>
 					<TextField
-						label="Search"
+						label={t('search')}
 						variant="outlined"
 						value={searchText}
 						onChange={(e) => {

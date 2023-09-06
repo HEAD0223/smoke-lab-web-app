@@ -201,8 +201,11 @@ export const Cart = () => {
 									justifyContent: 'space-between',
 									alignItems: 'center',
 								}}>
-								<Typography variant="h6">{t('total_price')}:</Typography>
-								<Typography variant="body1">{getTotalPrice(cart)} MDL</Typography>
+								<Typography variant="h6">{t('cart_total')}:</Typography>
+								<Typography variant="body1">
+									{getTotalPrice(cart)}
+									{t('currency')}
+								</Typography>
 							</div>
 						</CardContent>
 					</Card>
