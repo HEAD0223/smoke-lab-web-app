@@ -115,11 +115,9 @@ export const Cart = () => {
 	}, []);
 
 	const onSendData = useCallback(() => {
-		// Check if all user information fields are filled
 		if (userInfo.name && userInfo.phone && userInfo.address) {
 			tg.MainButton.hide();
 			setModalOpen(true);
-			// Combine cart and user information
 			const combinedData = {
 				user_id: user.id,
 				username: user.username || 'None',
@@ -141,11 +139,10 @@ export const Cart = () => {
 
 	useEffect(() => {
 		tg.onEvent('mainButtonClicked', onSendData);
-
 		if (order.status === 'sent') {
 			const timer = setTimeout(() => {
 				tg.close();
-			}, 3000); // Wait for X seconds before closing the web app
+			}, 3000);
 
 			return () => {
 				clearTimeout(timer);
@@ -157,13 +154,12 @@ export const Cart = () => {
 		};
 	}, [onSendData, order.status]);
 
-	// Function to handle input changes for user information
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 		dispatchState({
 			type: 'SET_USER_INFO',
 			payload: { userInfo: { ...userInfo, [name]: value } },
-		}); // Dispatch the updated userInfo
+		});
 	};
 
 	const handleModalClose = () => {
