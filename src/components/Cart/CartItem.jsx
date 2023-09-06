@@ -20,8 +20,8 @@ export const CartItem = ({ item }) => {
 		<div>
 			<Card>
 				<CardContent>
-					<Grid container spacing={2}>
-						<Grid item xs={6} minWidth={'60%'}>
+					<Grid container spacing={2} justifyContent={'center'}>
+						<Grid item xs={6}>
 							<img
 								src={
 									item.product.image
