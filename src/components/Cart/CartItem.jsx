@@ -29,10 +29,10 @@ export const CartItem = ({ item }) => {
 						<div key={index}>
 							<Divider />
 							<Grid container spacing={2} justifyContent={'space-between'}>
-								<Grid item xs={3}>
+								<Grid item xs={3} display={'flex'} alignItems={'center'}>
 									<DoneAllIcon />
 								</Grid>
-								<Grid item xs={6} minWidth={'60%'} display={'flex'} alignItems={'center'}>
+								<Grid item xs={6} display={'flex'} alignItems={'center'}>
 									<Typography variant="body1">{flavor.flavour}</Typography>
 									<Typography variant="caption">x{flavor.quantity}</Typography>
 								</Grid>
