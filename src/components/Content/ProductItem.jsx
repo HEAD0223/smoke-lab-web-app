@@ -87,6 +87,7 @@ export const ProductItem = () => {
 			type: 'ADD_TO_CART',
 			payload: { product, inCart },
 		});
+		console.log(cart);
 	};
 
 	const onRemove = (product, inCart) => {
@@ -101,6 +102,7 @@ export const ProductItem = () => {
 				payload: { product, inCart },
 			});
 		}
+		console.log(cart);
 	};
 
 	const onAddHandler = () => {
