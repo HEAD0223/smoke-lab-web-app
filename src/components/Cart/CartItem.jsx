@@ -33,7 +33,7 @@ export const CartItem = ({ item }) => {
 							/>
 						</Grid>
 						<Grid item xs={6}>
-							<Grid container spacing={2}>
+							<Grid container spacing={2} flexWrap={'wrap'}>
 								{filteredFlavours.map((flavor, index) => (
 									<Grid item xs={4} key={index}>
 										<img
