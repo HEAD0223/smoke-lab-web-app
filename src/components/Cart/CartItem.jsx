@@ -20,7 +20,7 @@ export const CartItem = ({ item }) => {
 		<div>
 			<Card>
 				<CardContent>
-					<Grid container spacing={2} justifyContent={'center'}>
+					<Grid container spacing={2} justifyContent={'center'} alignItems={'center'}>
 						<Grid item xs={6}>
 							<img
 								src={
