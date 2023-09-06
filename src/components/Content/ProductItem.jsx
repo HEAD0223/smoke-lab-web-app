@@ -298,6 +298,7 @@ export const ProductItem = () => {
 						display: 'flex',
 						flexDirection: 'column',
 						alignItems: 'center',
+						margin: '0 20px',
 					}}>
 					{renderSelectedFlavors()}
 				</div>
