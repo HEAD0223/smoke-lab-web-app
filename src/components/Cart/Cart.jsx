@@ -104,6 +104,7 @@ export const Cart = () => {
 	};
 
 	useEffect(() => {
+		console.log(cart);
 		tg.MainButton.show();
 		tg.MainButton.setParams({
 			text: `${t('tg_order')}`,
@@ -118,7 +119,7 @@ export const Cart = () => {
 			// Combine cart and user information
 			const combinedData = {
 				user_id: user.id,
-				username: user.username,
+				username: user.username || 'None',
 				created_at: Date.now(),
 				status: '⌛️',
 				items: cart,
