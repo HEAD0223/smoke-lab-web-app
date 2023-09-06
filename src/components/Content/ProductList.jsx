@@ -81,7 +81,7 @@ export const ProductList = () => {
 			} else if (totalAmountA !== 0 && totalAmountB === 0) {
 				return -1;
 			} else {
-				return totalAmountA - totalAmountB;
+				return totalAmountB - totalAmountA;
 			}
 		});
 
