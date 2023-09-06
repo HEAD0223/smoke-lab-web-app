@@ -62,10 +62,14 @@ const useStyles = makeStyles((theme) => ({
 	listItem: {
 		border: `1px solid ${theme.palette.grey[300]}`,
 		borderRadius: theme.shape.borderRadius,
-		marginBottom: theme.spacing(1),
+		marginBottom: theme.spacing(2),
 		padding: theme.spacing(1),
-		width: '80%',
+		minWidth: 150,
 		margin: '0 auto',
+		transition: 'box-shadow 0.3s ease-in-out',
+	},
+	selectedListItem: {
+		boxShadow: `0px 0px 8px 2px ${theme.palette.primary.main}`,
 	},
 }));
 
@@ -80,6 +84,7 @@ export const ProductItem = () => {
 	const { cart, dispatchState } = useCart();
 
 	const [selectedFlavor, setSelectedFlavor] = useState(null);
+	const [selectedFlavorName, setSelectedFlavorName] = useState(null);
 	const [selectedFlavors, setSelectedFlavors] = useState([]);
 	const [quantity, setQuantity] = useState(0);
 
@@ -94,6 +99,7 @@ export const ProductItem = () => {
 
 	const handleFlavorClick = (flavorIndex) => {
 		setSelectedFlavor(flavorIndex);
+		setSelectedFlavorName(product.flavours[flavorIndex].flavour);
 	};
 
 	const onAdd = (product, inCart) => {
@@ -172,7 +178,12 @@ export const ProductItem = () => {
 		return (
 			<List>
 				{selectedFlavors.map((sf, index) => (
-					<Paper key={index} className={classes.listItem} elevation={3}>
+					<Paper
+						key={index}
+						className={`${classes.listItem} ${
+							selectedFlavorName === sf.flavour ? classes.selectedListItem : ''
+						}`}
+						elevation={3}>
 						<ListItem key={index} style={{ width: '90%', margin: '0 auto' }}>
 							<ListItemText>
 								<Typography variant="h6" align="center">
@@ -310,8 +321,7 @@ export const ProductItem = () => {
 					}}>
 					{renderSelectedFlavors()}
 				</div>
-				{renderFlavors()}
-				<Typography variant="h6" align="center" marginTop={4}>
+				<Typography variant="h6" align="center" marginTop={2}>
 					{t('description')}
 				</Typography>
 				<Typography variant="body1" align="center" marginBottom={2}>
@@ -330,6 +340,7 @@ export const ProductItem = () => {
 						{t('modal_volume')}: {product.volume}
 					</Typography>
 				) : null}
+				<div style={{ marginTop: 12 }}>{renderFlavors()}</div>
 			</div>
 		</div>
 	);
