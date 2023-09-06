@@ -168,6 +168,60 @@ export const Cart = () => {
 		setModalOpen(false);
 	};
 
+	const CartItem = ({ item }) => {
+		return (
+			<div>
+				<Card>
+					<CardContent>
+						<Grid container spacing={2}>
+							<Grid item xs={3}>
+								<img
+									src={
+										item.url
+											? `data:image/png;base64,${item.url}`
+											: 'https://source.unsplash.com/random'
+									}
+									alt={item.name}
+									style={{ width: '100%' }}
+								/>
+							</Grid>
+							<Grid item xs={6}>
+								<Typography variant="h6">{item.name}</Typography>
+								<Typography variant="body2">
+									{item.quantity} x {item.price} {item.currency}
+								</Typography>
+							</Grid>
+							<Grid item xs={3}>
+								<Typography variant="body1">
+									{parseFloat(item.price) * item.quantity} {item.currency}
+								</Typography>
+							</Grid>
+						</Grid>
+						{item.flavorsInCart.map((flavor, index) => (
+							<div key={index}>
+								<Divider />
+								<Grid container spacing={2}>
+									<Grid item xs={3}>
+										{/* Flavor image */}
+									</Grid>
+									<Grid item xs={6}>
+										<Typography variant="h6">{flavor.flavour}</Typography>
+										<Typography variant="body2">Quantity: {flavor.quantity}</Typography>
+									</Grid>
+									<Grid item xs={3}>
+										<Typography variant="body1">
+											{parseFloat(item.price) * flavor.quantity} {item.currency}
+										</Typography>
+									</Grid>
+								</Grid>
+							</div>
+						))}
+					</CardContent>
+				</Card>
+			</div>
+		);
+	};
+
 	return (
 		<div className={classes.cartContainer}>
 			<div className={classes.headerContainer}>
@@ -189,26 +243,7 @@ export const Cart = () => {
 				: // Otherwise, show the cart content
 				  cart.map((item) => (
 						<div className={classes.cartItem} key={item.code}>
-							<img
-								src={
-									item.url
-										? `data:image/png;base64,${item.url}`
-										: 'https://source.unsplash.com/random'
-								}
-								alt={item.name}
-								className={classes.itemImage}
-							/>
-							<div className={classes.itemName}>
-								<Typography variant="h6">{item.name}</Typography>
-								<Typography variant="body2">
-									{item.quantity} x {item.price}
-									{t('currency')}
-								</Typography>
-							</div>
-							<Typography variant="body1">
-								{parseFloat(item.price) * item.quantity}
-								{t('currency')}
-							</Typography>
+							<CartItem item={item} />
 						</div>
 				  ))}
 			<div className={classes.commentContainer}>
@@ -252,6 +287,7 @@ export const Cart = () => {
 					margin="normal"
 				/>
 			</div>
+
 			{/* Modal */}
 			<Dialog open={modalOpen} onClose={handleModalClose}>
 				<DialogTitle className={classes.modalTitle}>{t('cart_order')}</DialogTitle>
