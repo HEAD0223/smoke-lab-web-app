@@ -13,8 +13,8 @@ export const CartItem = ({ item }) => {
 		<div>
 			<Card>
 				<CardContent>
-					<Grid container spacing={2}>
-						<Grid item xs={6}>
+					<Grid container spacing={2} justifyContent={'space-between'}>
+						<Grid item xs={6} minWidth={'60%'}>
 							<Typography variant="h6">{item.product.name}</Typography>
 							<Typography variant="body2">
 								{totalQuantity} x {item.product.price} MDL
@@ -34,7 +34,7 @@ export const CartItem = ({ item }) => {
 								</Grid>
 								<Grid item xs={3}>
 									<Typography variant="body1">
-										{parseFloat(item.price) * flavor.quantity} {item.currency}
+										{parseFloat(item.product.price) * flavor.quantity} MDL
 									</Typography>
 								</Grid>
 							</Grid>

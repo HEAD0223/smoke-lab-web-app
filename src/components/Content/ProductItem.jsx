@@ -190,7 +190,9 @@ export const ProductItem = () => {
 									justifyContent: 'space-between',
 									flexWrap: 'wrap',
 								}}>
-								<Typography variant="h6">{flavour.flavour}</Typography>
+								<Typography variant="h6" maxWidth={'80%'}>
+									{flavour.flavour}
+								</Typography>
 								<Typography variant="h6">{flavour.amount}</Typography>
 							</div>
 						</ListItemText>
