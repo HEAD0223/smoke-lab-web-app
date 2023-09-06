@@ -10,9 +10,9 @@
 .MuiOutlinedInput-notchedOutline:hover {
 	border-color: var(--tg-theme-text-color, 87%) !important;
 }
-.MuiButtonBase-root {
+/* .MuiButtonBase-root {
 	color: var(--tg-theme-button-color, 84%) !important;
-}
+} */
 .MuiButtonBase-root.MuiIconButton-root {
 	color: var(--tg-theme-text-color, 54%) !important;
 }

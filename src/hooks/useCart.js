@@ -51,7 +51,7 @@ const cartReducer = (state, action) => {
 										// If quantity > 1, decrease the quantity
 										return { ...flavor, quantity: flavor.quantity - 1 };
 									} else {
-										// If quantity is 1, remove the flavor
+										// If quantity is 1 or less, remove the flavor
 										return null;
 									}
 								}
@@ -59,20 +59,25 @@ const cartReducer = (state, action) => {
 							})
 							.filter(Boolean); // Remove null (flavors with quantity 0)
 
-						return {
-							...item,
-							inCart: updatedFlavors,
-						};
+						// Check if there are flavors left for the product
+						if (updatedFlavors.length > 0) {
+							return {
+								...item,
+								inCart: updatedFlavors,
+							};
+						} else {
+							// If no flavors left, remove the entire product from the cart
+							return null;
+						}
 					}
 					return item;
 				})
-				.filter((item) => item.inCart.length > 0); // Remove products with no flavors
+				.filter(Boolean); // Remove null (products with no flavors left)
 
 			return {
 				...state,
 				cart: updatedRemoveCart,
 			};
-
 		case 'REMOVE_PRODUCT_FROM_CART':
 			const filteredCart = state.cart.filter((item) => {
 				return item.product.code !== action.payload.product.code;

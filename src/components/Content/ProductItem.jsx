@@ -225,20 +225,18 @@ export const ProductItem = () => {
 							/>
 							<div>
 								{quantity === 0 ? (
-									<Button color="primary" variant="contained" onClick={onAddHandler}>
+									<Button variant="contained" onClick={onAddHandler}>
 										{t('card_add')}
 									</Button>
 								) : (
 									<div className={classes.quantityButtons}>
 										<Button
-											color="primary"
 											variant="contained"
 											className={classes.quantityButtonRemove}
 											onClick={onRemoveHandler}>
 											<RemoveIcon />
 										</Button>
 										<Button
-											color="primary"
 											variant="contained"
 											className={classes.quantityButtonAdd}
 											onClick={onAddHandler}>
