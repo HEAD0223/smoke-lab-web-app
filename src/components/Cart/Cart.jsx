@@ -171,6 +171,7 @@ export const Cart = () => {
 	};
 
 	const CartItem = ({ item }) => {
+		console.log(item);
 		return (
 			<div>
 				<Card>
