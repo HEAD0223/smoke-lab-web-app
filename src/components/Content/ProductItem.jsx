@@ -87,8 +87,6 @@ export const ProductItem = () => {
 			type: 'ADD_TO_CART',
 			payload: { product, inCart },
 		});
-		console.log('inCart', inCart);
-		console.log('cart', cart);
 	};
 
 	const onRemove = (product, inCart) => {
@@ -119,9 +117,12 @@ export const ProductItem = () => {
 				updatedSelectedFlavors.push({ flavour: flavor.flavour, quantity: 1 });
 			}
 
-			setQuantity(quantity + 1);
+			const newQuantity = updatedSelectedFlavors.reduce((total, f) => total + f.quantity, 0);
+			setQuantity(newQuantity);
 			setSelectedFlavors(updatedSelectedFlavors);
-			onAdd(product, [{ flavorName: flavor.flavour, quantity: quantity + 1 }]);
+
+			onAdd(product, [{ flavorName: flavor.flavour, quantity: newQuantity }]);
+			console.log('inCart', [{ flavorName: flavor.flavour, quantity: newQuantity }]);
 		}
 	};
 	const onRemoveHandler = () => {
@@ -138,9 +139,13 @@ export const ProductItem = () => {
 				} else {
 					updatedSelectedFlavors[existingFlavorIndex].quantity -= 1;
 				}
-				setQuantity(quantity - 1);
+
+				const newQuantity = updatedSelectedFlavors.reduce((total, f) => total + f.quantity, 0);
+				setQuantity(newQuantity);
 				setSelectedFlavors(updatedSelectedFlavors);
-				onRemove(product, [{ flavorName: flavor.flavour, quantity: quantity - 1 }]);
+
+				onRemove(product, [{ flavorName: flavor.flavour, quantity: newQuantity }]);
+				console.log('inCart', [{ flavorName: flavor.flavour, quantity: newQuantity }]);
 			}
 		}
 	};
