@@ -10,10 +10,51 @@ export const CartItem = ({ item }) => {
 		0,
 	);
 
+	const filteredFlavours = item.product.flavours.filter((flavour) => {
+		const foundFlavour = item.flavorsInCart.find(
+			(cartFlavour) => cartFlavour.flavour === flavour.flavour,
+		);
+		return foundFlavour !== undefined;
+	});
+
 	return (
 		<div>
 			<Card>
 				<CardContent>
+					<Grid container spacing={2} justifyContent={'space-between'}>
+						<Grid item xs={6} minWidth={'60%'}>
+							<img
+								src={
+									item.product.image
+										? `data:image/png;base64,${item.product.image}`
+										: 'https://source.unsplash.com/random'
+								}
+								alt={item.product.name}
+								style={{ width: '100%' }}
+							/>
+						</Grid>
+						<Grid item xs={3}>
+							{filteredFlavours.map((flavor, index) => (
+								<div key={index}>
+									<Divider />
+									<Grid container spacing={2}>
+										<Grid item xs={2}>
+											<img
+												src={
+													flavor.image
+														? `data:image/png;base64,${flavor.image}`
+														: 'https://source.unsplash.com/random'
+												}
+												alt={flavor.flavour}
+												style={{ width: '100%' }}
+											/>
+										</Grid>
+									</Grid>
+								</div>
+							))}
+						</Grid>
+					</Grid>
+					<Divider />
 					<Grid container spacing={2} justifyContent={'space-between'}>
 						<Grid item xs={6} minWidth={'60%'}>
 							<Typography variant="h6">{item.product.name}</Typography>
