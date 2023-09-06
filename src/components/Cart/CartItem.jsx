@@ -3,7 +3,6 @@ import { Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import React from 'react';
 
 export const CartItem = ({ item }) => {
-	console.log(item);
 	const totalQuantity = item.flavorsInCart.reduce((total, flavor) => total + flavor.quantity, 0);
 	const totalPrice = item.flavorsInCart.reduce(
 		(total, flavor) => total + parseFloat(item.product.price) * flavor.quantity,
@@ -21,7 +20,7 @@ export const CartItem = ({ item }) => {
 		<div>
 			<Card>
 				<CardContent>
-					<Grid container spacing={2} justifyContent={'space-between'}>
+					<Grid container spacing={2}>
 						<Grid item xs={6} minWidth={'60%'}>
 							<img
 								src={
@@ -33,25 +32,22 @@ export const CartItem = ({ item }) => {
 								style={{ width: '100%' }}
 							/>
 						</Grid>
-						<Grid item xs={3}>
-							{filteredFlavours.map((flavor, index) => (
-								<div key={index}>
-									{console.log(flavor)}
-									<Grid container spacing={2}>
-										<Grid item xs={2}>
-											<img
-												src={
-													flavor.image
-														? `data:image/png;base64,${flavor.image}`
-														: 'https://source.unsplash.com/random'
-												}
-												alt={flavor.flavour}
-												style={{ width: '100%' }}
-											/>
-										</Grid>
+						<Grid item xs={6}>
+							<Grid container spacing={2}>
+								{filteredFlavours.map((flavor, index) => (
+									<Grid item xs={4} key={index}>
+										<img
+											src={
+												flavor.image
+													? `data:image/png;base64,${flavor.image}`
+													: 'https://source.unsplash.com/random'
+											}
+											alt={flavor.flavour}
+											style={{ width: '100%' }}
+										/>
 									</Grid>
-								</div>
-							))}
+								))}
+							</Grid>
 						</Grid>
 					</Grid>
 					<Divider />
