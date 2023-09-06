@@ -20,7 +20,12 @@ export const CartItem = ({ item }) => {
 		<div>
 			<Card>
 				<CardContent>
-					<Grid container spacing={2} justifyContent={'center'} alignItems={'center'}>
+					<Grid
+						container
+						spacing={2}
+						justifyContent={'center'}
+						alignItems={'center'}
+						alignContent={'center'}>
 						<Grid item xs={6}>
 							<img
 								src={
@@ -33,7 +38,7 @@ export const CartItem = ({ item }) => {
 							/>
 						</Grid>
 						<Grid item xs={6}>
-							<Grid container spacing={2} flexWrap={'wrap'}>
+							<Grid container spacing={2} flexWrap={'wrap'} justifyContent={'center'}>
 								{filteredFlavours.map((flavor, index) => (
 									<Grid item xs={4} key={index}>
 										<img
