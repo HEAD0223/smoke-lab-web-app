@@ -2,7 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Badge, Button, IconButton, Tooltip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Carousel } from 'react-responsive-carousel';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -79,33 +79,31 @@ export const ProductItem = () => {
 		setSelectedFlavor(flavorIndex);
 	};
 
-	const onAdd = (product, newQuantity, flavorName) => {
-		console.log(cart);
+	const onAdd = (product, inCart) => {
+		const newQuantity = inCart.reduce((total, flavor) => total + flavor.quantity, 0);
 		setQuantity(newQuantity);
+
 		dispatchState({
 			type: 'ADD_TO_CART',
-			payload: { product, quantity: newQuantity, flavorName },
+			payload: { product, inCart },
 		});
+		console.log('inCart', inCart);
+		console.log('cart', cart);
 	};
-	const onRemove = (product, newQuantity, flavorName) => {
-		if (newQuantity === 0) {
-			setQuantity(0);
-		} else {
-			setQuantity(newQuantity);
-		}
+
+	const onRemove = (product, inCart) => {
+		const newQuantity = inCart.reduce((total, flavor) => total + flavor.quantity, 0);
+		setQuantity(newQuantity);
+
 		if (newQuantity === 0) {
 			dispatchState({ type: 'REMOVE_PRODUCT_FROM_CART', payload: { product } });
 		} else {
 			dispatchState({
 				type: 'REMOVE_FROM_CART',
-				payload: { product, quantity: newQuantity, flavorName },
+				payload: { product, inCart },
 			});
 		}
 	};
-
-	useEffect(() => {
-		console.log(cart);
-	}, []);
 
 	const onAddHandler = () => {
 		if (quantity < totalAmount && selectedFlavor !== null) {
@@ -123,7 +121,7 @@ export const ProductItem = () => {
 
 			setQuantity(quantity + 1);
 			setSelectedFlavors(updatedSelectedFlavors);
-			onAdd(product, quantity + 1, flavor.flavour);
+			onAdd(product, [{ flavorName: flavor.flavour, quantity: quantity + 1 }]);
 		}
 	};
 	const onRemoveHandler = () => {
@@ -142,7 +140,7 @@ export const ProductItem = () => {
 				}
 				setQuantity(quantity - 1);
 				setSelectedFlavors(updatedSelectedFlavors);
-				onRemove(product, quantity - 1, flavor.flavour);
+				onRemove(product, [{ flavorName: flavor.flavour, quantity: quantity - 1 }]);
 			}
 		}
 	};

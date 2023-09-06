@@ -6,52 +6,81 @@ const CartContext = createContext();
 const cartReducer = (state, action) => {
 	switch (action.type) {
 		case 'ADD_TO_CART':
-			const existingProduct = state.cart.find(
-				(item) => item.code === action.payload.product.code,
+			const updatedAddCart = [...state.cart];
+			const existingProductIndex = updatedAddCart.findIndex(
+				(item) => item.product.code === action.payload.product.code,
 			);
-			if (existingProduct) {
-				return {
-					...state,
-					cart: state.cart.map((item) =>
-						item.code === action.payload.product.code
-							? {
-									...item,
-									quantity: action.payload.quantity,
-									flavorName: action.payload.flavorName,
-							  }
-							: item,
-					),
-				};
+
+			if (existingProductIndex !== -1) {
+				// Product already exists in cart, update its flavors and quantities
+				const existingProduct = updatedAddCart[existingProductIndex];
+				action.payload.inCart.forEach((flavorInfo) => {
+					const existingFlavorIndex = existingProduct.inCart.findIndex(
+						(f) => f.flavorName === flavorInfo.flavorName,
+					);
+					if (existingFlavorIndex !== -1) {
+						// Flavor already exists, update its quantity
+						existingProduct.inCart[existingFlavorIndex].quantity = flavorInfo.quantity;
+					} else {
+						// Flavor does not exist, add it
+						existingProduct.inCart.push({ ...flavorInfo });
+					}
+				});
 			} else {
-				return {
-					...state,
-					cart: [
-						...state.cart,
-						{
-							...action.payload.product,
-							quantity: action.payload.quantity,
-							flavorName: action.payload.flavorName,
-						},
-					],
-				};
+				// Product does not exist in cart, add it with flavors and quantities
+				updatedAddCart.push({
+					product: { ...action.payload.product },
+					inCart: action.payload.inCart.map((flavorInfo) => ({ ...flavorInfo })),
+				});
 			}
-		case 'REMOVE_FROM_CART':
+
 			return {
 				...state,
-				cart: state.cart.map((item) =>
-					item.code === action.payload.product.code
-						? {
-								...item,
-								quantity: action.payload.quantity,
-								flavorName: action.payload.flavorName,
-						  }
-						: item,
-				),
+				cart: updatedAddCart,
 			};
-		case 'REMOVE_PRODUCT_FROM_CART':
+		case 'REMOVE_FROM_CART':
+			const updatedRemoveCart = state.cart
+				.map((item) => {
+					if (item.product.code === action.payload.product.code) {
+						// Find the product in the cart
+						const updatedFlavors = item.inCart
+							.map((flavor) => {
+								if (flavor.flavorName === action.payload.flavorName) {
+									// Find the flavor to update
+									if (flavor.quantity > 1) {
+										// If quantity > 1, decrease the quantity
+										return { ...flavor, quantity: flavor.quantity - 1 };
+									} else {
+										// If quantity is 1, remove the flavor
+										return null;
+									}
+								}
+								return flavor;
+							})
+							.filter(Boolean); // Remove null (flavors with quantity 0)
+
+						return {
+							...item,
+							inCart: updatedFlavors,
+						};
+					}
+					return item;
+				})
+				.filter((item) => item.inCart.length > 0); // Remove products with no flavors
+
 			return {
 				...state,
-				cart: state.cart.filter((item) => item.code !== action.payload.product.code),
+				cart: updatedRemoveCart,
+			};
+
+		case 'REMOVE_PRODUCT_FROM_CART':
+			const filteredCart = state.cart.filter((item) => {
+				return item.product.code !== action.payload.product.code;
+			});
+
+			return {
+				...state,
+				cart: filteredCart,
 			};
 		case 'SET_USER_INFO':
 			return {

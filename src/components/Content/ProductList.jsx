@@ -40,7 +40,16 @@ export const ProductList = () => {
 	};
 
 	const getTotalPrice = (items) => {
-		return items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
+		return items.reduce((total, item) => {
+			const itemPrice = parseFloat(item.price);
+
+			// Calculate the total price for each flavor in the item
+			const flavorTotal = item.inCart.reduce((flavorTotal, flavor) => {
+				return flavorTotal + itemPrice * flavor.quantity;
+			}, 0);
+
+			return total + flavorTotal;
+		}, 0);
 	};
 
 	const filteredProducts = [...products.items];
