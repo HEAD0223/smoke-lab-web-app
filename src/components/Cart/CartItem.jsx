@@ -5,7 +5,7 @@ export const CartItem = ({ item }) => {
 	console.log(item);
 	const totalQuantity = item.flavorsInCart.reduce((total, flavor) => total + flavor.quantity, 0);
 	const totalPrice = item.flavorsInCart.reduce(
-		(total, flavor) => total + parseFloat(item.price) * flavor.quantity,
+		(total, flavor) => total + parseFloat(item.product.price) * flavor.quantity,
 		0,
 	);
 
@@ -14,17 +14,6 @@ export const CartItem = ({ item }) => {
 			<Card>
 				<CardContent>
 					<Grid container spacing={2}>
-						<Grid item xs={3}>
-							<img
-								src={
-									item.product.image
-										? `data:image/png;base64,${item.product.image}`
-										: 'https://source.unsplash.com/random'
-								}
-								alt={item.product.name}
-								style={{ width: '100%' }}
-							/>
-						</Grid>
 						<Grid item xs={6}>
 							<Typography variant="h6">{item.product.name}</Typography>
 							<Typography variant="body2">
@@ -39,17 +28,6 @@ export const CartItem = ({ item }) => {
 						<div key={index}>
 							<Divider />
 							<Grid container spacing={2}>
-								<Grid item xs={3}>
-									<img
-										src={
-											flavor.image
-												? `data:image/png;base64,${flavor.image}`
-												: 'https://source.unsplash.com/random'
-										}
-										alt={flavor.flavor}
-										style={{ width: '100%' }}
-									/>
-								</Grid>
 								<Grid item xs={6}>
 									<Typography variant="h6">{flavor.flavour}</Typography>
 									<Typography variant="body2">Quantity: {flavor.quantity}</Typography>
