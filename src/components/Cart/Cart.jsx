@@ -2,6 +2,8 @@ import ErrorIcon from '@mui/icons-material/Error';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import {
 	Button,
+	Card,
+	CardContent,
 	CircularProgress,
 	Dialog,
 	DialogContent,
