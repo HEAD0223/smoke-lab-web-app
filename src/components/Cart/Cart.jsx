@@ -106,7 +106,6 @@ export const Cart = () => {
 	};
 
 	useEffect(() => {
-		console.log(cart);
 		tg.MainButton.show();
 		tg.MainButton.setParams({
 			text: `${t('tg_order')}`,
@@ -180,20 +179,30 @@ export const Cart = () => {
 					{t('cart_btn')}
 				</Button>
 			</div>
-			{cart.length === 0
-				? // If the cart is empty and still loading, show the Skeleton
-				  Array.from({ length: 3 }).map((_, index) => (
-						<Grid item xs={6} sm={6} md={4} lg={4} key={index}>
-							<Skeleton variant="rectangular" height={100} animation="wave" />
-							<Divider />
-						</Grid>
-				  ))
-				: // Otherwise, show the cart content
-				  cart.map((item) => (
+			{cart.length === 0 ? (
+				// If the cart is empty and still loading, show the Skeleton
+				Array.from({ length: 3 }).map((_, index) => (
+					<Grid item xs={6} sm={6} md={4} lg={4} key={index}>
+						<Skeleton variant="rectangular" height={100} animation="wave" />
+						<Divider />
+					</Grid>
+				))
+			) : (
+				// Otherwise, show the cart content
+				<div>
+					{cart.map((item) => (
 						<div className={classes.cartItem} key={item.code}>
 							<CartItem item={item} />
 						</div>
-				  ))}
+					))}
+					<Card>
+						<CardContent>
+							<Typography variant="h6">{t('total_price')}:</Typography>
+							<Typography variant="caption">{getTotalPrice(cart)} MDL</Typography>
+						</CardContent>
+					</Card>
+				</div>
+			)}
 			<div className={classes.commentContainer}>
 				{/* Form fields to collect user information */}
 				<TextField
