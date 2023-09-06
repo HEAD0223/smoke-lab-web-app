@@ -26,7 +26,7 @@ export const CartItem = ({ item }) => {
 						justifyContent={'center'}
 						alignItems={'center'}
 						alignContent={'center'}
-						marginBottom={10}>
+						marginBottom={'10px'}>
 						<Grid item xs={6}>
 							<img
 								src={
@@ -57,7 +57,7 @@ export const CartItem = ({ item }) => {
 						</Grid>
 					</Grid>
 					<Divider />
-					<Grid container spacing={2} justifyContent={'space-between'}>
+					<Grid container spacing={2} justifyContent={'space-between'} alignItems={'center'}>
 						<Grid item xs={6} minWidth={'60%'}>
 							<Typography variant="h6">{item.product.name}</Typography>
 							<Typography variant="caption">
@@ -65,7 +65,9 @@ export const CartItem = ({ item }) => {
 							</Typography>
 						</Grid>
 						<Grid item xs={3}>
-							<Typography variant="body2">{totalPrice} MDL</Typography>
+							<Typography variant="body2" textAlign={'center'}>
+								{totalPrice} MDL
+							</Typography>
 						</Grid>
 					</Grid>
 					{item.flavorsInCart.map((flavor, index) => (

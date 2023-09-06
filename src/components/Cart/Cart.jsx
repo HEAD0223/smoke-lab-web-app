@@ -199,8 +199,15 @@ export const Cart = () => {
 					))}
 					<Card>
 						<CardContent>
-							<Typography variant="h6">{t('total_price')}:</Typography>
-							<Typography variant="caption">{getTotalPrice(cart)} MDL</Typography>
+							<div
+								style={{
+									display: 'flex',
+									justifyContent: 'space-between',
+									alignItems: 'center',
+								}}>
+								<Typography variant="h6">{t('total_price')}:</Typography>
+								<Typography variant="body1">{getTotalPrice(cart)} MDL</Typography>
+							</div>
 						</CardContent>
 					</Card>
 				</div>
