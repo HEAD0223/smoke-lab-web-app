@@ -83,6 +83,9 @@ export const CartItem = ({ item }) => {
 								</Grid>
 								<Grid item xs={6} display={'flex'} alignItems={'center'}>
 									<Typography variant="body1">{flavor.flavour}</Typography>
+									{/* <Typography variant="caption">x{flavor.quantity}</Typography> */}
+								</Grid>
+								<Grid item xs={1} display={'flex'} alignItems={'center'}>
 									<Typography variant="caption">x{flavor.quantity}</Typography>
 								</Grid>
 								<Grid item xs={3}>

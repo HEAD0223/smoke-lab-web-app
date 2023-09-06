@@ -198,7 +198,7 @@ export const Cart = () => {
 						</div>
 					))}
 					<Card>
-						<CardContent>
+						<CardContent style={{ paddingBottom: 0 }}>
 							<div
 								style={{
 									display: 'flex',
