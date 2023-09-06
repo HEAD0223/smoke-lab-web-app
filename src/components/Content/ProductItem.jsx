@@ -1,6 +1,15 @@
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { Badge, Button, IconButton, Tooltip, Typography } from '@mui/material';
+import {
+	Button,
+	IconButton,
+	List,
+	ListItem,
+	ListItemText,
+	Paper,
+	Tooltip,
+	Typography,
+} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -49,6 +58,14 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.button_text_color.main,
 		padding: `${theme.spacing(0.5)} ${theme.spacing(1)} !important`,
 		minWidth: `${theme.spacing(5)} !important`,
+	},
+	listItem: {
+		border: `1px solid ${theme.palette.grey[300]}`,
+		borderRadius: theme.shape.borderRadius,
+		marginBottom: theme.spacing(1),
+		padding: theme.spacing(1),
+		width: '80%',
+		margin: '0 auto',
 	},
 }));
 
@@ -152,11 +169,47 @@ export const ProductItem = () => {
 	};
 
 	const renderSelectedFlavors = () => {
-		return selectedFlavors.map((sf, index) => (
-			<div key={index}>
-				{sf.flavour}: {sf.quantity}
-			</div>
-		));
+		return (
+			<List>
+				{selectedFlavors.map((sf, index) => (
+					<Paper key={index} className={classes.listItem} elevation={3}>
+						<ListItem key={index} style={{ width: '90%', margin: '0 auto' }}>
+							<ListItemText>
+								<Typography variant="h6" align="center">
+									{sf.flavour}
+								</Typography>
+								<Typography variant="subtitle1" align="center">
+									{t('Quantity')}: {sf.quantity}
+								</Typography>
+							</ListItemText>
+						</ListItem>
+					</Paper>
+				))}
+			</List>
+		);
+	};
+
+	const renderFlavors = () => {
+		return (
+			<List>
+				{product.flavours.map((flavour, index) => (
+					<ListItem key={index}>
+						<ListItemText>
+							<div
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'space-between',
+									flexWrap: 'wrap',
+								}}>
+								<Typography variant="h6">{flavour.flavour}</Typography>
+								<Typography variant="h6">{flavour.amount}</Typography>
+							</div>
+						</ListItemText>
+					</ListItem>
+				))}
+			</List>
+		);
 	};
 
 	return (
@@ -196,68 +249,41 @@ export const ProductItem = () => {
 				<Typography variant="h5" align="center" marginBottom={2}>
 					{product.price} MDL
 				</Typography>
-				<Typography variant="h6" align="center" marginBottom={6}>
+				<Typography variant="h6" align="center" marginBottom={2}>
 					{t('modal_amount')}
 					{totalAmount}
 				</Typography>
-				{selectedFlavor !== null && (
-					<>
-						<div
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								justifyContent: 'space-around',
-								flexWrap: 'wrap',
-							}}>
-							<Typography variant="h6">
-								{product.flavours[selectedFlavor].flavour}
-							</Typography>
-							<Typography variant="h6">
-								{t('modal_flavour_amount')} {product.flavours[selectedFlavor].amount}
-							</Typography>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+					}}>
+					{quantity === 0 ? (
+						<Button variant="contained" onClick={onAddHandler} disabled={!selectedFlavor}>
+							{t('card_add')}
+						</Button>
+					) : (
+						<div className={classes.quantityButtons}>
+							<Button
+								variant="contained"
+								className={classes.quantityButtonRemove}
+								onClick={onRemoveHandler}>
+								<RemoveIcon />
+							</Button>
+							<Button
+								variant="contained"
+								className={classes.quantityButtonAdd}
+								onClick={onAddHandler}>
+								<AddIcon />
+							</Button>
 						</div>
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'column',
-								alignItems: 'center',
-								marginTop: 12,
-							}}>
-							<div style={{ marginBottom: 12, marginTop: 8 }}>{renderSelectedFlavors()}</div>
-							<Badge
-								badgeContent={quantity || 0}
-								color="primary"
-								style={{ margin: '20px' }}
-							/>
-							<div>
-								{quantity === 0 ? (
-									<Button variant="contained" onClick={onAddHandler}>
-										{t('card_add')}
-									</Button>
-								) : (
-									<div className={classes.quantityButtons}>
-										<Button
-											variant="contained"
-											className={classes.quantityButtonRemove}
-											onClick={onRemoveHandler}>
-											<RemoveIcon />
-										</Button>
-										<Button
-											variant="contained"
-											className={classes.quantityButtonAdd}
-											onClick={onAddHandler}>
-											<AddIcon />
-										</Button>
-									</div>
-								)}
-							</div>
-						</div>
-					</>
-				)}
+					)}
+				</div>
 				<div
 					style={{
 						padding: '20px 0',
-						marginBottom: 20,
+						margin: '10px 0',
 						display: 'flex',
 						flexWrap: 'wrap',
 						justifyContent: 'center',
@@ -276,6 +302,15 @@ export const ProductItem = () => {
 						</Tooltip>
 					))}
 				</div>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+					}}>
+					{renderSelectedFlavors()}
+				</div>
+				{renderFlavors()}
 				<Typography variant="h6" align="center" marginTop={4}>
 					{t('description')}
 				</Typography>
