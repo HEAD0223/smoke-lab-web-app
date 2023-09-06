@@ -29,9 +29,9 @@ export const CartItem = ({ item }) => {
 							<Divider />
 							<Grid container spacing={2} justifyContent={'space-between'}>
 								<Grid item xs={6} minWidth={'60%'}>
-									<Typography variant="h7">{flavor.flavour}</Typography>
 									<Typography variant="body1">{flavor.flavour}</Typography>
 									<Typography variant="subtitle1">{flavor.quantity}</Typography>
+									<Typography variant="subtitle2">{flavor.quantity}</Typography>
 									<Typography variant="caption">{flavor.quantity}</Typography>
 									<Typography variant="body2">x{flavor.quantity}</Typography>
 								</Grid>

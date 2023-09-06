@@ -79,7 +79,10 @@ export const ProductCard = ({ product, cart }) => {
 		: 0;
 
 	return (
-		<Card className={classes.productCard}>
+		<Card
+			className={classes.productCard}
+			onClick={handleProductClick}
+			style={{ cursor: 'pointer' }}>
 			<div className={classes.productImageContainer}>
 				<CardMedia className={classes.productImage} image={imageSrc} title={product.name} />
 				{totalQuantity > 0 && (
@@ -88,7 +91,7 @@ export const ProductCard = ({ product, cart }) => {
 					</div>
 				)}
 			</div>
-			<CardContent className={classes.cardContent} onClick={handleProductClick}>
+			<CardContent className={classes.cardContent}>
 				<div>
 					{amountInStock === 0 && (
 						<Chip
