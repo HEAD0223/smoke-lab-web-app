@@ -77,24 +77,19 @@ export const CartItem = ({ item }) => {
 								container
 								spacing={2}
 								justifyContent={'space-between'}
+								alignItems={'center'}
 								padding={'10px 0'}>
 								<Grid item xs={2} display={'flex'} alignItems={'center'}>
 									<DoneAllIcon />
 								</Grid>
 								<Grid item xs={6} display={'flex'} alignItems={'center'}>
 									<Typography variant="body1">{flavor.flavour}</Typography>
-									{/* <Typography variant="caption">x{flavor.quantity}</Typography> */}
 								</Grid>
-								<Grid
-									item
-									xs={1}
-									display={'flex'}
-									alignItems={'center'}
-									marginRight={'5px'}>
+								<Grid item xs={1} display={'flex'} alignItems={'center'}>
 									<Typography variant="caption">x{flavor.quantity}</Typography>
 								</Grid>
 								<Grid item xs={3}>
-									<Typography variant="body2">
+									<Typography variant="body2" textAlign={'center'}>
 										{parseFloat(item.product.price) * flavor.quantity} MDL
 									</Typography>
 								</Grid>
