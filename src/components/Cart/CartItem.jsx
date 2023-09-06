@@ -16,7 +16,7 @@ export const CartItem = ({ item }) => {
 				<CardContent>
 					<Grid container spacing={2} justifyContent={'space-between'}>
 						<Grid item xs={6} minWidth={'60%'}>
-							<Typography variant="body1">{item.product.name}</Typography>
+							<Typography variant="h6">{item.product.name}</Typography>
 							<Typography variant="caption">
 								{totalQuantity} x {item.product.price} MDL
 							</Typography>
