@@ -39,12 +39,12 @@ export const ProductList = () => {
 		setSelectedTab(newValue);
 	};
 
-	const getTotalPrice = (items) => {
-		return items.reduce((total, item) => {
-			const itemPrice = parseFloat(item.price);
+	const getTotalPrice = (cart) => {
+		return cart.reduce((total, cartItem) => {
+			const itemPrice = parseFloat(cartItem.product.price);
 
 			// Calculate the total price for each flavor in the item
-			const flavorTotal = item.inCart.reduce((flavorTotal, flavor) => {
+			const flavorTotal = cartItem.inCart.reduce((flavorTotal, flavor) => {
 				return flavorTotal + itemPrice * flavor.quantity;
 			}, 0);
 
