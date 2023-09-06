@@ -18,6 +18,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { useCart } from '../../hooks/useCart';
+import { useTelegram } from '../../hooks/useTelegram';
 
 const useStyles = makeStyles((theme) => ({
 	carousel: {
@@ -57,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 export const ProductItem = () => {
 	const { code } = useParams();
 	const classes = useStyles();
+	const { tg } = useTelegram();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
@@ -69,12 +71,13 @@ export const ProductItem = () => {
 	const [selectedFlavors, setSelectedFlavors] = useState([]);
 
 	useEffect(() => {
+		tg.MainButton.hide();
 		const productFlavorsInCart = cart.find((item) => item.product.code === product.code);
 		if (productFlavorsInCart) {
 			console.log(productFlavorsInCart.flavorsInCart);
 			setSelectedFlavors(productFlavorsInCart.flavorsInCart);
 		}
-	}, []);
+	}, [tg]);
 
 	const goBackToList = () => {
 		navigate('/');
