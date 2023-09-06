@@ -14,23 +14,23 @@ const cartReducer = (state, action) => {
 			if (existingProductIndex !== -1) {
 				// Product already exists in cart, update its flavors and quantities
 				const existingProduct = updatedAddCart[existingProductIndex];
-				action.payload.inCart.forEach((flavorInfo) => {
-					const existingFlavorIndex = existingProduct.inCart.findIndex(
-						(f) => f.flavorName === flavorInfo.flavorName,
+				action.payload.flavorsInCart.forEach((flavorInfo) => {
+					const existingFlavorIndex = existingProduct.flavorsInCart.findIndex(
+						(f) => f.flavour === flavorInfo.flavour,
 					);
 					if (existingFlavorIndex !== -1) {
 						// Flavor already exists, update its quantity
-						existingProduct.inCart[existingFlavorIndex].quantity += 1; // Increase quantity by 1
+						existingProduct.flavorsInCart[existingFlavorIndex].quantity += 1; // Increase quantity by 1
 					} else {
 						// Flavor does not exist, add it
-						existingProduct.inCart.push({ ...flavorInfo });
+						existingProduct.flavorsInCart.push({ ...flavorInfo });
 					}
 				});
 			} else {
 				// Product does not exist in cart, add it with flavors and quantities
 				updatedAddCart.push({
 					product: { ...action.payload.product },
-					inCart: action.payload.inCart.map((flavorInfo) => ({ ...flavorInfo })),
+					flavorsInCart: action.payload.flavorsInCart.map((flavorInfo) => ({ ...flavorInfo })),
 				});
 			}
 
@@ -43,11 +43,11 @@ const cartReducer = (state, action) => {
 				.map((item) => {
 					if (item.product.code === action.payload.product.code) {
 						// Find the product in the cart
-						const updatedFlavors = item.inCart
+						const updatedFlavors = item.flavorsInCart
 							.map((flavor) => {
-								// Find the flavor to update by looping through the inCart array
-								const matchingFlavor = action.payload.inCart.find(
-									(cartFlavor) => cartFlavor.flavorName === flavor.flavorName,
+								// Find the flavor to update by looping through the flavorsInCart array
+								const matchingFlavor = action.payload.flavorsInCart.find(
+									(cartFlavor) => cartFlavor.flavour === flavor.flavour,
 								);
 								if (matchingFlavor) {
 									if (flavor.quantity > 1) {
@@ -63,13 +63,13 @@ const cartReducer = (state, action) => {
 						if (updatedFlavors.length > 0) {
 							return {
 								...item,
-								inCart: updatedFlavors,
+								flavorsInCart: updatedFlavors,
 							};
 						}
 					}
 					return item;
 				})
-				.filter((item) => item.inCart.length > 0); // Remove products with no flavors left
+				.filter((item) => item.flavorsInCart.length > 0); // Remove products with no flavors left
 
 			return {
 				...state,

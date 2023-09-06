@@ -40,25 +40,6 @@ const useStyles = makeStyles((theme) => ({
 		margin: '0 8px',
 		cursor: 'pointer',
 	},
-	quantityButtons: {
-		display: 'flex',
-		justifyContent: 'center',
-		marginTop: theme.spacing(2),
-	},
-	quantityButtonRemove: {
-		margin: `${theme.spacing(0)} ${theme.spacing(1)} !important`,
-		backgroundColor: theme.palette.error.main,
-		color: theme.palette.button_text_color.main,
-		padding: `${theme.spacing(0.5)} ${theme.spacing(1)} !important`,
-		minWidth: `${theme.spacing(5)} !important`,
-	},
-	quantityButtonAdd: {
-		margin: `${theme.spacing(0)} ${theme.spacing(1)} !important`,
-		backgroundColor: theme.palette.button_color.main,
-		color: theme.palette.button_text_color.main,
-		padding: `${theme.spacing(0.5)} ${theme.spacing(1)} !important`,
-		minWidth: `${theme.spacing(5)} !important`,
-	},
 	listItem: {
 		border: `1px solid ${theme.palette.grey[300]}`,
 		borderRadius: theme.shape.borderRadius,
@@ -86,15 +67,14 @@ export const ProductItem = () => {
 	const [selectedFlavor, setSelectedFlavor] = useState(null);
 	const [selectedFlavorName, setSelectedFlavorName] = useState(null);
 	const [selectedFlavors, setSelectedFlavors] = useState([]);
-	const [quantity, setQuantity] = useState(0);
 
 	useEffect(() => {
-		const productInCart = cart.find((item) => item.product === product);
-
-		if (productInCart) {
-			setSelectedFlavors(productInCart.inCart);
+		const productFlavorsInCart = cart.find((item) => item.product.code === product.code);
+		if (productFlavorsInCart) {
+			console.log(productFlavorsInCart.flavorsInCart);
+			setSelectedFlavors(productFlavorsInCart.flavorsInCart);
 		}
-	}, [cart, product]);
+	}, []);
 
 	const goBackToList = () => {
 		navigate('/');
@@ -110,30 +90,24 @@ export const ProductItem = () => {
 		setSelectedFlavorName(product.flavours[flavorIndex].flavour);
 	};
 
-	const onAdd = (product, inCart) => {
-		const newQuantity = inCart.reduce((total, flavor) => total + flavor.quantity, 0);
-		setQuantity(newQuantity);
-
+	const onAdd = (product, flavorsInCart) => {
 		dispatchState({
 			type: 'ADD_TO_CART',
-			payload: { product, inCart },
+			payload: { product, flavorsInCart },
 		});
-		console.log(cart);
 	};
 
-	const onRemove = (product, inCart) => {
-		const newQuantity = inCart.reduce((total, flavor) => total + flavor.quantity, 0);
-		setQuantity(newQuantity);
+	const onRemove = (product, flavorsInCart) => {
+		const newQuantity = flavorsInCart.reduce((total, flavor) => total + flavor.quantity, 0);
 
 		if (newQuantity === 0) {
 			dispatchState({ type: 'REMOVE_PRODUCT_FROM_CART', payload: { product } });
 		} else {
 			dispatchState({
 				type: 'REMOVE_FROM_CART',
-				payload: { product, inCart },
+				payload: { product, flavorsInCart },
 			});
 		}
-		console.log(cart);
 	};
 
 	const onAddHandler = () => {
@@ -150,12 +124,8 @@ export const ProductItem = () => {
 				updatedSelectedFlavors.push({ flavour: flavor.flavour, quantity: 1 });
 			}
 
-			const newQuantity = updatedSelectedFlavors.reduce((total, f) => total + f.quantity, 0);
-			setQuantity(newQuantity);
 			setSelectedFlavors(updatedSelectedFlavors);
-
-			onAdd(product, [{ flavorName: flavor.flavour, quantity: 1 }]);
-			console.log('inCart', [{ flavorName: flavor.flavour, quantity: 1 }]);
+			onAdd(product, [{ flavour: flavor.flavour, quantity: 1 }]);
 		}
 	};
 	const onRemoveHandler = () => {
@@ -173,12 +143,8 @@ export const ProductItem = () => {
 				updatedSelectedFlavors[existingFlavorIndex].quantity -= 1;
 			}
 
-			const newQuantity = updatedSelectedFlavors.reduce((total, f) => total + f.quantity, 0);
-			setQuantity(newQuantity);
 			setSelectedFlavors(updatedSelectedFlavors);
-
-			onRemove(product, [{ flavorName: flavor.flavour, quantity: 1 }]);
-			console.log('inCart', [{ flavorName: flavor.flavour, quantity: 1 }]);
+			onRemove(product, [{ flavour: flavor.flavour, quantity: 1 }]);
 		}
 	};
 
@@ -277,26 +243,27 @@ export const ProductItem = () => {
 						display: 'flex',
 						flexDirection: 'column',
 						alignItems: 'center',
+						marginTop: 35,
 					}}>
-					{quantity === 0 ? (
-						<Button variant="contained" onClick={onAddHandler} disabled={!selectedFlavor}>
-							{t('card_add')}
-						</Button>
-					) : (
-						<div className={classes.quantityButtons}>
-							<Button
-								variant="contained"
-								className={classes.quantityButtonRemove}
-								onClick={onRemoveHandler}>
+					{selectedFlavors.some(
+						(sf) => sf.flavour === selectedFlavorName && sf.quantity > 0,
+					) ? (
+						<div style={{ display: 'flex', gap: 20 }}>
+							<Button size="small" variant="contained" onClick={onRemoveHandler}>
 								<RemoveIcon />
 							</Button>
-							<Button
-								variant="contained"
-								className={classes.quantityButtonAdd}
-								onClick={onAddHandler}>
+							<Button size="small" variant="contained" onClick={onAddHandler}>
 								<AddIcon />
 							</Button>
 						</div>
+					) : (
+						<Button
+							size="small"
+							variant="contained"
+							onClick={onAddHandler}
+							disabled={!selectedFlavor}>
+							{t('card_add')}
+						</Button>
 					)}
 				</div>
 				<div

@@ -24,7 +24,7 @@ export const ProductList = () => {
 	const navigate = useNavigate();
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
-	const { cart, dispatchState } = useCart();
+	const { cart } = useCart();
 
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
@@ -44,7 +44,7 @@ export const ProductList = () => {
 			const itemPrice = parseFloat(cartItem.product.price);
 
 			// Calculate the total price for each flavor in the item
-			const flavorTotal = cartItem.inCart.reduce((flavorTotal, flavor) => {
+			const flavorTotal = cartItem.flavorsInCart.reduce((flavorTotal, flavor) => {
 				return flavorTotal + itemPrice * flavor.quantity;
 			}, 0);
 
@@ -98,21 +98,12 @@ export const ProductList = () => {
 	};
 
 	useEffect(() => {
-		// // Update the quantities state based on the products in the cart
-		// const newQuantities = {};
-		// cart.forEach((item) => {
-		// 	newQuantities[item.code] = item.quantity;
-		// });
-		// setQuantities(newQuantities);
-
 		// Hide or show the MainButton based on the cart items
 		if (cart.length === 0) {
 			tg.MainButton.hide();
 		} else {
 			tg.MainButton.show();
 			const totalPrice = getTotalPrice(cart);
-			console.log(cart);
-			console.log(totalPrice);
 			tg.MainButton.setParams({
 				text: `${t('tg_buy')}${totalPrice}`,
 			});
@@ -164,12 +155,14 @@ export const ProductList = () => {
 				<ESigs
 					isProductsLoading={isProductsLoading}
 					filteredAndSortedProducts={esigsProducts}
+					cart={cart}
 				/>
 			)}
 			{selectedTab === 1 && (
 				<Chasers
 					isProductsLoading={isProductsLoading}
 					filteredAndSortedProducts={chasersProducts}
+					cart={cart}
 				/>
 			)}
 		</>

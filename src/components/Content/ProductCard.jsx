@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Chip, Typography } from '@mui/material';
+import { Badge, Card, CardContent, CardMedia, Chip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ProductCard = ({ product }) => {
+export const ProductCard = ({ product, cart }) => {
 	const classes = useStyles();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
@@ -73,15 +73,20 @@ export const ProductCard = ({ product }) => {
 		navigate(`/item/${product.code}`, { state: { productData: product } });
 	};
 
+	const cartItem = cart.find((item) => item.product.code === product.code);
+	const totalQuantity = cartItem
+		? cartItem.flavorsInCart.reduce((total, flavor) => total + flavor.quantity, 0)
+		: 0;
+
 	return (
 		<Card className={classes.productCard}>
 			<div className={classes.productImageContainer}>
 				<CardMedia className={classes.productImage} image={imageSrc} title={product.name} />
-				{/* {quantity > 0 && (
+				{totalQuantity > 0 && (
 					<div className={classes.badgeContainer}>
-						<Badge badgeContent={quantity} className={classes.badgeBody} />
+						<Badge badgeContent={totalQuantity} className={classes.badgeBody} />
 					</div>
-				)} */}
+				)}
 			</div>
 			<CardContent className={classes.cardContent} onClick={handleProductClick}>
 				<div>

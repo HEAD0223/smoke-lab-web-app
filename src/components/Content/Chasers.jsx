@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const Chasers = ({ isProductsLoading, filteredAndSortedProducts }) => {
+export const Chasers = ({ isProductsLoading, filteredAndSortedProducts, cart }) => {
 	const classes = useStyles();
 
 	return (
@@ -27,7 +27,7 @@ export const Chasers = ({ isProductsLoading, filteredAndSortedProducts }) => {
 				  ))
 				: filteredAndSortedProducts.map((item) => (
 						<Grid item xs={6} sm={6} md={4} lg={4} key={item._id}>
-							<ProductCard product={item} />
+							<ProductCard product={item} cart={cart} />
 						</Grid>
 				  ))}
 		</Grid>
