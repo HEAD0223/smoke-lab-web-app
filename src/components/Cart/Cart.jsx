@@ -92,8 +92,17 @@ export const Cart = () => {
 	const { order } = useSelector((state) => state.order);
 	const isDataSending = order.status === 'sending';
 
-	const getTotalPrice = (items) => {
-		return items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
+	const getTotalPrice = (cart) => {
+		return cart.reduce((total, cartItem) => {
+			const itemPrice = parseFloat(cartItem.product.price);
+
+			// Calculate the total price for each flavor in the item
+			const flavorTotal = cartItem.flavorsInCart.reduce((flavorTotal, flavor) => {
+				return flavorTotal + itemPrice * flavor.quantity;
+			}, 0);
+
+			return total + flavorTotal;
+		}, 0);
 	};
 
 	const handleEditClick = () => {

@@ -3,6 +3,12 @@ import React from 'react';
 
 export const CartItem = ({ item }) => {
 	console.log(item);
+	const totalQuantity = item.flavorsInCart.reduce((total, flavor) => total + flavor.quantity, 0);
+	const totalPrice = item.flavorsInCart.reduce(
+		(total, flavor) => total + parseFloat(item.price) * flavor.quantity,
+		0,
+	);
+
 	return (
 		<div>
 			<Card>
@@ -11,24 +17,22 @@ export const CartItem = ({ item }) => {
 						<Grid item xs={3}>
 							<img
 								src={
-									item.url
-										? `data:image/png;base64,${item.url}`
+									item.product.image
+										? `data:image/png;base64,${item.product.image}`
 										: 'https://source.unsplash.com/random'
 								}
-								alt={item.name}
+								alt={item.product.name}
 								style={{ width: '100%' }}
 							/>
 						</Grid>
 						<Grid item xs={6}>
-							<Typography variant="h6">{item.name}</Typography>
+							<Typography variant="h6">{item.product.name}</Typography>
 							<Typography variant="body2">
-								{item.quantity} x {item.price} {item.currency}
+								{totalQuantity} x {item.product.price} MDL
 							</Typography>
 						</Grid>
 						<Grid item xs={3}>
-							<Typography variant="body1">
-								{parseFloat(item.price) * item.quantity} {item.currency}
-							</Typography>
+							<Typography variant="body1">{totalPrice} MDL</Typography>
 						</Grid>
 					</Grid>
 					{item.flavorsInCart.map((flavor, index) => (
@@ -36,7 +40,15 @@ export const CartItem = ({ item }) => {
 							<Divider />
 							<Grid container spacing={2}>
 								<Grid item xs={3}>
-									{/* Flavor image */}
+									<img
+										src={
+											flavor.image
+												? `data:image/png;base64,${flavor.image}`
+												: 'https://source.unsplash.com/random'
+										}
+										alt={flavor.flavor}
+										style={{ width: '100%' }}
+									/>
 								</Grid>
 								<Grid item xs={6}>
 									<Typography variant="h6">{flavor.flavour}</Typography>
