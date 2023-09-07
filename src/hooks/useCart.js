@@ -39,37 +39,50 @@ const cartReducer = (state, action) => {
 				cart: updatedAddCart,
 			};
 		case 'REMOVE_FROM_CART':
-			const updatedRemoveCart = state.cart
-				.map((item) => {
-					if (item.product.code === action.payload.product.code) {
-						// Find the product in the cart
-						const updatedFlavors = item.flavorsInCart
-							.map((flavor) => {
-								// Find the flavor to update by looping through the flavorsInCart array
-								const matchingFlavor = action.payload.flavorsInCart.find(
-									(cartFlavor) => cartFlavor.flavour === flavor.flavour,
-								);
-								if (matchingFlavor) {
-									if (flavor.quantity > 1) {
-										// If quantity > 1, decrease the quantity
-										return { ...flavor, quantity: flavor.quantity - 1 };
-									}
-								}
-								return flavor;
-							})
-							.filter(Boolean); // Remove null (flavors with quantity 0)
+			console.log(state.cart);
+			const updatedRemoveCart = state.cart.map((item) => {
+				if (item.product.code === action.payload.product.code) {
+					// Find the product in the cart
+					const updatedFlavors = item.flavorsInCart.map((flavor) => {
+						console.log('flavor: ', flavor);
+						// Check if the flavor exists in the action.payload.flavorsInCart
+						const matchingFlavor = action.payload.flavorsInCart.find(
+							(cartFlavor) => cartFlavor.flavour === flavor.flavour,
+						);
 
-						// Check if there are flavors left for the product
-						if (updatedFlavors.length > 0) {
-							return {
-								...item,
-								flavorsInCart: updatedFlavors,
-							};
+						console.log('matchingFlavor: ', matchingFlavor);
+
+						if (matchingFlavor) {
+							// If the flavor exists in the payload, subtract its quantity from the current quantity
+							const newQuantity = flavor.quantity - matchingFlavor.quantity;
+
+							console.log('flavor.quantity: ', flavor.quantity);
+							console.log('matchingFlavor.quantity: ', matchingFlavor.quantity);
+							console.log('newQuantity: ', newQuantity);
+
+							// Ensure the quantity doesn't go below 0
+							const updatedQuantity = Math.max(newQuantity, 0);
+
+							console.log('updatedQuantity: ', updatedQuantity);
+
+							// Return the updated flavor object with the new quantity
+							return { ...flavor, quantity: updatedQuantity };
+						} else {
+							// Otherwise, return the original flavor
+							return flavor;
 						}
-					}
-					return item;
-				})
-				.filter((item) => item.flavorsInCart.length > 0); // Remove products with no flavors left
+					});
+
+					// Filter out flavors with quantity 0
+					const filteredFlavors = updatedFlavors.filter((flavor) => flavor.quantity > 0);
+
+					return {
+						...item,
+						flavorsInCart: filteredFlavors,
+					};
+				}
+				return item;
+			});
 
 			return {
 				...state,

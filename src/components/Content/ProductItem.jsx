@@ -75,7 +75,6 @@ export const ProductItem = () => {
 		tg.MainButton.hide();
 		const productFlavorsInCart = cart.find((item) => item.product.code === product.code);
 		if (productFlavorsInCart) {
-			console.log(productFlavorsInCart.flavorsInCart);
 			setSelectedFlavors(productFlavorsInCart.flavorsInCart);
 		}
 	}, [tg]);
@@ -101,16 +100,10 @@ export const ProductItem = () => {
 		});
 	};
 	const onRemove = (product, flavorsInCart) => {
-		const newQuantity = flavorsInCart.reduce((total, flavor) => total + flavor.quantity, 0);
-
-		if (newQuantity === 0) {
-			dispatchState({ type: 'REMOVE_PRODUCT_FROM_CART', payload: { product } });
-		} else {
-			dispatchState({
-				type: 'REMOVE_FROM_CART',
-				payload: { product, flavorsInCart },
-			});
-		}
+		dispatchState({
+			type: 'REMOVE_FROM_CART',
+			payload: { product, flavorsInCart },
+		});
 	};
 
 	const onAddHandler = () => {
@@ -122,13 +115,25 @@ export const ProductItem = () => {
 			);
 
 			if (existingFlavorIndex !== -1) {
-				updatedSelectedFlavors[existingFlavorIndex].quantity += 1;
+				const currentQuantity = updatedSelectedFlavors[existingFlavorIndex].quantity;
+
+				// Increment the quantity by 1
+				updatedSelectedFlavors[existingFlavorIndex].quantity = currentQuantity + 1;
+
+				// Check if adding one more doesn't exceed the flavor amount
+				if (currentQuantity + 1 <= flavor.amount) {
+					setSelectedFlavors(updatedSelectedFlavors);
+					onAdd(product, [{ flavour: flavor.flavour, quantity: 1 }]);
+				} else {
+					// You can show a message to the user that they've reached the maximum quantity
+					console.log('Maximum quantity reached.');
+					return;
+				}
 			} else {
 				updatedSelectedFlavors.push({ flavour: flavor.flavour, quantity: 1 });
+				setSelectedFlavors(updatedSelectedFlavors);
+				onAdd(product, updatedSelectedFlavors);
 			}
-
-			setSelectedFlavors(updatedSelectedFlavors);
-			onAdd(product, [{ flavour: flavor.flavour, quantity: 1 }]);
 		}
 	};
 	const onRemoveHandler = () => {
@@ -139,15 +144,39 @@ export const ProductItem = () => {
 				(f) => f.flavour === flavor.flavour,
 			);
 
-			if (
-				existingFlavorIndex !== -1 &&
-				updatedSelectedFlavors[existingFlavorIndex].quantity > 0
-			) {
-				updatedSelectedFlavors[existingFlavorIndex].quantity -= 1;
-			}
+			if (existingFlavorIndex !== -1) {
+				const currentQuantity = updatedSelectedFlavors[existingFlavorIndex].quantity;
 
-			setSelectedFlavors(updatedSelectedFlavors);
-			onRemove(product, [{ flavour: flavor.flavour, quantity: 1 }]);
+				console.log(currentQuantity);
+				if (currentQuantity > 0) {
+					// Decrement the quantity by 1
+					updatedSelectedFlavors[existingFlavorIndex].quantity = currentQuantity - 1;
+					setSelectedFlavors(updatedSelectedFlavors);
+
+					// If the quantity becomes 0, remove the flavor from the array
+					if (currentQuantity === 1) {
+						updatedSelectedFlavors.splice(existingFlavorIndex, 1);
+						setSelectedFlavors(updatedSelectedFlavors);
+
+						// Check if there are any flavors left in updatedSelectedFlavors
+						const flavorsLeft = updatedSelectedFlavors.some(
+							(sf) => sf.flavour !== flavor.flavour && sf.quantity > 0,
+						);
+
+						if (!flavorsLeft) {
+							console.log('REMOVE_PRODUCT_FROM_CART');
+							// If no flavors are left, remove the product from the cart
+							dispatchState({
+								type: 'REMOVE_PRODUCT_FROM_CART',
+								payload: { product },
+							});
+						}
+					}
+
+					// Dispatch the 'onRemove' action
+					onRemove(product, [{ flavour: flavor.flavour, quantity: 1 }]);
+				}
+			}
 		}
 	};
 
