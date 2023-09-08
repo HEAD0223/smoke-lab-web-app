@@ -105,7 +105,6 @@ export const Cart = () => {
 			return total + flavorTotal;
 		}, 0);
 	};
-	const totalQuantity = item.flavorsInCart.reduce((total, flavor) => total + flavor.quantity, 0);
 
 	const handleEditClick = () => {
 		navigate('/');
