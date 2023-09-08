@@ -112,7 +112,6 @@ export const Cart = () => {
 
 	useEffect(() => {
 		dispatch(fetchPromos());
-		console.log(promos);
 		tg.MainButton.show();
 		tg.MainButton.setParams({
 			text: `${t('tg_order')}`,
@@ -175,6 +174,8 @@ export const Cart = () => {
 		tg.MainButton.show();
 		setModalOpen(false);
 	};
+
+	console.log(promos);
 
 	return (
 		<div className={classes.cartContainer}>
