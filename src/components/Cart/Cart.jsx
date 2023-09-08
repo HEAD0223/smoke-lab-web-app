@@ -105,6 +105,7 @@ export const Cart = () => {
 			return total + flavorTotal;
 		}, 0);
 	};
+	const totalQuantity = item.flavorsInCart.reduce((total, flavor) => total + flavor.quantity, 0);
 
 	const handleEditClick = () => {
 		navigate('/');
@@ -218,6 +219,7 @@ export const Cart = () => {
 									display: 'flex',
 									justifyContent: 'space-between',
 									alignItems: 'center',
+									marginBottom: 12,
 								}}>
 								<Typography variant="h6">{t('cart_total')}</Typography>
 								<Typography variant="body1">
@@ -226,6 +228,13 @@ export const Cart = () => {
 								</Typography>
 							</div>
 							<Divider />
+							{console.log(cart)}
+							{cart.length > 3 && (
+								<div>
+									<Typography variant="body1">{t('gift')}</Typography>
+									<Divider />
+								</div>
+							)}
 							<div>
 								<TextField
 									name="promocode"
@@ -233,7 +242,6 @@ export const Cart = () => {
 									value={promoCode}
 									onChange={handlePromoCodeChange}
 									color="primary"
-									style={{ color: 'black !important' }}
 									variant="outlined"
 									fullWidth
 									margin="normal"
