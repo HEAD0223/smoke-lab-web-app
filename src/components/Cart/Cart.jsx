@@ -155,6 +155,11 @@ export const Cart = () => {
 		if (userInfo.name && userInfo.phone && userInfo.address) {
 			tg.MainButton.hide();
 			setModalOpen(true);
+
+			if (usePoints) {
+				pointsSpent = getTotalPrice(cart) - calculateTotalPrice();
+			}
+
 			const combinedData = {
 				user_id: user.id,
 				username: user.username || 'None',
@@ -162,6 +167,8 @@ export const Cart = () => {
 				status: '⌛️',
 				items: cart,
 				info: {
+					promo: isPromoValid ? promoCode : '',
+					points: pointsSpent,
 					name: userInfo.name,
 					phone: userInfo.phone,
 					address: userInfo.address,
