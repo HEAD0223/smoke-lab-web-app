@@ -28,6 +28,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
 import { sendDataToServer } from '../../redux/slices/cart';
+import { fetchPoints } from '../../redux/slices/points';
 import { fetchPromos } from '../../redux/slices/promo';
 import { CartItem } from './CartItem';
 
@@ -91,6 +92,7 @@ export const Cart = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const { order } = useSelector((state) => state.order);
 	const { promos } = useSelector((state) => state.promos);
+	const { points } = useSelector((state) => state.points);
 	const isDataSending = order.status === 'sending';
 	const [promoCode, setPromoCode] = useState('');
 	const [isPromoValid, setIsPromoValid] = useState(false);
@@ -120,6 +122,7 @@ export const Cart = () => {
 
 	useEffect(() => {
 		dispatch(fetchPromos());
+		dispatch(fetchPoints(user.id));
 		tg.MainButton.show();
 		tg.MainButton.setParams({
 			text: `${t('tg_order')}`,
@@ -274,6 +277,7 @@ export const Cart = () => {
 									}}
 								/>
 							</div>
+							{console.log(points)}
 							<div style={{ display: 'flex', justifyContent: 'center' }}>
 								<FormControlLabel
 									control={
