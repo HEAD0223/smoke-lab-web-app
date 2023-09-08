@@ -233,6 +233,7 @@ export const Cart = () => {
 									value={promoCode}
 									onChange={handlePromoCodeChange}
 									color="primary"
+									style={{ color: 'black !important' }}
 									variant="outlined"
 									fullWidth
 									margin="normal"
