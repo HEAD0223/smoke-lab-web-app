@@ -219,6 +219,7 @@ export const Cart = () => {
 									label={t('promoCode')}
 									value={promoCode}
 									onChange={handlePromoCodeChange}
+									color="primary"
 									variant="outlined"
 									fullWidth
 									margin="normal"
