@@ -166,7 +166,7 @@ export const Cart = () => {
 				username: user.username || 'None',
 				created_at: Date.now(),
 				status: '⌛️',
-				items: cart,
+				cart: cart,
 				info: {
 					promo: isPromoValid ? promoCode : '',
 					points: pointsSpent,
