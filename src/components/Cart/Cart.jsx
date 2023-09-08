@@ -241,7 +241,7 @@ export const Cart = () => {
 								}}>
 								<Typography variant="h6">{t('cart_total')}</Typography>
 								<Typography variant="body1">
-									{getTotalPrice(cart)}
+									{usePoints ? getTotalPrice(cart) - points.items : getTotalPrice(cart)}
 									{t('currency')}
 								</Typography>
 							</div>
@@ -277,7 +277,6 @@ export const Cart = () => {
 									}}
 								/>
 							</div>
-							{console.log('points: ', points)}
 							<div style={{ display: 'flex', justifyContent: 'center' }}>
 								<FormControlLabel
 									control={
