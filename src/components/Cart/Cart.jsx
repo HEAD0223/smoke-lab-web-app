@@ -274,17 +274,19 @@ export const Cart = () => {
 									}}
 								/>
 							</div>
-							<FormControlLabel
-								control={
-									<Checkbox
-										checked={usePoints}
-										onChange={(e) => setUsePoints(e.target.checked)}
-										name="usePoints"
-										color="primary"
-									/>
-								}
-								label="Use Points"
-							/>
+							<div>
+								<FormControlLabel
+									control={
+										<Checkbox
+											checked={usePoints}
+											onChange={(e) => setUsePoints(e.target.checked)}
+											name="usePoints"
+											color="primary"
+										/>
+									}
+									label="Use Points"
+								/>
+							</div>
 						</CardContent>
 					</Card>
 				</div>
