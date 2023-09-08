@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
 import { sendDataToServer } from '../../redux/slices/cart';
+import { fetchPromos } from '../../redux/slices/promo';
 import { CartItem } from './CartItem';
 
 const useStyles = makeStyles((theme) => ({
@@ -84,6 +85,7 @@ export const Cart = () => {
 	const dispatch = useDispatch();
 	const [modalOpen, setModalOpen] = useState(false);
 	const { order } = useSelector((state) => state.order);
+	const { promos } = useSelector((state) => state.promos);
 	const isDataSending = order.status === 'sending';
 	const [promoCode, setPromoCode] = useState('');
 
@@ -109,6 +111,8 @@ export const Cart = () => {
 	};
 
 	useEffect(() => {
+		dispatch(fetchPromos());
+		console.log(promos);
 		tg.MainButton.show();
 		tg.MainButton.setParams({
 			text: `${t('tg_order')}`,
