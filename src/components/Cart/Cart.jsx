@@ -175,8 +175,6 @@ export const Cart = () => {
 		setModalOpen(false);
 	};
 
-	console.log(promos);
-
 	return (
 		<div className={classes.cartContainer}>
 			<div className={classes.headerContainer}>
