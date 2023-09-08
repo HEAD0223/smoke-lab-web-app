@@ -28,6 +28,8 @@
 	"cart_title": "Comanda dumneavoastră",
 	"cart_btn": "Editați",
 	"cart_total": "Preț total: ",
+	"cart_promo": "Cod promoțional",
+	"cart_gift": "Pentru achizitionarea a 4 bucati primesti 1 bucata cadou",
 
 	"cart_order": "Confirmare Comandă",
 	"cart_decline": "Vă rugăm să completați toate câmpurile necesare.",

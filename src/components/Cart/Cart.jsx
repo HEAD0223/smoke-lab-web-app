@@ -240,17 +240,16 @@ export const Cart = () => {
 								</Typography>
 							</div>
 							<Divider />
-							{console.log(cart)}
 							{totalQuantity > 3 && (
 								<div>
-									<Typography variant="body1">{t('gift')}</Typography>
+									<Typography variant="body1">{t('cart_gift')}</Typography>
 									<Divider />
 								</div>
 							)}
 							<div>
 								<TextField
 									name="promocode"
-									label={t('promoCode')}
+									label={t('cart_promo')}
 									value={promoCode}
 									onChange={handlePromoCodeChange}
 									color="primary"

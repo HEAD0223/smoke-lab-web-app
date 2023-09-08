@@ -28,6 +28,8 @@
 	"cart_title": "Your Order",
 	"cart_btn": "Edit",
 	"cart_total": "Total price: ",
+	"cart_promo": "Promo code",
+	"cart_gift": "For purchasing 4 pcs you get 1 pc as a gift",
 
 	"cart_order": "Order Confirmation",
 	"cart_decline": "Please fill out all the required fields.",
