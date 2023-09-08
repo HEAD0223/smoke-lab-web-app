@@ -176,6 +176,7 @@ export const Cart = () => {
 					comment: userInfo.comment,
 				},
 			};
+			console.log(combinedData);
 			dispatch(sendDataToServer(combinedData));
 		} else {
 			alert(`${t('cart_decline')}`);
