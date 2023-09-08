@@ -242,7 +242,9 @@ export const Cart = () => {
 							<Divider />
 							{totalQuantity > 3 && (
 								<div>
-									<Typography variant="body1">{t('cart_gift')}</Typography>
+									<Typography variant="body1" textAlign={'center'} margin={'10px 0'}>
+										{t('cart_gift')}
+									</Typography>
 									<Divider />
 								</div>
 							)}
