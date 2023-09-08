@@ -215,8 +215,8 @@ export const Cart = () => {
 							<Divider />
 							<div>
 								<TextField
-									name=""
-									label={t('promocode')}
+									name="promocode"
+									label={t('promoCode')}
 									value={promoCode}
 									onChange={handlePromoCodeChange}
 									variant="outlined"
