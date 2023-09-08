@@ -93,6 +93,7 @@ export const Cart = () => {
 	const [promoCode, setPromoCode] = useState('');
 	const [isPromoValid, setIsPromoValid] = useState(false);
 	const [totalQuantity, setTotalQuantity] = useState(0);
+	const [usePoints, setUsePoints] = useState(false);
 
 	const getTotalPrice = (cart) => {
 		return cart.reduce((total, cartItem) => {
@@ -271,6 +272,17 @@ export const Cart = () => {
 									}}
 								/>
 							</div>
+							<FormControlLabel
+								control={
+									<Checkbox
+										checked={usePoints}
+										onChange={(e) => setUsePoints(e.target.checked)}
+										name="usePoints"
+										color="primary"
+									/>
+								}
+								label="Use Points"
+							/>
 						</CardContent>
 					</Card>
 				</div>
