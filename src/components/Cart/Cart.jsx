@@ -99,6 +99,15 @@ export const Cart = () => {
 	const [totalQuantity, setTotalQuantity] = useState(0);
 	const [usePoints, setUsePoints] = useState(false);
 
+	useEffect(() => {
+		dispatch(fetchPromos());
+		dispatch(fetchPoints(user.id));
+		tg.MainButton.show();
+		tg.MainButton.setParams({
+			text: `${t('tg_order')}`,
+		});
+	}, []);
+
 	const getTotalPrice = (cart) => {
 		return cart.reduce((total, cartItem) => {
 			const itemPrice = parseFloat(cartItem.product.price);
@@ -112,6 +121,16 @@ export const Cart = () => {
 		}, 0);
 	};
 
+	const calculateTotalPrice = () => {
+		const totalPrice = getTotalPrice(cart);
+		if (usePoints) {
+			const maxPoints = totalPrice * 0.5;
+			const newTotalPrice = Math.max(totalPrice - points.items, totalPrice - maxPoints);
+			return newTotalPrice;
+		}
+		return totalPrice;
+	};
+
 	const handleEditClick = () => {
 		navigate('/');
 		const totalPrice = getTotalPrice(cart);
@@ -119,15 +138,6 @@ export const Cart = () => {
 			text: `${t('tg_buy')}${totalPrice}`,
 		});
 	};
-
-	useEffect(() => {
-		dispatch(fetchPromos());
-		dispatch(fetchPoints(user.id));
-		tg.MainButton.show();
-		tg.MainButton.setParams({
-			text: `${t('tg_order')}`,
-		});
-	}, []);
 
 	useEffect(() => {
 		const total = cart.reduce((total, item) => {
@@ -241,7 +251,7 @@ export const Cart = () => {
 								}}>
 								<Typography variant="h6">{t('cart_total')}</Typography>
 								<Typography variant="body1">
-									{usePoints ? getTotalPrice(cart) - points.items : getTotalPrice(cart)}
+									{calculateTotalPrice()}
 									{t('currency')}
 								</Typography>
 							</div>
