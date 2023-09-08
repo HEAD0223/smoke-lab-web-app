@@ -274,7 +274,7 @@ export const Cart = () => {
 									}}
 								/>
 							</div>
-							<div>
+							<div style={{ display: 'flex', justifyContent: 'center' }}>
 								<FormControlLabel
 									control={
 										<Checkbox
