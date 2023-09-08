@@ -85,7 +85,7 @@ export const Cart = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const { order } = useSelector((state) => state.order);
 	const isDataSending = order.status === 'sending';
-	const [promo, setPromo] = useState('');
+	const [promoCode, setPromoCode] = useState('');
 
 	const getTotalPrice = (cart) => {
 		return cart.reduce((total, cartItem) => {
@@ -163,8 +163,8 @@ export const Cart = () => {
 		});
 	};
 
-	const handlePromoInput = (promo) => {
-		setPromo(promo);
+	const handlePromoCodeChange = (event) => {
+		setPromoCode(event.target.value);
 	};
 
 	const handleModalClose = () => {
@@ -215,10 +215,10 @@ export const Cart = () => {
 							<Divider />
 							<div>
 								<TextField
-									name="promo"
+									name=""
 									label={t('promocode')}
-									value={promo}
-									onChange={handlePromoInput(promo)}
+									value={promoCode}
+									onChange={handlePromoCodeChange}
 									variant="outlined"
 									fullWidth
 									margin="normal"
