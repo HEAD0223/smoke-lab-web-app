@@ -85,6 +85,7 @@ export const Cart = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const { order } = useSelector((state) => state.order);
 	const isDataSending = order.status === 'sending';
+	const [promo, setPromo] = useState('');
 
 	const getTotalPrice = (cart) => {
 		return cart.reduce((total, cartItem) => {
@@ -162,6 +163,10 @@ export const Cart = () => {
 		});
 	};
 
+	const handlePromoInput = (promo) => {
+		setPromo(promo);
+	};
+
 	const handleModalClose = () => {
 		tg.MainButton.show();
 		setModalOpen(false);
@@ -201,11 +206,23 @@ export const Cart = () => {
 									justifyContent: 'space-between',
 									alignItems: 'center',
 								}}>
-								<Typography variant="h6">{t('cart_total')}:</Typography>
+								<Typography variant="h6">{t('cart_total')}</Typography>
 								<Typography variant="body1">
 									{getTotalPrice(cart)}
 									{t('currency')}
 								</Typography>
+							</div>
+							<Divider />
+							<div>
+								<TextField
+									name="promo"
+									label={t('promocode')}
+									value={promo}
+									onChange={handlePromoInput(promo)}
+									variant="outlined"
+									fullWidth
+									margin="normal"
+								/>
 							</div>
 						</CardContent>
 					</Card>

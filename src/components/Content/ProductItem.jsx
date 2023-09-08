@@ -117,11 +117,21 @@ export const ProductItem = () => {
 			if (existingFlavorIndex !== -1) {
 				const currentQuantity = updatedSelectedFlavors[existingFlavorIndex].quantity;
 
+				console.log(
+					'Before setting quantity:',
+					updatedSelectedFlavors[existingFlavorIndex].quantity,
+				);
 				// Increment the quantity by 1
 				updatedSelectedFlavors[existingFlavorIndex].quantity = currentQuantity + 1;
+				console.log(
+					'After setting quantity:',
+					updatedSelectedFlavors[existingFlavorIndex].quantity,
+				);
 
 				// Check if adding one more doesn't exceed the flavor amount
 				if (currentQuantity + 1 <= flavor.amount) {
+					console.log(updatedSelectedFlavors);
+
 					setSelectedFlavors(updatedSelectedFlavors);
 					onAdd(product, [{ flavour: flavor.flavour, quantity: 1 }]);
 				} else {
