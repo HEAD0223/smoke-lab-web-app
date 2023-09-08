@@ -297,7 +297,7 @@ export const Cart = () => {
 											color="primary"
 										/>
 									}
-									label="Use Points"
+									label={t('cart_points')}
 								/>
 							</div>
 						</CardContent>
