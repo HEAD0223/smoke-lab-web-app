@@ -1,5 +1,5 @@
 .MuiInputLabel-root {
-	color: var(--tg-theme-text-color, 60%) !important;
+	/* color: var(--tg-theme-text-color, 60%) !important; */
 }
 .MuiInputBase-input {
 	color: var(--tg-theme-text-color, 40%) !important;
