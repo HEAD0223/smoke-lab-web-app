@@ -277,7 +277,7 @@ export const Cart = () => {
 									}}
 								/>
 							</div>
-							{console.log(points)}
+							{console.log('points: ', points)}
 							<div style={{ display: 'flex', justifyContent: 'center' }}>
 								<FormControlLabel
 									control={

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../axios';
 
 export const fetchPoints = createAsyncThunk('points/fetchPoints', async (user_id) => {
-	console.log(user_id);
+	console.log('user_id: ', user_id);
 	const { data } = await axios.post('/points', { user_id });
 	return data;
 });
