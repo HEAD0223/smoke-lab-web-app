@@ -156,6 +156,7 @@ export const Cart = () => {
 			tg.MainButton.hide();
 			setModalOpen(true);
 
+			let pointsSpent = 0;
 			if (usePoints) {
 				pointsSpent = getTotalPrice(cart) - calculateTotalPrice();
 			}
