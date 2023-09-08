@@ -92,6 +92,7 @@ export const Cart = () => {
 	const isDataSending = order.status === 'sending';
 	const [promoCode, setPromoCode] = useState('');
 	const [isPromoValid, setIsPromoValid] = useState(false);
+	const [totalQuantity, setTotalQuantity] = useState(0);
 
 	const getTotalPrice = (cart) => {
 		return cart.reduce((total, cartItem) => {
@@ -121,6 +122,18 @@ export const Cart = () => {
 			text: `${t('tg_order')}`,
 		});
 	}, []);
+
+	useEffect(() => {
+		const total = cart.reduce((total, item) => {
+			return (
+				total +
+				item.flavorsInCart.reduce((flavorTotal, flavor) => {
+					return flavorTotal + flavor.quantity;
+				}, 0)
+			);
+		}, 0);
+		setTotalQuantity(total);
+	}, [cart]);
 
 	const onSendData = useCallback(() => {
 		if (userInfo.name && userInfo.phone && userInfo.address) {
@@ -228,7 +241,7 @@ export const Cart = () => {
 							</div>
 							<Divider />
 							{console.log(cart)}
-							{cart.length > 3 && (
+							{totalQuantity > 3 && (
 								<div>
 									<Typography variant="body1">{t('gift')}</Typography>
 									<Divider />
