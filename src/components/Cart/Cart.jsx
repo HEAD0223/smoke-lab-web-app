@@ -88,6 +88,7 @@ export const Cart = () => {
 	const { promos } = useSelector((state) => state.promos);
 	const isDataSending = order.status === 'sending';
 	const [promoCode, setPromoCode] = useState('');
+	const [isPromoValid, setIsPromoValid] = useState(false);
 
 	const getTotalPrice = (cart) => {
 		return cart.reduce((total, cartItem) => {
@@ -112,7 +113,6 @@ export const Cart = () => {
 
 	useEffect(() => {
 		dispatch(fetchPromos());
-		console.log(promos);
 		tg.MainButton.show();
 		tg.MainButton.setParams({
 			text: `${t('tg_order')}`,
@@ -168,7 +168,11 @@ export const Cart = () => {
 	};
 
 	const handlePromoCodeChange = (event) => {
-		setPromoCode(event.target.value);
+		const enteredCode = event.target.value;
+		setPromoCode(enteredCode);
+
+		const isCodeValid = promos.some((promo) => promo.promoName === enteredCode);
+		setIsPromoValid(isCodeValid);
 	};
 
 	const handleModalClose = () => {
@@ -227,6 +231,17 @@ export const Cart = () => {
 									variant="outlined"
 									fullWidth
 									margin="normal"
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+												{isPromoValid ? (
+													<CheckCircleIcon style={{ color: 'green' }} />
+												) : (
+													<CancelIcon style={{ color: 'red' }} />
+												)}
+											</InputAdornment>
+										),
+									}}
 								/>
 							</div>
 						</CardContent>
