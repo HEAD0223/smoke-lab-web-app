@@ -1,5 +1,5 @@
+import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
 import ErrorIcon from '@mui/icons-material/Error';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import {
@@ -174,8 +174,9 @@ export const Cart = () => {
 		const enteredCode = event.target.value;
 		setPromoCode(enteredCode);
 
-		console.log(promos);
-		const isCodeValid = promos.items.some((promo) => promo.promoName === enteredCode);
+		const isCodeValid = promos.items.some(
+			(promo) => promo.promoName === enteredCode && promo.usage > 0,
+		);
 		setIsPromoValid(isCodeValid);
 	};
 
@@ -239,7 +240,7 @@ export const Cart = () => {
 										endAdornment: (
 											<InputAdornment position="end">
 												{isPromoValid ? (
-													<DoneAllIcon style={{ color: 'green' }} />
+													<CheckIcon style={{ color: 'green' }} />
 												) : (
 													<CloseIcon style={{ color: 'red' }} />
 												)}
