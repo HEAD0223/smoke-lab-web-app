@@ -1,3 +1,5 @@
+import CloseIcon from '@mui/icons-material/Close';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import ErrorIcon from '@mui/icons-material/Error';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import {
@@ -11,6 +13,7 @@ import {
 	DialogTitle,
 	Divider,
 	Grid,
+	InputAdornment,
 	Skeleton,
 	TextField,
 	Typography,
@@ -171,7 +174,8 @@ export const Cart = () => {
 		const enteredCode = event.target.value;
 		setPromoCode(enteredCode);
 
-		const isCodeValid = promos.some((promo) => promo.promoName === enteredCode);
+		console.log(promos);
+		const isCodeValid = promos.items.some((promo) => promo.promoName === enteredCode);
 		setIsPromoValid(isCodeValid);
 	};
 
@@ -235,9 +239,9 @@ export const Cart = () => {
 										endAdornment: (
 											<InputAdornment position="end">
 												{isPromoValid ? (
-													<CheckCircleIcon style={{ color: 'green' }} />
+													<DoneAllIcon style={{ color: 'green' }} />
 												) : (
-													<CancelIcon style={{ color: 'red' }} />
+													<CloseIcon style={{ color: 'red' }} />
 												)}
 											</InputAdornment>
 										),
