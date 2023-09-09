@@ -326,6 +326,7 @@ export const ProductItem = () => {
 					}}>
 					{product.flavours.map((flavour, index) => (
 						<Tooltip key={index} title={flavour.flavour} arrow>
+							{console.log(flavour)}
 							<IconButton
 								className={classes.flavorCircle}
 								style={{
