@@ -334,7 +334,7 @@ export const ProductItem = () => {
 									border: selectedFlavor === index ? '2px solid #333' : 'none',
 								}}
 								onClick={() => handleFlavorClick(index)}
-								disabled={flavour.amount === 0}></IconButton>
+								disabled={flavour.amount === '0'}></IconButton>
 						</Tooltip>
 					))}
 				</div>
