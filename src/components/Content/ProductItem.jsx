@@ -54,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
 	selectedListItem: {
 		boxShadow: `0px 0px 8px 2px ${theme.palette.primary.main}`,
 	},
+	disabledButton: {
+		opacity: 0.5,
+		cursor: 'not-allowed',
+	},
 }));
 
 export const ProductItem = () => {
@@ -328,7 +332,9 @@ export const ProductItem = () => {
 						<Tooltip key={index} title={flavour.flavour} arrow>
 							{console.log(flavour)}
 							<IconButton
-								className={classes.flavorCircle}
+								className={`${classes.flavorCircle} ${
+									flavour.amount === '0' ? classes.disabledButton : ''
+								}`}
 								style={{
 									background: `linear-gradient(to bottom, ${flavour.gradient1}, ${flavour.gradient2})`,
 									border: selectedFlavor === index ? '2px solid #333' : 'none',
