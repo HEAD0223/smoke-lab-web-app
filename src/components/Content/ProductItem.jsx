@@ -83,7 +83,7 @@ export const ProductItem = () => {
 		if (productFlavorsInCart) {
 			setSelectedFlavors(productFlavorsInCart.flavorsInCart);
 		}
-	}, [tg]);
+	}, [tg, cart, product]);
 
 	const goBackToList = () => {
 		navigate('/');
@@ -102,7 +102,8 @@ export const ProductItem = () => {
 	const onAddHandler = () => {
 		if (selectedFlavor !== null) {
 			const flavor = product.flavours[selectedFlavor];
-			const updatedSelectedFlavors = [...selectedFlavors];
+			const updatedSelectedFlavors = JSON.parse(JSON.stringify(selectedFlavors)); // Create a deep copy
+
 			const existingFlavorIndex = updatedSelectedFlavors.findIndex(
 				(f) => f.flavour === flavor.flavour,
 			);
@@ -132,7 +133,8 @@ export const ProductItem = () => {
 	const onRemoveHandler = () => {
 		if (selectedFlavor !== null) {
 			const flavor = product.flavours[selectedFlavor];
-			const updatedSelectedFlavors = [...selectedFlavors];
+			const updatedSelectedFlavors = JSON.parse(JSON.stringify(selectedFlavors)); // Create a deep copy
+
 			const existingFlavorIndex = updatedSelectedFlavors.findIndex(
 				(f) => f.flavour === flavor.flavour,
 			);
