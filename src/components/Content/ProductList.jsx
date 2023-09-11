@@ -24,8 +24,7 @@ export const ProductList = () => {
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
 
-	const { cart } = useSelector((state) => state.cart);
-
+	const { cart } = useSelector((state) => state.order);
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
 	const { manufacturers } = useSelector((state) => state.manufacturers);

@@ -60,7 +60,7 @@ export const ProductCard = ({ product }) => {
 	const classes = useStyles();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	const { cart } = useSelector((state) => state.cart);
+	const { cart } = useSelector((state) => state.order);
 
 	// Decode the base64 image data and create a data Image
 	const imageSrc = product.image

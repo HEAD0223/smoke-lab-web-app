@@ -17,9 +17,10 @@ import { useTranslation } from 'react-i18next';
 import { Carousel } from 'react-responsive-carousel';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { useTelegram } from '../../hooks/useTelegram';
+import { addToCart, removeFromCart, removeProductFromCart } from '../../redux/slices/cart';
 
 const useStyles = makeStyles((theme) => ({
 	carousel: {
@@ -66,10 +67,11 @@ export const ProductItem = () => {
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const { state } = useLocation();
 	const product = state.productData;
-	const { cart } = useSelector((state) => state.cart);
+	const { cart } = useSelector((state) => state.order);
 
 	const [selectedFlavor, setSelectedFlavor] = useState(null);
 	const [selectedFlavorName, setSelectedFlavorName] = useState(null);
@@ -302,17 +304,18 @@ export const ProductItem = () => {
 					}}>
 					{product.flavours.map((flavour, index) => (
 						<Tooltip key={index} title={flavour.flavour} arrow>
-							{console.log(flavour)}
-							<IconButton
-								className={`${classes.flavorCircle} ${
-									flavour.amount === '0' ? classes.disabledButton : ''
-								}`}
-								style={{
-									background: `linear-gradient(to bottom, ${flavour.gradient1}, ${flavour.gradient2})`,
-									border: selectedFlavor === index ? '2px solid #333' : 'none',
-								}}
-								onClick={() => handleFlavorClick(index)}
-								disabled={flavour.amount === '0'}></IconButton>
+							<span>
+								<IconButton
+									className={`${classes.flavorCircle} ${
+										flavour.amount === '0' ? classes.disabledButton : ''
+									}`}
+									style={{
+										background: `linear-gradient(to bottom, ${flavour.gradient1}, ${flavour.gradient2})`,
+										border: selectedFlavor === index ? '2px solid #333' : 'none',
+									}}
+									onClick={() => handleFlavorClick(index)}
+									disabled={flavour.amount === '0'}></IconButton>
+							</span>
 						</Tooltip>
 					))}
 				</div>

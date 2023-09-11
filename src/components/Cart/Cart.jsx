@@ -26,7 +26,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTelegram } from '../../hooks/useTelegram';
-import { sendDataToServer } from '../../redux/slices/cart';
+import { sendDataToServer, setUserInfo } from '../../redux/slices/cart';
 import { fetchPoints } from '../../redux/slices/points';
 import { fetchPromos } from '../../redux/slices/promo';
 import { CartItem } from './CartItem';
@@ -84,10 +84,10 @@ const useStyles = makeStyles((theme) => ({
 export const Cart = () => {
 	const classes = useStyles();
 	const navigate = useNavigate();
-	const { cart, userInfo, setUserInfo } = useSelector((state) => state.cart);
+	const dispatch = useDispatch();
+	const { cart, userInfo } = useSelector((state) => state.order);
 	const { tg, user } = useTelegram();
 	const { t } = useTranslation();
-	const dispatch = useDispatch();
 	const [modalOpen, setModalOpen] = useState(false);
 	const { order } = useSelector((state) => state.order);
 	const { promos } = useSelector((state) => state.promos);
