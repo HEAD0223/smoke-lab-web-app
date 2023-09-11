@@ -108,6 +108,6 @@ const orderSlice = createSlice({
 	},
 });
 
-export const { addToCart, removeFromCart, removeProductFromCart, setUserInfo } = cartSlice.actions;
+export const { addToCart, removeFromCart, removeProductFromCart, setUserInfo } = orderSlice.actions;
 
 export const orderReducer = orderSlice.reducer;
