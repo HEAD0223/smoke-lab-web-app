@@ -25,7 +25,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
 import { sendDataToServer } from '../../redux/slices/cart';
 import { fetchPoints } from '../../redux/slices/points';
@@ -85,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
 export const Cart = () => {
 	const classes = useStyles();
 	const navigate = useNavigate();
-	const { cart, userInfo, dispatchState } = useCart();
+	const { cart, userInfo, setUserInfo } = useSelector((state) => state.cart);
 	const { tg, user } = useTelegram();
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
@@ -202,10 +201,7 @@ export const Cart = () => {
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
-		dispatchState({
-			type: 'SET_USER_INFO',
-			payload: { userInfo: { ...userInfo, [name]: value } },
-		});
+		dispatch(setUserInfo({ userInfo: { ...userInfo, [name]: value } }));
 	};
 
 	const handlePromoCodeChange = (event) => {

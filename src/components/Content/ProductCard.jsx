@@ -2,6 +2,7 @@ import { Badge, Card, CardContent, CardMedia, Chip, Typography } from '@mui/mate
 import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -55,10 +56,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ProductCard = ({ product, cart }) => {
+export const ProductCard = ({ product }) => {
 	const classes = useStyles();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
+	const { cart } = useSelector((state) => state.cart);
 
 	// Decode the base64 image data and create a data Image
 	const imageSrc = product.image

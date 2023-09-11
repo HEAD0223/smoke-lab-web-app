@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { Carousel } from 'react-responsive-carousel';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
@@ -69,7 +70,8 @@ export const ProductItem = () => {
 
 	const { state } = useLocation();
 	const product = state.productData;
-	const { cart, dispatchState } = useCart();
+	const { dispatchState } = useCart();
+	const { cart } = useSelector((state) => state.cart);
 
 	const [selectedFlavor, setSelectedFlavor] = useState(null);
 	const [selectedFlavorName, setSelectedFlavorName] = useState(null);
@@ -97,19 +99,6 @@ export const ProductItem = () => {
 		setSelectedFlavorName(product.flavours[flavorIndex].flavour);
 	};
 
-	const onAdd = (product, flavorsInCart) => {
-		dispatchState({
-			type: 'ADD_TO_CART',
-			payload: { product, flavorsInCart },
-		});
-	};
-	const onRemove = (product, flavorsInCart) => {
-		dispatchState({
-			type: 'REMOVE_FROM_CART',
-			payload: { product, flavorsInCart },
-		});
-	};
-
 	const onAddHandler = () => {
 		if (selectedFlavor !== null) {
 			const flavor = product.flavours[selectedFlavor];
@@ -121,23 +110,13 @@ export const ProductItem = () => {
 			if (existingFlavorIndex !== -1) {
 				const currentQuantity = updatedSelectedFlavors[existingFlavorIndex].quantity;
 
-				console.log(
-					'Before setting quantity:',
-					updatedSelectedFlavors[existingFlavorIndex].quantity,
-				);
 				// Increment the quantity by 1
 				updatedSelectedFlavors[existingFlavorIndex].quantity = currentQuantity + 1;
-				console.log(
-					'After setting quantity:',
-					updatedSelectedFlavors[existingFlavorIndex].quantity,
-				);
 
 				// Check if adding one more doesn't exceed the flavor amount
 				if (currentQuantity + 1 <= flavor.amount) {
-					console.log(updatedSelectedFlavors);
-
 					setSelectedFlavors(updatedSelectedFlavors);
-					onAdd(product, [{ flavour: flavor.flavour, quantity: 1 }]);
+					dispatch(addToCart({ product, flavorName: flavor.flavour }));
 				} else {
 					// You can show a message to the user that they've reached the maximum quantity
 					console.log('Maximum quantity reached.');
@@ -146,7 +125,7 @@ export const ProductItem = () => {
 			} else {
 				updatedSelectedFlavors.push({ flavour: flavor.flavour, quantity: 1 });
 				setSelectedFlavors(updatedSelectedFlavors);
-				onAdd(product, updatedSelectedFlavors);
+				dispatch(addToCart({ product, flavorName: flavor.flavour }));
 			}
 		}
 	};
@@ -161,7 +140,6 @@ export const ProductItem = () => {
 			if (existingFlavorIndex !== -1) {
 				const currentQuantity = updatedSelectedFlavors[existingFlavorIndex].quantity;
 
-				console.log(currentQuantity);
 				if (currentQuantity > 0) {
 					// Decrement the quantity by 1
 					updatedSelectedFlavors[existingFlavorIndex].quantity = currentQuantity - 1;
@@ -178,17 +156,13 @@ export const ProductItem = () => {
 						);
 
 						if (!flavorsLeft) {
-							console.log('REMOVE_PRODUCT_FROM_CART');
 							// If no flavors are left, remove the product from the cart
-							dispatchState({
-								type: 'REMOVE_PRODUCT_FROM_CART',
-								payload: { product },
-							});
+							dispatch(removeProductFromCart({ product }));
 						}
 					}
 
-					// Dispatch the 'onRemove' action
-					onRemove(product, [{ flavour: flavor.flavour, quantity: 1 }]);
+					// Dispatch the 'removeFromCart' action
+					dispatch(removeFromCart({ product, flavorName: flavor.flavour }));
 				}
 			}
 		}

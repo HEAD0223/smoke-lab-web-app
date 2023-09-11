@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const Liquid = ({ isProductsLoading, filteredAndSortedProducts, cart }) => {
+export const Liquid = ({ isProductsLoading, filteredAndSortedProducts }) => {
 	const classes = useStyles();
 
 	return (
@@ -27,7 +27,7 @@ export const Liquid = ({ isProductsLoading, filteredAndSortedProducts, cart }) =
 				  ))
 				: filteredAndSortedProducts.map((item) => (
 						<Grid item xs={6} sm={6} md={4} lg={4} key={item._id}>
-							<ProductCard product={item} cart={cart} />
+							<ProductCard product={item} />
 						</Grid>
 				  ))}
 		</Grid>

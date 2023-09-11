@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
 import { Filters } from '../Utils/Filters';
 import { ECigs } from './ECigs';
@@ -24,7 +23,8 @@ export const ProductList = () => {
 	const navigate = useNavigate();
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
-	const { cart } = useCart();
+
+	const { cart } = useSelector((state) => state.cart);
 
 	const { products } = useSelector((state) => state.products);
 	const isProductsLoading = products.status === 'loading' || products.status === 'error';
@@ -155,14 +155,12 @@ export const ProductList = () => {
 				<ECigs
 					isProductsLoading={isProductsLoading}
 					filteredAndSortedProducts={esigsProducts}
-					cart={cart}
 				/>
 			)}
 			{selectedTab === 1 && (
 				<Liquid
 					isProductsLoading={isProductsLoading}
 					filteredAndSortedProducts={chasersProducts}
-					cart={cart}
 				/>
 			)}
 		</>
