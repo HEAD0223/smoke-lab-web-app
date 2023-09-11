@@ -19,7 +19,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { useCart } from '../../hooks/useCart';
 import { useTelegram } from '../../hooks/useTelegram';
 
 const useStyles = makeStyles((theme) => ({
@@ -70,7 +69,6 @@ export const ProductItem = () => {
 
 	const { state } = useLocation();
 	const product = state.productData;
-	const { dispatchState } = useCart();
 	const { cart } = useSelector((state) => state.cart);
 
 	const [selectedFlavor, setSelectedFlavor] = useState(null);
