@@ -142,8 +142,12 @@ export const ProductList = () => {
 					style={{ marginBottom: 16 }}
 					value={selectedTab}
 					onChange={handleTabChange}
-					indicatorColor="var(--tg-theme-button-color)"
 					textColor="inherit"
+					sx={{
+						'& span': {
+							backgroundColor: 'var(--tg-theme-button-color)',
+						},
+					}}
 					centered>
 					<Tab label={t('tabECigs')} />
 					<Tab label={t('tabLiquid')} />
