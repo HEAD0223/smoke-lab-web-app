@@ -430,11 +430,7 @@ export const Cart = () => {
 									flexDirection: 'column',
 									textAlign: 'center',
 								}}>
-								<LocalShippingIcon
-									color="success"
-									fontSize="56px"
-									style={{ marginBottom: 8 }}
-								/>
+								<LocalShippingIcon color="success" style={{ marginBottom: 8 }} />
 								<Typography variant="body1">{t('cart_success')}</Typography>
 							</div>
 						)}
