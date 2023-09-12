@@ -270,6 +270,9 @@ export const ProductItem = () => {
 								sx={{
 									color: 'var(--tg-theme-button-text-color)',
 									backgroundColor: 'var(--tg-theme-button-color)',
+									':hover': {
+										backgroundColor: 'var(--tg-theme-button-color)',
+									},
 								}}>
 								<RemoveIcon />
 							</Button>
@@ -280,6 +283,9 @@ export const ProductItem = () => {
 								sx={{
 									color: 'var(--tg-theme-button-text-color)',
 									backgroundColor: 'var(--tg-theme-button-color)',
+									':hover': {
+										backgroundColor: 'var(--tg-theme-button-color)',
+									},
 								}}>
 								<AddIcon />
 							</Button>
