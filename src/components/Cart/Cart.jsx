@@ -174,9 +174,9 @@ export const Cart = () => {
 					display: 'flex',
 					justifyContent: 'space-between',
 					alignItems: 'center',
-					marginBottom: 2,
+					marginBottom: 16,
 				}}>
-				<Typography variant="h4" fontSize={18} margin={6}>
+				<Typography variant="h4" fontSize={18} margin={1}>
 					{t('cart_title')}
 				</Typography>
 				<Button
