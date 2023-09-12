@@ -328,7 +328,10 @@ export const ProductItem = () => {
 										opacity: flavour.amount === '0' ? 0.5 : '',
 										cursor: flavour.amount === '0' ? 'not-allowed' : 'pointer',
 										background: `linear-gradient(to bottom, ${flavour.gradient1}, ${flavour.gradient2})`,
-										border: selectedFlavor === index ? '2px solid #333' : 'none',
+										border:
+											selectedFlavor === index
+												? '2px solid var(--tg-theme-button-color)'
+												: 'none',
 									}}
 									onClick={() => handleFlavorClick(index)}
 									disabled={flavour.amount === '0'}></IconButton>
