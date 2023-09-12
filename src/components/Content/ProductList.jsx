@@ -137,18 +137,18 @@ export const ProductList = () => {
 				/>
 			</div>
 			{/* Tabs */}
-			<Tabs
-				style={{ marginBottom: 16 }}
-				value={selectedTab}
-				onChange={handleTabChange}
-				indicatorColor="var(--tg-theme-button-color)"
-				sx={{
-					color: 'var(--tg-theme-button-color)',
-				}}
-				centered>
-				<Tab label={t('tabECigs')} />
-				<Tab label={t('tabLiquid')} />
-			</Tabs>
+			<div style={{ color: 'var(--tg-theme-button-color)' }}>
+				<Tabs
+					style={{ marginBottom: 16 }}
+					value={selectedTab}
+					onChange={handleTabChange}
+					indicatorColor="var(--tg-theme-button-color)"
+					textColor="inherit"
+					centered>
+					<Tab label={t('tabECigs')} />
+					<Tab label={t('tabLiquid')} />
+				</Tabs>
+			</div>
 			{/* Products */}
 			{selectedTab === 0 && (
 				<ECigs
