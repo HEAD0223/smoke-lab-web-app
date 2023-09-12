@@ -36,7 +36,7 @@ export const ProductCard = ({ product }) => {
 				flexDirection: 'column',
 				alignItems: 'center',
 				height: '100%',
-				backgroundColor: '#000000',
+				backgroundColor: '#99989e',
 			}}>
 			<div
 				style={{
