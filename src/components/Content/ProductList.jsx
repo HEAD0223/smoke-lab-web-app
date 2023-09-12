@@ -126,6 +126,21 @@ export const ProductList = () => {
 
 	return (
 		<>
+			<div style={{ backgroundColor: 'var(--tg-color-scheme)' }}>--tg-color-scheme</div>
+			<div style={{ backgroundColor: 'var(--tg-theme-bg-color)' }}>--tg-theme-bg-color</div>
+			<div style={{ backgroundColor: 'var(--tg-theme-button-color)' }}>
+				--tg-theme-button-color
+			</div>
+			<div style={{ backgroundColor: 'var(--tg-theme-button-text-color)' }}>
+				--tg-theme-button-text-color
+			</div>
+			<div style={{ backgroundColor: 'var(--tg-theme-hint-color)' }}>--tg-theme-hint-color</div>
+			<div style={{ backgroundColor: 'var(--tg-theme-link-color)' }}>--tg-theme-link-color</div>
+			<div style={{ backgroundColor: 'var(--tg-theme-secondary-bg-color)' }}>
+				--tg-theme-secondary-bg-color
+			</div>
+			<div style={{ backgroundColor: 'var(--tg-theme-text-color)' }}>--tg-theme-text-color</div>
+
 			{isProductsLoading && <LinearProgress />}
 			<div className={classes.filterContainer}>
 				{/* Pass handleManufacturerSelection as a callback to Filter component */}
