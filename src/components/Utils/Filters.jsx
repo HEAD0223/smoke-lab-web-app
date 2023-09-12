@@ -1,4 +1,4 @@
-import { CircularProgress, TextField } from '@mui/material';
+import { Checkbox, CircularProgress, FormControlLabel, FormGroup, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -101,6 +101,19 @@ export const Filters = ({
 							</div>
 						))}
 					</div>
+					<FormGroup>
+						{manufacturers.map((manufacturer) => (
+							<div key={manufacturer.name}>
+								<FormControlLabel
+									control={<Checkbox />}
+									value={manufacturer.name}
+									checked={selectedOptions.includes(manufacturer.name)}
+									onChange={() => handleManufacturerCheckboxChange(manufacturer.name)}
+									label={manufacturer.name}
+								/>
+							</div>
+						))}
+					</FormGroup>
 				</>
 			)}
 		</div>
