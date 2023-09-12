@@ -50,6 +50,7 @@ export const Filters = ({
 						label={t('search')}
 						variant="outlined"
 						value={searchText}
+						color="var(--tg-theme-text-color)"
 						onChange={(e) => {
 							setSearchText(e.target.value);
 							onSearchByName(e.target.value);
