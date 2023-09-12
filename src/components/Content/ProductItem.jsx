@@ -293,6 +293,9 @@ export const ProductItem = () => {
 							sx={{
 								color: 'var(--tg-theme-button-text-color)',
 								backgroundColor: 'var(--tg-theme-button-color)',
+								':hover': {
+									backgroundColor: 'var(--tg-theme-button-color)',
+								},
 							}}>
 							{t('card_add')}
 						</Button>
