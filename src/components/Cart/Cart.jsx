@@ -268,7 +268,6 @@ export const Cart = () => {
 											onChange={(e) => setUsePoints(e.target.checked)}
 											name="usePoints"
 											sx={{
-												color: 'var(--tg-theme-button-text-color)',
 												'&.Mui-checked': {
 													color: 'var(--tg-theme-button-color)',
 												},
