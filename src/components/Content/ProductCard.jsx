@@ -66,7 +66,7 @@ export const ProductCard = ({ product }) => {
 					padding: 10,
 					width: `100%`,
 				}}>
-				<div>
+				<div style={{ color: 'var(--tg-theme-text-color)' }}>
 					{amountInStock === 0 && (
 						<Chip
 							label={t('card_chip')}
@@ -75,6 +75,12 @@ export const ProductCard = ({ product }) => {
 							style={{ marginBottom: 4 }}
 						/>
 					)}
+					<Chip
+						label={t('card_chip')}
+						color="secondary"
+						size="small"
+						style={{ marginBottom: 4 }}
+					/>
 					<Typography color={'inherit'} variant="h6" fontSize={16}>
 						{product.name}
 					</Typography>
