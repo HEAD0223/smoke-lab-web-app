@@ -169,7 +169,7 @@ export const ProductItem = () => {
 	const renderFlavors = () => {
 		return (
 			<List>
-				<Divider color="var(--tg-theme-hint-color)" />
+				<Divider style={{ borderColor: 'var(--tg-theme-hint-color)' }} />
 				{product.flavours.map((flavour, index) => (
 					<div key={index}>
 						<ListItem>
@@ -188,7 +188,7 @@ export const ProductItem = () => {
 								</div>
 							</ListItemText>
 						</ListItem>
-						<Divider />
+						<Divider style={{ borderColor: 'var(--tg-theme-hint-color)' }} />
 					</div>
 				))}
 			</List>
