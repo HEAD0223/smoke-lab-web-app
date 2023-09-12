@@ -42,7 +42,7 @@ export const Filters = ({
 			}}>
 			{isManufacturersLoading ? (
 				<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-					<CircularProgress style={{ color: 'var(--tg-theme-button-color)' }} />
+					<CircularProgress color="var(--tg-theme-button-color)" />
 				</div>
 			) : (
 				<>
