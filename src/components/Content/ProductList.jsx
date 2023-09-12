@@ -116,7 +116,10 @@ export const ProductList = () => {
 	return (
 		<>
 			{isProductsLoading && (
-				<LinearProgress style={{ backgroundColor: 'var(--tg-theme-hint-color)' }} />
+				<LinearProgress
+					sx={{ color: 'var(--tg-theme-button-color)' }}
+					style={{ backgroundColor: 'var(--tg-theme-hint-color)' }}
+				/>
 			)}
 			<div style={{ display: 'flex', justifyContent: 'center', marginTop: 32 }}>
 				{/* Pass handleManufacturerSelection as a callback to Filter component */}
