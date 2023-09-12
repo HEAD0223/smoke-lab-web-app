@@ -204,9 +204,15 @@ export const ProductItem = () => {
 				justifyContent: 'center',
 				minHeight: '100vh',
 			}}>
-			<Button variant="text" color="primary" style={{ margin: '20px' }} onClick={goBackToList}>
-				{t('back_button')}
-			</Button>
+			<div style={{ color: 'var(--tg-theme-button-color)' }}>
+				<Button
+					variant="text"
+					color="inherit"
+					style={{ margin: '20px' }}
+					onClick={goBackToList}>
+					{t('back_button')}
+				</Button>
+			</div>
 			<div style={{ maxWidth: '80%', margin: '0 auto' }}>
 				<Carousel
 					showStatus={false}
@@ -269,7 +275,11 @@ export const ProductItem = () => {
 							size="small"
 							variant="contained"
 							onClick={onAddHandler}
-							disabled={selectedFlavor === null}>
+							disabled={selectedFlavor === null}
+							sx={{
+								color: 'var(--tg-theme-button-text-color)',
+								backgroundColor: 'var(--tg-theme-button-color)',
+							}}>
 							{t('card_add')}
 						</Button>
 					)}
