@@ -183,7 +183,13 @@ export const Cart = () => {
 					variant="outlined"
 					size="small"
 					onClick={handleEditClick}
-					sx={{ color: 'var(--tg-theme-button-color)' }}>
+					sx={{
+						color: 'var(--tg-theme-button-color)',
+						border: '1px solid var(--tg-theme-button-color)',
+						':hover': {
+							border: '1px solid var(--tg-theme-button-color)',
+						},
+					}}>
 					{t('cart_btn')}
 				</Button>
 			</div>
