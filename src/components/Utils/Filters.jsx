@@ -77,31 +77,7 @@ export const Filters = ({
 							onSearchByName(e.target.value);
 						}}
 					/>
-					<div
-						style={{
-							display: 'flex',
-							flexWrap: 'wrap',
-							flexDirection: 'row',
-							justifyContent: 'space-evenly',
-							width: '100%',
-							gap: 8,
-						}}>
-						{manufacturers.map((manufacturer) => (
-							<div key={manufacturer.name}>
-								<label>
-									<input
-										type="checkbox"
-										value={manufacturer.name}
-										checked={selectedOptions.includes(manufacturer.name)}
-										onChange={() => handleManufacturerCheckboxChange(manufacturer.name)}
-										style={{ marginRight: 6 }}
-									/>
-									{manufacturer.name}
-								</label>
-							</div>
-						))}
-					</div>
-					<FormGroup>
+					<FormGroup row>
 						{manufacturers.map((manufacturer) => (
 							<div key={manufacturer.name}>
 								<FormControlLabel
