@@ -263,10 +263,24 @@ export const ProductItem = () => {
 						(sf) => sf.flavour === selectedFlavorName && sf.quantity > 0,
 					) ? (
 						<div style={{ display: 'flex', gap: 20 }}>
-							<Button size="small" variant="contained" onClick={onRemoveHandler}>
+							<Button
+								size="small"
+								variant="contained"
+								onClick={onRemoveHandler}
+								sx={{
+									color: 'var(--tg-theme-button-text-color)',
+									backgroundColor: 'var(--tg-theme-button-color)',
+								}}>
 								<RemoveIcon />
 							</Button>
-							<Button size="small" variant="contained" onClick={onAddHandler}>
+							<Button
+								size="small"
+								variant="contained"
+								onClick={onAddHandler}
+								sx={{
+									color: 'var(--tg-theme-button-text-color)',
+									backgroundColor: 'var(--tg-theme-button-color)',
+								}}>
 								<AddIcon />
 							</Button>
 						</div>
