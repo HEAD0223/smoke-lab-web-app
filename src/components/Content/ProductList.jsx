@@ -142,7 +142,7 @@ export const ProductList = () => {
 				value={selectedTab}
 				onChange={handleTabChange}
 				indicatorColor="primary"
-				textColor="primary"
+				textColor="inherit"
 				centered>
 				<Tab label={t('tabECigs')} />
 				<Tab label={t('tabLiquid')} />
