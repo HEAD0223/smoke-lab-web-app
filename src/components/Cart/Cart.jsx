@@ -317,7 +317,7 @@ export const Cart = () => {
 				<DialogContent>
 					<DialogContentText>
 						<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-							{isDataSending && <CircularProgress color="var(--tg-theme-button-color)" />}
+							{isDataSending && <CircularProgress style={'var(--tg-theme-button-color)'} />}
 						</div>
 						{order.status === 'sent' && (
 							<div
