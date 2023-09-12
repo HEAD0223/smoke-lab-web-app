@@ -1,35 +1,6 @@
 import { CircularProgress, TextField } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import './Filters.css';
-
-const useStyles = makeStyles((theme) => ({
-	filterContainer: {
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		gap: theme.spacing(2),
-		marginBottom: theme.spacing(2),
-		width: 300,
-	},
-	circularProgressContainer: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	circularProgress: {
-		color: theme.palette.button_color.main,
-	},
-	checkboxContainer: {
-		display: 'flex',
-		flexWrap: 'wrap',
-		flexDirection: 'row',
-		justifyContent: 'space-evenly',
-		width: '100%',
-		gap: theme.spacing(1),
-	},
-}));
 
 export const Filters = ({
 	manufacturers,
@@ -39,7 +10,6 @@ export const Filters = ({
 	searchText,
 	setSearchText,
 }) => {
-	const classes = useStyles();
 	const { t } = useTranslation();
 	const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -61,10 +31,18 @@ export const Filters = ({
 	};
 
 	return (
-		<div className={classes.filterContainer}>
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				gap: 16,
+				width: 300,
+				marginBottom: 16,
+			}}>
 			{isManufacturersLoading ? (
-				<div className={classes.circularProgressContainer}>
-					<CircularProgress className={classes.circularProgress} />
+				<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+					<CircularProgress style={{ color: 'var(--tg-theme-button-color)' }} />
 				</div>
 			) : (
 				<>
@@ -77,7 +55,15 @@ export const Filters = ({
 							onSearchByName(e.target.value);
 						}}
 					/>
-					<div className={classes.checkboxContainer}>
+					<div
+						style={{
+							display: 'flex',
+							flexWrap: 'wrap',
+							flexDirection: 'row',
+							justifyContent: 'space-evenly',
+							width: '100%',
+							gap: 8,
+						}}>
 						{manufacturers.map((manufacturer) => (
 							<div key={manufacturer.name}>
 								<label>

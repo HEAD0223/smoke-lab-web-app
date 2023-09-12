@@ -20,7 +20,6 @@ import {
 	TextField,
 	Typography,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,58 +30,7 @@ import { fetchPoints } from '../../redux/slices/points';
 import { fetchPromos } from '../../redux/slices/promo';
 import { CartItem } from './CartItem';
 
-const useStyles = makeStyles((theme) => ({
-	cartContainer: {
-		padding: theme.spacing(2),
-	},
-	headerContainer: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		marginBottom: theme.spacing(2),
-	},
-	headerTitle: {
-		fontSize: `1.125rem !important`,
-		margin: `6px !important`,
-	},
-	headerButton: {
-		fontSize: `0.675rem !important`,
-	},
-	cartItem: {
-		display: 'flex',
-		alignItems: 'center',
-		marginBottom: theme.spacing(2),
-	},
-	modalTitle: {
-		textAlign: 'center',
-	},
-	circularProgressContainer: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	circularProgress: {
-		color: theme.palette.button_color.main,
-	},
-	commentContainer: {
-		marginTop: theme.spacing(4),
-		color: theme.palette.hint_color.main,
-	},
-	iconContainer: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		flexDirection: 'column',
-		textAlign: 'center',
-	},
-	icon: {
-		fontSize: `3.5rem !important`,
-		marginBottom: theme.spacing(1),
-	},
-}));
-
 export const Cart = () => {
-	const classes = useStyles();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { cart, userInfo } = useSelector((state) => state.order);
@@ -220,12 +168,18 @@ export const Cart = () => {
 	};
 
 	return (
-		<div className={classes.cartContainer}>
-			<div className={classes.headerContainer}>
-				<Typography variant="h4" className={classes.headerTitle}>
+		<div style={{ padding: 16 }}>
+			<div
+				style={{
+					display: 'flex',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					marginBottom: 16,
+				}}>
+				<Typography variant="h4" fontSize={18} margin={6}>
 					{t('cart_title')}
 				</Typography>
-				<Button variant="outlined" className={classes.headerButton} onClick={handleEditClick}>
+				<Button variant="outlined" size="small" onClick={handleEditClick}>
 					{t('cart_btn')}
 				</Button>
 			</div>
@@ -241,7 +195,13 @@ export const Cart = () => {
 				// Otherwise, show the cart content
 				<div>
 					{cart.map((item) => (
-						<div className={classes.cartItem} key={item.code}>
+						<div
+							style={{
+								display: 'flex',
+								alignItems: 'center',
+								marginBottom: 16,
+							}}
+							key={item.code}>
 							<CartItem item={item} />
 						</div>
 					))}
@@ -309,7 +269,7 @@ export const Cart = () => {
 					</Card>
 				</div>
 			)}
-			<div className={classes.commentContainer}>
+			<div style={{ marginTop: 32 }}>
 				{/* Form fields to collect user information */}
 				<TextField
 					name="name"
@@ -353,21 +313,35 @@ export const Cart = () => {
 
 			{/* Modal */}
 			<Dialog open={modalOpen} onClose={handleModalClose}>
-				<DialogTitle className={classes.modalTitle}>{t('cart_order')}</DialogTitle>
+				<DialogTitle textAlign={'center'}>{t('cart_order')}</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
-						<div className={classes.circularProgressContainer}>
-							{isDataSending && <CircularProgress className={classes.circularProgress} />}
+						<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+							{isDataSending && <CircularProgress color="var(--tg-theme-button-color)" />}
 						</div>
 						{order.status === 'sent' && (
-							<div className={classes.iconContainer}>
-								<LocalShippingIcon className={classes.icon} />
+							<div
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'center',
+									flexDirection: 'column',
+									textAlign: 'center',
+								}}>
+								<LocalShippingIcon fontSize="56px" style={{ marginBottom: 8 }} />
 								<Typography variant="body1">{t('cart_success')}</Typography>
 							</div>
 						)}
 						{order.status === 'error' && (
-							<div className={classes.iconContainer}>
-								<ErrorIcon className={classes.icon} />
+							<div
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'center',
+									flexDirection: 'column',
+									textAlign: 'center',
+								}}>
+								<ErrorIcon fontSize="56px" style={{ marginBottom: 8 }} />
 								<Typography variant="body1">{t('cart_error')}</Typography>
 							</div>
 						)}

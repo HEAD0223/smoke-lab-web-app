@@ -1,4 +1,3 @@
-import { makeStyles } from '@mui/styles';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -11,15 +10,7 @@ import { useTelegram } from './hooks/useTelegram';
 import { fetchManufacturers } from './redux/slices/manufacturers';
 import { fetchProducts } from './redux/slices/products';
 
-const useStyles = makeStyles((theme) => ({
-	body: {
-		backgroundColor: theme.palette.bg_color.main,
-		color: theme.palette.text_color.main,
-	},
-}));
-
 function App() {
-	const classes = useStyles();
 	const { tg } = useTelegram();
 	const dispatch = useDispatch();
 
@@ -30,7 +21,11 @@ function App() {
 	}, [dispatch, tg]);
 
 	return (
-		<div className={classes.body}>
+		<div
+			style={{
+				backgroundColor: 'var(--tg-theme-bg-color)',
+				color: 'var(--tg-theme-text-color)',
+			}}>
 			<Header />
 			<Routes>
 				<Route index element={<ProductList />} />

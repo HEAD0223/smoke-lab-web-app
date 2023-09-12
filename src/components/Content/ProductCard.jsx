@@ -1,63 +1,10 @@
 import { Badge, Card, CardContent, CardMedia, Chip, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-	productCard: {
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		height: '100%',
-		backgroundColor: theme.palette.hint_color.main,
-		color: theme.palette.text_color.main,
-	},
-	productImageContainer: {
-		position: 'relative',
-		height: 120,
-		width: '100%',
-		marginBottom: theme.spacing(2),
-	},
-	productImage: {
-		height: '100%',
-		width: '100%',
-		backgroundSize: 'cover',
-	},
-	badgeContainer: {
-		position: 'absolute',
-		top: 'auto',
-		right: 15,
-		bottom: -25,
-	},
-	badgeBody: {
-		color: theme.palette.button_text_color.main,
-		'& span': {
-			backgroundColor: theme.palette.button_color.main,
-		},
-	},
-	productName: {
-		marginBottom: theme.spacing(0.5),
-		fontSize: `1rem !important`,
-	},
-	productPrice: {
-		fontSize: `0.75rem !important`,
-	},
-	cardContent: {
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		justifyContent: 'space-around',
-		textAlign: 'center',
-		minHeight: 135,
-		padding: `10px !important`,
-		width: `100%`,
-	},
-}));
-
 export const ProductCard = ({ product }) => {
-	const classes = useStyles();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const { cart } = useSelector((state) => state.order);
@@ -82,18 +29,43 @@ export const ProductCard = ({ product }) => {
 
 	return (
 		<Card
-			className={classes.productCard}
 			onClick={handleProductClick}
-			style={{ cursor: 'pointer' }}>
-			<div className={classes.productImageContainer}>
-				<CardMedia className={classes.productImage} image={imageSrc} title={product.name} />
+			style={{
+				cursor: 'pointer',
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				height: '100%',
+				backgroundColor: 'var(--tg-theme-hint-color)',
+			}}>
+			<div
+				style={{
+					position: 'relative',
+					height: 120,
+					width: '100%',
+				}}>
+				<CardMedia
+					image={imageSrc}
+					title={product.name}
+					style={{ height: '100%', width: '100%', backgroundSize: 'cover' }}
+				/>
 				{totalQuantity > 0 && (
-					<div className={classes.badgeContainer}>
-						<Badge badgeContent={totalQuantity} className={classes.badgeBody} />
+					<div style={{ position: 'absolute', top: 'auto', right: 15, bottom: -25 }}>
+						<Badge badgeContent={totalQuantity} />
 					</div>
 				)}
 			</div>
-			<CardContent className={classes.cardContent}>
+			<CardContent
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+					justifyContent: 'space-around',
+					textAlign: 'center',
+					minHeight: 135,
+					padding: 10,
+					width: `100%`,
+				}}>
 				<div>
 					{amountInStock === 0 && (
 						<Chip
@@ -103,10 +75,10 @@ export const ProductCard = ({ product }) => {
 							style={{ marginBottom: 4 }}
 						/>
 					)}
-					<Typography variant="h6" className={classes.productName}>
+					<Typography variant="h6" fontSize={16}>
 						{product.name}
 					</Typography>
-					<Typography variant="subtitle1" className={classes.productPrice}>
+					<Typography variant="subtitle1" fontSize={12}>
 						{product.price}
 						{t('currency')}
 					</Typography>

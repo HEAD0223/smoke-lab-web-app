@@ -1,5 +1,4 @@
 import { LinearProgress, Tab, Tabs } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -9,17 +8,7 @@ import { Filters } from '../Utils/Filters';
 import { ECigs } from './ECigs';
 import { Liquid } from './Liquid';
 
-const useStyles = makeStyles((theme) => ({
-	filterContainer: {
-		display: 'flex',
-		justifyContent: 'center',
-		marginTop: theme.spacing(4),
-		backgroundColor: theme.palette.bg_color.main,
-	},
-}));
-
 export const ProductList = () => {
-	const classes = useStyles();
 	const navigate = useNavigate();
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
@@ -126,23 +115,8 @@ export const ProductList = () => {
 
 	return (
 		<>
-			<div style={{ backgroundColor: 'var(--tg-color-scheme)' }}>--tg-color-scheme</div>
-			<div style={{ backgroundColor: 'var(--tg-theme-bg-color)' }}>--tg-theme-bg-color</div>
-			<div style={{ backgroundColor: 'var(--tg-theme-button-color)' }}>
-				--tg-theme-button-color
-			</div>
-			<div style={{ backgroundColor: 'var(--tg-theme-button-text-color)' }}>
-				--tg-theme-button-text-color
-			</div>
-			<div style={{ backgroundColor: 'var(--tg-theme-hint-color)' }}>--tg-theme-hint-color</div>
-			<div style={{ backgroundColor: 'var(--tg-theme-link-color)' }}>--tg-theme-link-color</div>
-			<div style={{ backgroundColor: 'var(--tg-theme-secondary-bg-color)' }}>
-				--tg-theme-secondary-bg-color
-			</div>
-			<div style={{ backgroundColor: 'var(--tg-theme-text-color)' }}>--tg-theme-text-color</div>
-
 			{isProductsLoading && <LinearProgress />}
-			<div className={classes.filterContainer}>
+			<div style={{ display: 'flex', justifyContent: 'center', marginTop: 32 }}>
 				{/* Pass handleManufacturerSelection as a callback to Filter component */}
 				<Filters
 					manufacturers={manufacturers.items}

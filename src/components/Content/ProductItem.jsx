@@ -11,7 +11,6 @@ import {
 	Tooltip,
 	Typography,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Carousel } from 'react-responsive-carousel';
@@ -22,48 +21,8 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { useTelegram } from '../../hooks/useTelegram';
 import { addToCart, removeFromCart, removeProductFromCart } from '../../redux/slices/cart';
 
-const useStyles = makeStyles((theme) => ({
-	carousel: {
-		maxWidth: '80%',
-		margin: '0 auto',
-	},
-	productDetails: {
-		marginTop: theme.spacing(4),
-	},
-	productImage: {
-		maxWidth: '400px',
-		maxHeight: '400px',
-		margin: '0 auto',
-		display: 'block',
-	},
-	flavorCircle: {
-		width: 48,
-		height: 48,
-		borderRadius: '50%',
-		margin: '0 8px',
-		cursor: 'pointer',
-	},
-	listItem: {
-		border: `1px solid ${theme.palette.grey[300]}`,
-		borderRadius: theme.shape.borderRadius,
-		marginBottom: theme.spacing(2),
-		padding: theme.spacing(1),
-		minWidth: 150,
-		margin: '0 auto',
-		transition: 'box-shadow 0.3s ease-in-out',
-	},
-	selectedListItem: {
-		boxShadow: `0px 0px 8px 2px ${theme.palette.primary.main}`,
-	},
-	disabledButton: {
-		opacity: 0.5,
-		cursor: 'not-allowed',
-	},
-}));
-
 export const ProductItem = () => {
 	const { code } = useParams();
-	const classes = useStyles();
 	const { tg } = useTelegram();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
@@ -176,10 +135,20 @@ export const ProductItem = () => {
 				{selectedFlavors.map((sf, index) => (
 					<Paper
 						key={index}
-						className={`${classes.listItem} ${
-							selectedFlavorName === sf.flavour ? classes.selectedListItem : ''
-						}`}
-						elevation={3}>
+						elevation={3}
+						style={{
+							boxShadow:
+								selectedFlavorName === sf.flavour
+									? `0px 0px 8px 2px var(--tg-theme-button-color)`
+									: '',
+							border: `1px solid var(--tg-theme-hint-color)`,
+							borderRadius: 4,
+							marginBottom: 16,
+							padding: 8,
+							minWidth: 150,
+							margin: '0 auto',
+							transition: 'box-shadow 0.3s ease-in-out',
+						}}>
 						<ListItem key={index} style={{ width: '90%', margin: '0 auto' }}>
 							<ListItemText>
 								<Typography variant="h6" align="center">
@@ -238,25 +207,35 @@ export const ProductItem = () => {
 			<Button variant="text" color="primary" style={{ margin: '20px' }} onClick={goBackToList}>
 				{t('back_button')}
 			</Button>
-			<Carousel
-				showStatus={false}
-				showIndicators={false}
-				showArrows={false}
-				infiniteLoop={true}
-				swipeable={true}
-				autoPlay={true}
-				selectedItem={selectedFlavor !== null ? selectedFlavor + 1 : 0}
-				className={classes.carousel}>
-				{allImages.map((image, index) => (
-					<div key={index} className={classes.productImage}>
-						<img
-							src={`data:image/png;base64,${image}` || 'https://source.unsplash.com/random'}
-							alt={`Image ${index + 1}`}
-						/>
-					</div>
-				))}
-			</Carousel>
-			<div className={classes.productDetails}>
+			<div style={{ maxWidth: '80%', margin: '0 auto' }}>
+				<Carousel
+					showStatus={false}
+					showIndicators={false}
+					showArrows={false}
+					infiniteLoop={true}
+					swipeable={true}
+					autoPlay={true}
+					selectedItem={selectedFlavor !== null ? selectedFlavor + 1 : 0}>
+					{allImages.map((image, index) => (
+						<div
+							key={index}
+							style={{
+								maxWidth: 400,
+								maxHeight: 400,
+								margin: '0 auto',
+								display: 'block',
+							}}>
+							<img
+								src={
+									`data:image/png;base64,${image}` || 'https://source.unsplash.com/random'
+								}
+								alt={`Image ${index + 1}`}
+							/>
+						</div>
+					))}
+				</Carousel>
+			</div>
+			<div style={{ marginTop: 32 }}>
 				<Typography variant="h4" align="center">
 					{product.name}
 				</Typography>
@@ -308,10 +287,13 @@ export const ProductItem = () => {
 						<Tooltip key={index} title={flavour.flavour} arrow>
 							<span>
 								<IconButton
-									className={`${classes.flavorCircle} ${
-										flavour.amount === '0' ? classes.disabledButton : ''
-									}`}
 									style={{
+										width: 48,
+										height: 48,
+										borderRadius: '50%',
+										margin: '0 8px',
+										opacity: flavour.amount === '0' ? 0.5 : '',
+										cursor: flavour.amount === '0' ? 'not-allowed' : 'pointer',
 										background: `linear-gradient(to bottom, ${flavour.gradient1}, ${flavour.gradient2})`,
 										border: selectedFlavor === index ? '2px solid #333' : 'none',
 									}}

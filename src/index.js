@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import i18n from 'i18next';
 import HttpApi from 'i18next-http-backend';
 import React from 'react';
@@ -9,7 +9,6 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { useTelegram } from './hooks/useTelegram';
 import store from './redux/store';
-import theme from './theme';
 
 const { user } = useTelegram();
 const userLanguageCode = user?.language_code;
@@ -29,12 +28,10 @@ i18n
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<ThemeProvider theme={theme}>
-		<BrowserRouter>
-			<Provider store={store}>
-				<CssBaseline />
-				<App />
-			</Provider>
-		</BrowserRouter>
-	</ThemeProvider>,
+	<BrowserRouter>
+		<Provider store={store}>
+			<CssBaseline />
+			<App />
+		</Provider>
+	</BrowserRouter>,
 );
