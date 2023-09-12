@@ -58,6 +58,9 @@ export const Filters = ({
 								color: 'var(--tg-theme-button-color)',
 							},
 							'& .MuiOutlinedInput-root': {
+								'& input': {
+									color: 'var(--tg-theme-text-color)',
+								},
 								'& fieldset': {
 									borderColor: 'var(--tg-theme-button-text-color)',
 								},
