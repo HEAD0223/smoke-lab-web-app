@@ -23,7 +23,8 @@ function App() {
 	return (
 		<div
 			style={{
-				backgroundColor: 'var(--tg-theme-bg-color)',
+				backgroundColor: 'var(--tg-theme-secondary-bg-color)',
+				// backgroundColor: 'var(--tg-theme-bg-color)',
 				color: 'var(--tg-theme-text-color)',
 			}}>
 			<Header />
