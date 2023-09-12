@@ -174,12 +174,16 @@ export const Cart = () => {
 					display: 'flex',
 					justifyContent: 'space-between',
 					alignItems: 'center',
-					marginBottom: 16,
+					marginBottom: 2,
 				}}>
 				<Typography variant="h4" fontSize={18} margin={6}>
 					{t('cart_title')}
 				</Typography>
-				<Button variant="outlined" size="small" onClick={handleEditClick}>
+				<Button
+					variant="outlined"
+					size="small"
+					onClick={handleEditClick}
+					sx={{ color: 'var(--tg-theme-button-color)' }}>
 					{t('cart_btn')}
 				</Button>
 			</div>
