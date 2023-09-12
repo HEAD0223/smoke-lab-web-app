@@ -279,6 +279,28 @@ export const Cart = () => {
 					variant="outlined"
 					fullWidth
 					margin="normal"
+					sx={{
+						'& label': {
+							color: 'var(--tg-theme-button-text-color)',
+						},
+						'& label.Mui-focused': {
+							color: 'var(--tg-theme-button-color)',
+						},
+						'& .MuiOutlinedInput-root': {
+							'& input': {
+								color: 'var(--tg-theme-text-color)',
+							},
+							'& fieldset': {
+								borderColor: 'var(--tg-theme-button-text-color)',
+							},
+							'&:hover fieldset': {
+								borderColor: 'var(--tg-theme-hint-color)',
+							},
+							'&.Mui-focused fieldset': {
+								borderColor: 'var(--tg-theme-button-color)',
+							},
+						},
+					}}
 				/>
 				<TextField
 					name="phone"
@@ -288,6 +310,28 @@ export const Cart = () => {
 					variant="outlined"
 					fullWidth
 					margin="normal"
+					sx={{
+						'& label': {
+							color: 'var(--tg-theme-button-text-color)',
+						},
+						'& label.Mui-focused': {
+							color: 'var(--tg-theme-button-color)',
+						},
+						'& .MuiOutlinedInput-root': {
+							'& input': {
+								color: 'var(--tg-theme-text-color)',
+							},
+							'& fieldset': {
+								borderColor: 'var(--tg-theme-button-text-color)',
+							},
+							'&:hover fieldset': {
+								borderColor: 'var(--tg-theme-hint-color)',
+							},
+							'&.Mui-focused fieldset': {
+								borderColor: 'var(--tg-theme-button-color)',
+							},
+						},
+					}}
 				/>
 				<TextField
 					name="address"
@@ -297,6 +341,28 @@ export const Cart = () => {
 					variant="outlined"
 					fullWidth
 					margin="normal"
+					sx={{
+						'& label': {
+							color: 'var(--tg-theme-button-text-color)',
+						},
+						'& label.Mui-focused': {
+							color: 'var(--tg-theme-button-color)',
+						},
+						'& .MuiOutlinedInput-root': {
+							'& input': {
+								color: 'var(--tg-theme-text-color)',
+							},
+							'& fieldset': {
+								borderColor: 'var(--tg-theme-button-text-color)',
+							},
+							'&:hover fieldset': {
+								borderColor: 'var(--tg-theme-hint-color)',
+							},
+							'&.Mui-focused fieldset': {
+								borderColor: 'var(--tg-theme-button-color)',
+							},
+						},
+					}}
 				/>
 				<TextField
 					name="comment"
@@ -308,6 +374,28 @@ export const Cart = () => {
 					variant="outlined"
 					fullWidth
 					margin="normal"
+					sx={{
+						'& label': {
+							color: 'var(--tg-theme-button-text-color)',
+						},
+						'& label.Mui-focused': {
+							color: 'var(--tg-theme-button-color)',
+						},
+						'& .MuiOutlinedInput-root': {
+							'& input': {
+								color: 'var(--tg-theme-text-color)',
+							},
+							'& fieldset': {
+								borderColor: 'var(--tg-theme-button-text-color)',
+							},
+							'&:hover fieldset': {
+								borderColor: 'var(--tg-theme-hint-color)',
+							},
+							'&.Mui-focused fieldset': {
+								borderColor: 'var(--tg-theme-button-color)',
+							},
+						},
+					}}
 				/>
 			</div>
 
