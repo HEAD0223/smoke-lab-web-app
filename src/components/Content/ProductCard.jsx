@@ -77,7 +77,7 @@ export const ProductCard = ({ product }) => {
 					)}
 					<Chip
 						label={t('card_chip')}
-						color="secondary"
+						color="warning"
 						size="small"
 						style={{ marginBottom: 4 }}
 					/>
