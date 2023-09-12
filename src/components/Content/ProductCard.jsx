@@ -36,7 +36,7 @@ export const ProductCard = ({ product }) => {
 				flexDirection: 'column',
 				alignItems: 'center',
 				height: '100%',
-				backgroundColor: 'var(--tg-theme-hint-color)',
+				backgroundColor: 'var(--tg-theme-secondary-bg-color)',
 			}}>
 			<div
 				style={{
@@ -70,17 +70,11 @@ export const ProductCard = ({ product }) => {
 					{amountInStock === 0 && (
 						<Chip
 							label={t('card_chip')}
-							color="secondary"
+							color="error"
 							size="small"
 							style={{ marginBottom: 4 }}
 						/>
 					)}
-					<Chip
-						label={t('card_chip')}
-						color="error"
-						size="small"
-						style={{ marginBottom: 4 }}
-					/>
 					<Typography color={'inherit'} variant="h6" fontSize={16}>
 						{product.name}
 					</Typography>
