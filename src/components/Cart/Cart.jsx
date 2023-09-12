@@ -394,7 +394,7 @@ export const Cart = () => {
 							color: 'var(--tg-theme-button-color)',
 						},
 						'& .MuiOutlinedInput-root': {
-							'& input': {
+							'& textarea': {
 								color: 'var(--tg-theme-text-color)',
 							},
 							'& fieldset': {
@@ -430,7 +430,11 @@ export const Cart = () => {
 									flexDirection: 'column',
 									textAlign: 'center',
 								}}>
-								<LocalShippingIcon fontSize="56px" style={{ marginBottom: 8 }} />
+								<LocalShippingIcon
+									color="success"
+									fontSize="56px"
+									style={{ marginBottom: 8 }}
+								/>
 								<Typography variant="body1">{t('cart_success')}</Typography>
 							</div>
 						)}
@@ -443,7 +447,7 @@ export const Cart = () => {
 									flexDirection: 'column',
 									textAlign: 'center',
 								}}>
-								<ErrorIcon fontSize="56px" style={{ marginBottom: 8 }} />
+								<ErrorIcon color="error" style={{ marginBottom: 8 }} />
 								<Typography variant="body1">{t('cart_error')}</Typography>
 							</div>
 						)}
