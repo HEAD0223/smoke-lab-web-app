@@ -36,7 +36,7 @@ export const ProductCard = ({ product }) => {
 				flexDirection: 'column',
 				alignItems: 'center',
 				height: '100%',
-				backgroundColor: 'var(--tg-theme-secondary-bg-color)',
+				backgroundColor: '#000000',
 			}}>
 			<div
 				style={{
