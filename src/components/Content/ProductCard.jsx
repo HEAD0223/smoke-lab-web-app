@@ -75,10 +75,10 @@ export const ProductCard = ({ product }) => {
 							style={{ marginBottom: 4 }}
 						/>
 					)}
-					<Typography variant="h6" fontSize={16}>
+					<Typography color={'inherit'} variant="h6" fontSize={16}>
 						{product.name}
 					</Typography>
-					<Typography variant="subtitle1" fontSize={12}>
+					<Typography color={'inherit'} variant="subtitle1" fontSize={12}>
 						{product.price}
 						{t('currency')}
 					</Typography>
