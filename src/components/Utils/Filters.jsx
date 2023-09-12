@@ -81,7 +81,16 @@ export const Filters = ({
 						{manufacturers.map((manufacturer) => (
 							<div key={manufacturer.name}>
 								<FormControlLabel
-									control={<Checkbox />}
+									control={
+										<Checkbox
+											sx={{
+												color: 'var(--tg-theme-button-text-color)',
+												'&.Mui-checked': {
+													color: 'var(--tg-theme-button-color)',
+												},
+											}}
+										/>
+									}
 									value={manufacturer.name}
 									checked={selectedOptions.includes(manufacturer.name)}
 									onChange={() => handleManufacturerCheckboxChange(manufacturer.name)}
