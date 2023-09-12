@@ -143,10 +143,10 @@ export const ProductItem = () => {
 									: '',
 							border: `1px solid var(--tg-theme-hint-color)`,
 							borderRadius: 4,
-							marginBottom: 16,
 							padding: 8,
 							minWidth: 150,
 							margin: '0 auto',
+							marginBottom: '16px',
 							transition: 'box-shadow 0.3s ease-in-out',
 						}}>
 						<ListItem key={index} style={{ width: '90%', margin: '0 auto' }}>
