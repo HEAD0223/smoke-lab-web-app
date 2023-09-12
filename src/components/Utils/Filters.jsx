@@ -50,7 +50,14 @@ export const Filters = ({
 						label={t('search')}
 						variant="outlined"
 						value={searchText}
-						style={{ color: 'var(--tg-theme-text-color)' }}
+						sx={{
+							'& label.Mui-focused': {
+								color: 'var(--tg-theme-button-color)',
+							},
+							'&.Mui-focused fieldset': {
+								borderColor: 'var(--tg-theme-button-color)',
+							},
+						}}
 						onChange={(e) => {
 							setSearchText(e.target.value);
 							onSearchByName(e.target.value);
