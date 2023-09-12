@@ -179,17 +179,7 @@ export const Cart = () => {
 				<Typography variant="h4" fontSize={18} margin={1}>
 					{t('cart_title')}
 				</Typography>
-				<Button
-					variant="outlined"
-					size="small"
-					onClick={handleEditClick}
-					sx={{
-						color: 'var(--tg-theme-button-color)',
-						border: '1px solid var(--tg-theme-button-color)',
-						':hover': {
-							border: '1px solid var(--tg-theme-button-color)',
-						},
-					}}>
+				<Button variant="outlined" size="small" onClick={handleEditClick} color="success">
 					{t('cart_btn')}
 				</Button>
 			</div>
