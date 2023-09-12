@@ -144,7 +144,7 @@ export const ProductList = () => {
 					onChange={handleTabChange}
 					textColor="inherit"
 					sx={{
-						'& span': {
+						'& span.MuiTabs-indicator': {
 							backgroundColor: 'var(--tg-theme-button-color)',
 						},
 					}}
