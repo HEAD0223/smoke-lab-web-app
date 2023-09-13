@@ -53,7 +53,10 @@ export const ProductCard = ({ product }) => {
 					<div style={{ position: 'absolute', top: 'auto', right: 15, bottom: -25 }}>
 						<Badge
 							badgeContent={totalQuantity}
-							sx={{ backgroundColor: 'var(--tg-theme-button-color)' }}
+							sx={{
+								color: 'var(--tg-theme-button-text-color)',
+								'& span': { backgroundColor: 'var(--tg-theme-button-color)' },
+							}}
 						/>
 					</div>
 				)}
