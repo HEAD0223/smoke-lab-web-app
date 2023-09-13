@@ -51,7 +51,10 @@ export const ProductCard = ({ product }) => {
 				/>
 				{totalQuantity > 0 && (
 					<div style={{ position: 'absolute', top: 'auto', right: 15, bottom: -25 }}>
-						<Badge badgeContent={totalQuantity} />
+						<Badge
+							badgeContent={totalQuantity}
+							sx={{ backgroundColor: 'var(--tg-theme-button-color)' }}
+						/>
 					</div>
 				)}
 			</div>
